@@ -1,0 +1,880 @@
+[gd_scene load_steps=42 format=3 uid="uid://b687koijwjkt4"]
+
+[ext_resource type="Script" path="res://addons/lines_and_trails_3d/line_3d.gd" id="1_qw2n0"]
+[ext_resource type="Shader" path="res://addons/lines_and_trails_3d/line_3d_billboard_mix_unlit.gdshader" id="3_vk4x5"]
+[ext_resource type="Script" path="res://addons/lines_and_trails_3d/trail_3d.gd" id="4_v7nag"]
+[ext_resource type="Shader" path="res://addons/lines_and_trails_3d/line_3d_solid_unlit.gdshader" id="5_cjxmw"]
+[ext_resource type="Shader" path="res://addons/lines_and_trails_3d/line_3d_add.gdshader" id="5_qvxfe"]
+
+[sub_resource type="Environment" id="Environment_nl0ma"]
+background_mode = 1
+background_color = Color(0.0863636, 0.0863636, 0.0863636, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wy7so"]
+albedo_color = Color(0.4, 0.4, 0.4, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_f5biq"]
+material = SubResource("StandardMaterial3D_wy7so")
+size = Vector2(2, 1)
+orientation = 1
+
+[sub_resource type="GDScript" id="GDScript_4w2x5"]
+script/source = "@tool
+extends Node3D
+
+
+@onready var line_2: Line3D = $line2
+
+
+func _notification(what: int) -> void:
+
+	if what == NOTIFICATION_EDITOR_PRE_SAVE:
+		_reflect_state(0)
+
+
+func _process(delta: float) -> void:
+
+	_reflect_state(Time.get_ticks_msec() / 1000.0)
+
+
+func _reflect_state(t: float) -> void:
+
+	var p1 := Vector3(-0.5, sin(t * 2) * 0.1, 0)
+	var p2 := Vector3(0.5, cos(t * 2) * 0.1, 0)
+
+	var n := line_2.points.size()
+	for i in n:
+		var ratio := float(i) / (n - 1)
+		line_2.points[i] = p1.lerp(p2, ratio) + Vector3(0, sin(ratio * PI) * sin((ratio + t) * 7.0) * 0.1, 0)
+
+	line_2.rebuild()
+"
+
+[sub_resource type="Curve" id="Curve_ecy4m"]
+_data = [Vector2(0, 0), 0.0, 1.07006, 0, 0, Vector2(0.243889, 1), 0.0, 0.0, 0, 0, Vector2(0.751618, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_vplke"]
+offsets = PackedFloat32Array(0, 0.261084, 0.53202, 0.773399, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0.0727272, 1, 0, 1, 1, 1, 0, 0, 1, 1)
+
+[sub_resource type="GDScript" id="GDScript_w1rhg"]
+script/source = "@tool
+extends Node3D
+
+
+@onready var light: OmniLight3D = $light
+
+
+func _notification(what: int) -> void:
+
+	if what == NOTIFICATION_EDITOR_PRE_SAVE:
+		_reflect_state(0)
+
+
+func _process(delta: float) -> void:
+
+	_reflect_state(Time.get_ticks_msec() / 1000.0)
+
+
+func _reflect_state(t: float) -> void:
+
+	light.position.x = sin(t)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_23fs1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_n08wu"]
+material = SubResource("StandardMaterial3D_23fs1")
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgugc"]
+shading_mode = 0
+albedo_color = Color(1, 1, 0.5, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_jj8s7"]
+radius = 0.05
+height = 0.1
+radial_segments = 8
+rings = 4
+
+[sub_resource type="GDScript" id="GDScript_x42ah"]
+script/source = "@tool
+extends Node3D
+
+
+@onready var line_2: Line3D = $line2
+
+
+func _ready() -> void:
+
+	var p1 := Vector3(-0.5, 0, 0)
+	var p2 := Vector3(0.5, 0, 0)
+
+	var n := line_2.points.size()
+	for i in n:
+		var ratio := float(i) / (n - 1)
+		line_2.points[i] = p1.lerp(p2, ratio)
+		line_2.curve_normals[i] = Basis(Vector3.RIGHT, ratio * 8) * Vector3.UP
+
+	line_2.rebuild()
+"
+
+[sub_resource type="Curve" id="Curve_2g0j4"]
+_data = [Vector2(0, 1), 0.0, -0.328958, 0, 1, Vector2(1, 0.671042), -0.328958, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_aoek0"]
+colors = PackedColorArray(0, 0, 0, 1, 0.830289, 1, 0.495455, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5bniu"]
+noise_type = 2
+frequency = 0.283
+fractal_type = 0
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ss65v"]
+width = 40
+height = 8
+color_ramp = SubResource("Gradient_aoek0")
+noise = SubResource("FastNoiseLite_5bniu")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oh8ir"]
+render_priority = 0
+shader = ExtResource("5_cjxmw")
+shader_parameter/tex_tile_factor = 1.0
+shader_parameter/tex_offset = 0.0
+shader_parameter/color_tex = SubResource("NoiseTexture2D_ss65v")
+
+[sub_resource type="Gradient" id="Gradient_bkje4"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.201681, 0.819328)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fmbfn"]
+gradient = SubResource("Gradient_bkje4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bvxow"]
+render_priority = 0
+shader = ExtResource("3_vk4x5")
+shader_parameter/tex_tile_factor = 8.0
+shader_parameter/tex_offset = 0.0
+shader_parameter/color_tex = SubResource("GradientTexture2D_fmbfn")
+
+[sub_resource type="GDScript" id="GDScript_wgrqr"]
+script/source = "@tool
+extends Node3D
+
+
+@onready var line_1: Line3D = $line1
+@onready var line_2: Line3D = $line2
+
+
+func _notification(what: int) -> void:
+
+	if what == NOTIFICATION_EDITOR_PRE_SAVE:
+		_reflect_state(0)
+
+
+func _process(delta: float) -> void:
+
+	_reflect_state(Time.get_ticks_msec() / 1000.0)
+
+
+func _reflect_state(t: float) -> void:
+
+	line_1.points[1].x = 0.25 + sin(t * 3) * 0.25
+	line_2.points[1].x = 0.25 + cos(t * 3) * 0.25
+	line_1.rebuild()
+	line_2.rebuild()
+"
+
+[sub_resource type="GDScript" id="GDScript_irqjk"]
+script/source = "@tool
+extends Node3D
+
+
+@onready var ball: Node3D = $ball
+
+
+func _notification(what: int) -> void:
+
+	if what == NOTIFICATION_EDITOR_PRE_SAVE:
+		_reflect_state(0)
+
+
+func _process(delta: float) -> void:
+
+	_reflect_state(Time.get_ticks_msec() / 1000.0)
+
+
+func _reflect_state(t: float) -> void:
+
+	ball.position = Vector3(sin(t * 2) * 1, 0.75 + sin(t * 4) * 0.5, 0)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4obpg"]
+shading_mode = 0
+
+[sub_resource type="Curve" id="Curve_jjr5r"]
+_data = [Vector2(0, 1), 0.0, -1.18033, 0, 0, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="GDScript" id="GDScript_r0l0j"]
+script/source = "@tool
+extends Node3D
+
+
+const CORNERS: PackedVector3Array = [
+	Vector3(-1, 1, 0),
+	Vector3(1, 1, 0),
+	Vector3(1, -1, 0),
+	Vector3(-1, -1, 0) ]
+
+@onready var ball_1: Node3D = $ball1
+@onready var ball_2: Node3D = $ball2
+
+
+func _notification(what: int) -> void:
+
+	if what == NOTIFICATION_EDITOR_PRE_SAVE:
+		_reflect_state(0)
+
+
+func _process(delta: float) -> void:
+
+	_reflect_state(Time.get_ticks_msec() / 1000.0 * 2.5)
+
+
+func _reflect_state(t: float) -> void:
+
+	var corner_idx := int(wrapf(t, 0, 8) / 2) % 4
+	var lerp_ratio := minf(1, wrapf(t, 0, 2))
+
+	_reflect_ball_state(ball_1, -1, corner_idx, lerp_ratio)
+	_reflect_ball_state(ball_2, 1, corner_idx, lerp_ratio)
+
+
+func _reflect_ball_state(ball: Node3D, sign: int, corner_idx: int, lerp_ratio: float) -> void:
+
+	var corner := CORNERS[corner_idx]
+	var next_corner := CORNERS[(corner_idx + 1) % 4]
+	ball.position = Vector3(0.5 * sign, 0.75, 0) + 0.3 * corner.lerp(next_corner, ease(lerp_ratio, -4))
+"
+
+[sub_resource type="Gradient" id="Gradient_vu8i4"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GDScript" id="GDScript_cklss"]
+script/source = "@tool
+extends Node3D
+
+
+const CORNERS: PackedVector3Array = [
+	Vector3(-1, 1, 0),
+	Vector3(1, 1, 0),
+	Vector3(1, -1, 0),
+	Vector3(-1, -1, 0) ]
+
+@onready var ball_1: Node3D = $ball1
+@onready var ball_2: Node3D = $ball2
+
+
+func _notification(what: int) -> void:
+
+	if what == NOTIFICATION_EDITOR_PRE_SAVE:
+		_reflect_state(0)
+
+
+func _process(delta: float) -> void:
+
+	_reflect_state(Time.get_ticks_msec() / 1000.0)
+
+
+func _reflect_state(t: float) -> void:
+
+	var corner_idx := int(wrapf(t, 0, 4)) % 4
+	var lerp_ratio := minf(1, wrapf(t, 0, 1))
+
+	_reflect_ball_state(ball_1, -1, corner_idx, lerp_ratio)
+	_reflect_ball_state(ball_2, 1, corner_idx, lerp_ratio)
+
+
+func _reflect_ball_state(ball: Node3D, sign: int, corner_idx: int, lerp_ratio: float) -> void:
+
+	var corner := CORNERS[corner_idx]
+	var next_corner := CORNERS[(corner_idx + 1) % 4]
+	ball.position = Vector3(0.5 * sign, 0.75, 0) + 0.3 * corner.lerp(next_corner, lerp_ratio)
+"
+
+[sub_resource type="GDScript" id="GDScript_plx72"]
+script/source = "@tool
+extends Node3D
+
+
+@onready var staff_pivot: Node3D = $staff_pivot
+@onready var staff: MeshInstance3D = $staff_pivot/staff
+
+
+func _notification(what: int) -> void:
+
+	if what == NOTIFICATION_EDITOR_PRE_SAVE:
+		_reflect_state(0)
+
+
+func _process(delta: float) -> void:
+
+	_reflect_state(Time.get_ticks_msec() / 1000.0)
+
+
+func _reflect_state(t: float) -> void:
+
+	staff_pivot.basis = Basis(Vector3.RIGHT, t * 15)
+	staff.basis = Basis(Vector3.FORWARD, t)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lsvk8"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_uloyt"]
+material = SubResource("StandardMaterial3D_lsvk8")
+top_radius = 0.03
+bottom_radius = 0.03
+height = 1.7
+radial_segments = 16
+
+[sub_resource type="Curve" id="Curve_u7bmq"]
+_data = [Vector2(0, 1), 0.0, -0.190533, 0, 1, Vector2(1, 0.416555), -1.02911, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_qqri1"]
+offsets = PackedFloat32Array(0, 0.190871, 0.423237, 1)
+colors = PackedColorArray(1, 0.834711, 0.0909091, 1, 1, 0.627273, 0, 1, 1, 0.3, 0, 0.75, 1, 0.136364, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_kbraj"]
+offsets = PackedFloat32Array(0, 0.608295)
+colors = PackedColorArray(0.331818, 0.331818, 0.331818, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qdatc"]
+frequency = 0.0106
+fractal_octaves = 1
+fractal_lacunarity = 0.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jil5r"]
+height = 256
+seamless = true
+seamless_blend_skirt = 0.206
+color_ramp = SubResource("Gradient_kbraj")
+noise = SubResource("FastNoiseLite_qdatc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_texnx"]
+render_priority = 0
+shader = ExtResource("5_qvxfe")
+shader_parameter/tex_tile_factor = 0.1
+shader_parameter/tex_offset = 0.0
+shader_parameter/color_tex = SubResource("NoiseTexture2D_jil5r")
+
+[node name="lines_and_trails_3d_examples" type="Node3D"]
+
+[node name="world_env" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nl0ma")
+
+[node name="main_light" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.925871, -0.32722, 0.18892, 0, 0.5, 0.866025, -0.377841, -0.801827, 0.462935, 0, 10, 0)
+light_energy = 0.2
+
+[node name="example_1" type="Node3D" parent="."]
+
+[node name="heading" type="Label3D" parent="example_1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.0775828, 0.61109)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "LINE INTRO"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "You can create a line by adding a Line3D node to the scene."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_1"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="line1" type="MeshInstance3D" parent="example_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_qw2n0")
+points = PackedVector3Array(-0.5, 0, 0, 0.5, 0, 0)
+
+[node name="example_2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
+script = SubResource("GDScript_4w2x5")
+
+[node name="heading" type="Label3D" parent="example_2"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 0.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "BASIC EDITING"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_2"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "You can edit a line (e.g. points, size, color) in the editor or at runtime.
+When editing at runtime, make sure to call rebuild() afterwards."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_2"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="line1" type="MeshInstance3D" parent="example_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_qw2n0")
+width = 0.1
+width_curve = SubResource("Curve_ecy4m")
+points = PackedVector3Array(-0.5, 0, 0, -0.175, 0.1, 0, 0.175, -0.1, 0, 0.5, 0, 0)
+
+[node name="line2" type="MeshInstance3D" parent="example_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_qw2n0")
+width = 0.062
+gradient = SubResource("Gradient_vplke")
+points = PackedVector3Array(-0.5, 0, 0, -0.433333, 0.0160209, 0, -0.366667, 0.046019, 0, -0.3, 0.0779233, 0, -0.233333, 0.0977521, 0, -0.166667, 0.0959544, 0, -0.1, 0.0718593, 0, -0.0333333, 0.0342602, 0, 0.0333334, -0.00214175, 0, 0.1, -0.0228918, 0, 0.166667, -0.0198454, 0, 0.233333, 0.00550625, 0, 0.3, 0.0428951, 0, 0.366667, 0.0779287, 0, 0.433333, 0.0984801, 0, 0.5, 0.1, 0)
+
+[node name="example_3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+script = SubResource("GDScript_w1rhg")
+
+[node name="heading" type="Label3D" parent="example_3"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 0.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "MATERIAL TYPE"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_3"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "You can choose from several built-in material types for your line, or use your own custom material."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_3"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="box" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(0.89449, 0, -0.447088, -0.162645, 0.931482, -0.325405, 0.416454, 0.363788, 0.833201, 0, 0.5, -0.5)
+mesh = SubResource("BoxMesh_n08wu")
+
+[node name="line1" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_qw2n0")
+material_type = 0
+points = PackedVector3Array(-0.5, 0, 0, -0.175, 0.1, 0, 0.175, -0.1, 0, 0.5, 0, 0)
+
+[node name="line2" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_qw2n0")
+color = Color(1, 0, 0, 1)
+material_type = 4
+points = PackedVector3Array(-0.5, 0, 0, 0.5, 0, 0)
+
+[node name="line3" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_qw2n0")
+color = Color(0, 1, 0, 1)
+material_type = 4
+points = PackedVector3Array(-0.5, 0, 0, 0.5, 0, 0)
+
+[node name="line4" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_qw2n0")
+color = Color(0, 0, 1, 1)
+material_type = 4
+points = PackedVector3Array(-0.5, 0, 0, 0.5, 0, 0)
+
+[node name="light" type="OmniLight3D" parent="example_3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19207, 0.532059)
+light_color = Color(0.963636, 1, 0, 1)
+omni_range = 1.5
+omni_attenuation = 2.0
+
+[node name="ball" type="MeshInstance3D" parent="example_3/light"]
+material_override = SubResource("StandardMaterial3D_fgugc")
+mesh = SubResource("SphereMesh_jj8s7")
+skeleton = NodePath("../..")
+
+[node name="example_4" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 0)
+script = SubResource("GDScript_x42ah")
+
+[node name="heading" type="Label3D" parent="example_4"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 0.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "BILLBOARD MODE"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_4"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "Billboard mode VIEW makes the line always face the camera. NONE lets you manually set the curve normals (see screw). Z constrains line to the XY plane (see ground)."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_4"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="line1" type="MeshInstance3D" parent="example_4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_qw2n0")
+points = PackedVector3Array(-0.5, 0, 0, -0.175, 0.1, 0, 0.175, -0.1, 0, 0.5, 0, 0)
+
+[node name="line2" type="MeshInstance3D" parent="example_4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_qw2n0")
+width = 0.2
+color = Color(1, 1, 1, 0.544)
+gradient = SubResource("Gradient_vplke")
+billboard_mode = 0
+material_type = 0
+points = PackedVector3Array(-0.5, 0, 0, -0.467742, 0, 0, -0.435484, 0, 0, -0.403226, 0, 0, -0.370968, 0, 0, -0.33871, 0, 0, -0.306452, 0, 0, -0.274194, 0, 0, -0.241935, 0, 0, -0.209677, 0, 0, -0.177419, 0, 0, -0.145161, 0, 0, -0.112903, 0, 0, -0.0806452, 0, 0, -0.0483871, 0, 0, -0.016129, 0, 0, 0.016129, 0, 0, 0.0483871, 0, 0, 0.0806451, 0, 0, 0.112903, 0, 0, 0.145161, 0, 0, 0.177419, 0, 0, 0.209677, 0, 0, 0.241935, 0, 0, 0.274194, 0, 0, 0.306452, 0, 0, 0.33871, 0, 0, 0.370968, 0, 0, 0.403226, 0, 0, 0.435484, 0, 0, 0.467742, 0, 0, 0.5, 0, 0)
+curve_normals = PackedVector3Array(0, 1, 0, 0, 0.966886, 0.25521, 0, 0.869736, 0.493517, 0, 0.714985, 0.69914, 0, 0.512882, 0.858459, 0, 0.276811, 0.960924, 0, 0.0224074, 0.999749, 0, -0.23348, 0.972362, 0, -0.473905, 0.880576, 0, -0.682943, 0.730471, 0, -0.846751, 0.531989, 0, -0.954481, 0.298273, 0, -0.998996, 0.0448035, 0, -0.977349, -0.211633, 0, -0.890974, -0.454054, 0, -0.745591, -0.666404, 0, -0.550829, -0.834618, 0, -0.319586, -0.947557, 0, -0.0671772, -0.997741, 0, 0.189681, -0.981846, 0, 0.433976, -0.900925, 0, 0.64953, -0.760336, 0, 0.822066, -0.569392, 0, 0.940158, -0.340738, 0, 0.995985, -0.0895171, 0, 0.98585, 0.167632, 0, 0.910423, 0.41368, 0, 0.774699, 0.63233, 0, 0.587669, 0.809101, 0, 0.361719, 0.932287, 0, 0.111812, 0.993729, 0, -0.1455, 0.989358)
+
+[node name="line3" type="MeshInstance3D" parent="example_4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0558782, 0.005, -0.0373915)
+script = ExtResource("1_qw2n0")
+width = 0.11
+width_curve = SubResource("Curve_2g0j4")
+color = Color(0.936, 1, 0, 0.269)
+billboard_mode = 2
+material_type = 4
+points = PackedVector3Array(-0.579, -0.165, 0, -0.135, -0.138, 0, -0.222, 0.3, 0, 0.252, 0.252, 0, 0.201, -0.246, 0, -0.342, -0.318, 0, -0.399, 0.042, 0, 0.033, 0.033, 0, 0.048, -0.417, 0, 0.462, -0.417, 0)
+
+[node name="light" type="OmniLight3D" parent="example_4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3298, 0.783323, -0.1121)
+light_color = Color(0.963636, 1, 0, 1)
+light_energy = 0.5
+omni_range = 1.5
+
+[node name="ball" type="MeshInstance3D" parent="example_4/light"]
+material_override = SubResource("StandardMaterial3D_fgugc")
+mesh = SubResource("SphereMesh_jj8s7")
+skeleton = NodePath("../../../example_3")
+
+[node name="example_5" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="heading" type="Label3D" parent="example_5"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 0.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "TEXTURES"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_5"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "To add a texture to your line, set material type to CUSTOM, and create a new ShaderMaterial with any built-in shader (or your own)."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_5"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="line1" type="MeshInstance3D" parent="example_5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_qw2n0")
+width = 0.212
+billboard_mode = 2
+material_type = 5
+custom_material = SubResource("ShaderMaterial_oh8ir")
+points = PackedVector3Array(-0.5, 0, 0, -0.175, 0.1, 0, 0.175, -0.1, 0, 0.5, 0, 0)
+
+[node name="line2" type="MeshInstance3D" parent="example_5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_qw2n0")
+material_type = 5
+custom_material = SubResource("ShaderMaterial_bvxow")
+points = PackedVector3Array(-0.5, 0, 0, 0.5, 0, 0)
+
+[node name="example_6" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 0)
+script = SubResource("GDScript_wgrqr")
+
+[node name="heading" type="Label3D" parent="example_6"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 0.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "TILE MODE"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_6"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "Texture tile mode (RATIO or DISTANCE) controls how texture coords are incremented along the line."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_6"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="line1" type="MeshInstance3D" parent="example_6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_qw2n0")
+material_type = 5
+custom_material = SubResource("ShaderMaterial_bvxow")
+points = PackedVector3Array(-0.5, 0, 0, 0.25, 0, 0)
+
+[node name="line2" type="MeshInstance3D" parent="example_6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_qw2n0")
+texture_tile_mode = 1
+material_type = 5
+custom_material = SubResource("ShaderMaterial_bvxow")
+points = PackedVector3Array(-0.5, 0, 0, 0.5, 0, 0)
+
+[node name="example_7" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
+script = SubResource("GDScript_irqjk")
+
+[node name="heading" type="Label3D" parent="example_7"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 0.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "TRAIL INTRO"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_7"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "You can create a trail by adding a Trail3D node to the scene. Trails are special lines whose points are automatically updated by moving the node itself."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_7"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="ball" type="MeshInstance3D" parent="example_7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+material_override = SubResource("StandardMaterial3D_4obpg")
+mesh = SubResource("SphereMesh_jj8s7")
+skeleton = NodePath("../../example_3")
+
+[node name="trail" type="MeshInstance3D" parent="example_7/ball"]
+process_priority = 9999
+script = ExtResource("4_v7nag")
+time_limit = 0.5
+width_curve = SubResource("Curve_jjr5r")
+
+[node name="example_8" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 0)
+script = SubResource("GDScript_r0l0j")
+
+[node name="heading" type="Label3D" parent="example_8"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 0.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "LIMIT MODE"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_8"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "Trails can be limited by TIME or LENGTH."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_8"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="ball1" type="MeshInstance3D" parent="example_8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 1.05, 0)
+material_override = SubResource("StandardMaterial3D_4obpg")
+mesh = SubResource("SphereMesh_jj8s7")
+skeleton = NodePath("../../example_3")
+
+[node name="trail1" type="MeshInstance3D" parent="example_8/ball1"]
+process_priority = 9999
+script = ExtResource("4_v7nag")
+max_section_length = 0.05
+gradient = SubResource("Gradient_vu8i4")
+texture_tile_mode = 1
+material_type = 5
+custom_material = SubResource("ShaderMaterial_bvxow")
+
+[node name="ball2" type="MeshInstance3D" parent="example_8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 1.05, 0)
+material_override = SubResource("StandardMaterial3D_4obpg")
+mesh = SubResource("SphereMesh_jj8s7")
+skeleton = NodePath("../../example_3")
+
+[node name="trail2" type="MeshInstance3D" parent="example_8/ball2"]
+process_priority = 9999
+script = ExtResource("4_v7nag")
+max_section_length = 0.02
+limit_mode = 1
+time_limit = 0.5
+length_limit = 1.5
+gradient = SubResource("Gradient_vu8i4")
+texture_tile_mode = 1
+material_type = 5
+custom_material = SubResource("ShaderMaterial_bvxow")
+
+[node name="example_9" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+script = SubResource("GDScript_cklss")
+
+[node name="heading" type="Label3D" parent="example_9"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 0.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "PIN TEXTURE"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_9"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "Trail texture coords can be \"pinned\" to the world, instead of incrementing from the start of the trail."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_9"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="ball1" type="MeshInstance3D" parent="example_9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 1.05, 0)
+material_override = SubResource("StandardMaterial3D_4obpg")
+mesh = SubResource("SphereMesh_jj8s7")
+skeleton = NodePath("../../example_3")
+
+[node name="trail1" type="MeshInstance3D" parent="example_9/ball1"]
+process_priority = 9999
+script = ExtResource("4_v7nag")
+max_section_length = 0.02
+limit_mode = 1
+length_limit = 1.5
+gradient = SubResource("Gradient_vu8i4")
+texture_tile_mode = 1
+material_type = 5
+custom_material = SubResource("ShaderMaterial_bvxow")
+
+[node name="ball2" type="MeshInstance3D" parent="example_9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 1.05, 0)
+material_override = SubResource("StandardMaterial3D_4obpg")
+mesh = SubResource("SphereMesh_jj8s7")
+skeleton = NodePath("../../example_3")
+
+[node name="trail2" type="MeshInstance3D" parent="example_9/ball2"]
+process_priority = 9999
+script = ExtResource("4_v7nag")
+max_section_length = 0.02
+limit_mode = 1
+time_limit = 0.5
+length_limit = 1.5
+pin_texture = true
+gradient = SubResource("Gradient_vu8i4")
+texture_tile_mode = 1
+material_type = 5
+custom_material = SubResource("ShaderMaterial_bvxow")
+
+[node name="example_10" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0, 0)
+script = SubResource("GDScript_plx72")
+
+[node name="heading" type="Label3D" parent="example_10"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 0.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "UNBILLBOARDED TRAIL"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_10"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "A trail with billboard mode NONE will use its Y axis to set the curve normals."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_10"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="staff_pivot" type="Node3D" parent="example_10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="staff" type="MeshInstance3D" parent="example_10/staff_pivot"]
+mesh = SubResource("CylinderMesh_uloyt")
+
+[node name="trail" type="MeshInstance3D" parent="example_10/staff_pivot/staff"]
+process_priority = 9999
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+skeleton = NodePath("../../../..")
+script = ExtResource("4_v7nag")
+time_limit = 0.2
+length_limit = 5.0
+width = 0.7
+width_curve = SubResource("Curve_u7bmq")
+gradient = SubResource("Gradient_qqri1")
+billboard_mode = 0
+texture_tile_mode = 1
+material_type = 5
+custom_material = SubResource("ShaderMaterial_texnx")
+
+[node name="trail2" type="MeshInstance3D" parent="example_10/staff_pivot/staff"]
+process_priority = 9999
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+skeleton = NodePath("../../../..")
+script = ExtResource("4_v7nag")
+time_limit = 0.2
+length_limit = 5.0
+width = 0.7
+width_curve = SubResource("Curve_u7bmq")
+gradient = SubResource("Gradient_qqri1")
+billboard_mode = 0
+texture_tile_mode = 1
+material_type = 5
+custom_material = SubResource("ShaderMaterial_texnx")
+
+[node name="example_11" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0)
+
+[node name="heading" type="Label3D" parent="example_11"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 0.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "TIP: SHARP CORNERS"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_11"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "Sharp corners can look funky from certain angles. An easy hack is to simply duplicate all the corner points."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_11"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="line1" type="MeshInstance3D" parent="example_11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_qw2n0")
+points = PackedVector3Array(-0.5, 0, 0, -0.15, 0.15, 0, 0.15, -0.15, 0, 0.5, 0, 0)
+
+[node name="line2" type="MeshInstance3D" parent="example_11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_qw2n0")
+points = PackedVector3Array(-0.5, 0, 0, -0.15, 0.15, 0, -0.15, 0.15, 0, 0.15, -0.15, 0, 0.15, -0.15, 0, 0.5, 0, 0)
