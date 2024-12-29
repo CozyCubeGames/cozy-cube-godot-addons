@@ -16,7 +16,7 @@ extends ArrayMesh
 	set(value):
 		if value == input_size:
 			return
-		input_size = value
+		input_size = Vector2(maxf(value.x, 0.001), maxf(value.y, 0.001))
 		if Engine.is_editor_hint():
 			remap_vertices()
 @export var output_size: Vector2 = Vector2(1, 1):
@@ -24,7 +24,7 @@ extends ArrayMesh
 	set(value):
 		if value == output_size:
 			return
-		output_size = value
+		output_size = Vector2(maxf(value.x, 0.001), maxf(value.y, 0.001))
 		if Engine.is_editor_hint():
 			remap_vertices()
 @export var right_margin: float = 0.25:
@@ -94,16 +94,12 @@ func remap_vertices() -> void:
 		return
 
 	var input_ext := input_size / 2
-	var input_min := Vector2(-input_ext.x, -input_ext.y)
-	var input_max := Vector2(input_ext.x, input_ext.y)
-	var input_center_min := input_min + Vector2(left_margin, bottom_margin)
-	var input_center_max := input_max - Vector2(right_margin, top_margin)
+	var input_center_min := -input_ext + Vector2(left_margin, bottom_margin)
+	var input_center_max := input_ext - Vector2(right_margin, top_margin)
 
 	var output_ext := output_size / 2
-	var output_min := Vector2(-output_ext.x, -output_ext.y)
-	var output_max := Vector2(output_ext.x, output_ext.y)
-	var output_center_min := output_min + Vector2(left_margin, bottom_margin)
-	var output_center_max := output_max - Vector2(right_margin, top_margin)
+	var output_center_min := -output_ext + Vector2(left_margin, bottom_margin)
+	var output_center_max := output_ext - Vector2(right_margin, top_margin)
 
 	for surf_idx in input_mesh.get_surface_count():
 
@@ -126,14 +122,29 @@ func remap_vertices() -> void:
 				y_patch = -1
 
 			match x_patch:
-				1: p.x = output_max.x + p.x - input_max.x
-				-1: p.x = output_min.x + p.x - input_min.x
+				1: p.x = output_ext.x + p.x - input_ext.x
+				-1: p.x = -output_ext.x + p.x + input_ext.x
 				0: p.x = remap(p.x, input_center_min.x, input_center_max.x, output_center_min.x, output_center_max.x)
 			match y_patch:
-				1: p.y = output_max.y + p.y - input_max.y
-				-1: p.y = output_min.y + p.y - input_min.y
+				1: p.y = output_ext.y + p.y - input_ext.y
+				-1: p.y = -output_ext.y + p.y + input_ext.y
 				0: p.y = remap(p.y, input_center_min.y, input_center_max.y, output_center_min.y, output_center_max.y)
 
 			verts[i] = p
 
 		surface_update_vertex_region(surf_idx, 0, verts.to_byte_array())
+		custom_aabb = _get_aabb()
+
+
+func _get_aabb() -> AABB:
+
+	if input_mesh:
+		var aabb := input_mesh.get_aabb()
+		var size_ratio := output_size / input_size
+		aabb.position.x *= size_ratio.x
+		aabb.position.y *= size_ratio.y
+		aabb.size.x *= size_ratio.x
+		aabb.size.y *= size_ratio.y
+		return aabb
+	else:
+		return AABB(Vector3.ZERO, Vector3.ZERO)
