@@ -8,9 +8,14 @@ extends ArrayMesh
 	set(value):
 		if value == input_mesh:
 			return
+		if Engine.is_editor_hint():
+			if input_mesh:
+				input_mesh.changed.disconnect(rebuild)
 		input_mesh = value
 		if Engine.is_editor_hint():
 			rebuild()
+			if input_mesh:
+				input_mesh.changed.connect(rebuild)
 @export var input_size: Vector3 = Vector3(1, 1, 1):
 	get: return input_size
 	set(value):
