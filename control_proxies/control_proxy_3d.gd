@@ -87,11 +87,6 @@ static var _normals: PackedVector3Array
 static var _colors: PackedColorArray
 static var _indices: PackedInt32Array
 
-func _validate_property(property: Dictionary) -> void:
-
-	if property.name == "mesh":
-		property.usage |= PROPERTY_USAGE_READ_ONLY
-
 
 func _ready() -> void:
 
