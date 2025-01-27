@@ -103,10 +103,17 @@ func _ready() -> void:
 	if mesh.get_surface_count() > 0:
 		mesh.surface_set_material(0, _material)
 
-	_refresh_material()
+	rebuild()
 
 	if is_instance_valid(control):
 		visible = control.visible
+
+
+func _validate_property(property: Dictionary) -> void:
+
+	match property.name:
+		"mesh":
+			property.usage = PROPERTY_USAGE_NONE
 
 
 func get_size_3d() -> Vector3:
