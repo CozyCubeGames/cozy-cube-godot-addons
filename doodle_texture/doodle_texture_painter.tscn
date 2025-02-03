@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf541rxq25q56"]
+
+[ext_resource type="Script" path="res://addons/doodle_texture/doodle_texture_painter.gd" id="1_nkew5"]
+
+[node name="doodle_texture_painter" type="VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 5
+script = ExtResource("1_nkew5")
+
+[node name="texture_rect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(0, 256)
+layout_mode = 2
+size_flags_vertical = 0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="h_box_container" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="swap_button" type="Button" parent="h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🔃 Swap Colors"
+
+[node name="clear_button" type="Button" parent="h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🪣Clear"
+
+[connection signal="pressed" from="h_box_container/swap_button" to="." method="_on_swap_button_pressed"]
+[connection signal="pressed" from="h_box_container/clear_button" to="." method="_on_clear_button_pressed"]
