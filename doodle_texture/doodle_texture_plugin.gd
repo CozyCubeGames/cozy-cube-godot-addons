@@ -10,13 +10,17 @@ var inspector_plugin := DoodleTextureInspectorPlugin.new()
 
 func _enter_tree() -> void:
 
-	instance = self
+	if instance == null:
+		instance = self
 
 	add_custom_type("DoodleTexture", "PortableCompressedTexture2D", preload("res://addons/doodle_texture/doodle_texture.gd"), null)
 	add_inspector_plugin(inspector_plugin)
 
 
 func _exit_tree() -> void:
+
+	if instance == self:
+		instance = null
 
 	remove_custom_type("DoodleTexture")
 	remove_inspector_plugin(inspector_plugin)
