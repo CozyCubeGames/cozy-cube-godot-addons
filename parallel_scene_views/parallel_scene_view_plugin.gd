@@ -3,11 +3,12 @@ class_name ParallelSceneViewPlugin
 extends EditorPlugin
 
 
-const BUTTON_SCN = preload("res://addons/parallel_scene_view/parallel_scene_view_button.tscn")
+const BUTTON_SCN = preload("res://addons/parallel_scene_views/parallel_scene_view_button.tscn")
 
 var _button: ParallelSceneViewButton
 var _active_previews: Variant = null
 var _previews_by_scene: Dictionary
+var _previews_dirty_by_scene: Dictionary
 var _dialog: EditorFileDialog
 var _asking_idx: int
 
@@ -37,6 +38,7 @@ func _exit_tree() -> void:
 				preview.free()
 
 	_previews_by_scene.clear()
+	_previews_dirty_by_scene.clear()
 
 	if is_instance_valid(_button):
 		remove_control_from_container(EditorPlugin.CONTAINER_SPATIAL_EDITOR_MENU, _button)
@@ -135,14 +137,11 @@ func _set_preview_visible(idx: int, visible: bool) -> void:
 	if not _active_previews:
 		return
 
-	var preview: Node = _active_previews[idx]
+	var preview := _active_previews[idx] as Node
 	if not is_instance_valid(preview):
 		return
 
 	var vp := EditorInterface.get_editor_viewport_3d(idx)
-
-	if preview.get_parent():
-		preview.get_parent().remove_child(preview)
 
 	if visible:
 		if not is_instance_valid(vp.world_3d):
@@ -165,41 +164,48 @@ func _on_scene_changed(scene_root: Node) -> void:
 	for i in 4:
 		_set_preview_visible(i, false)
 
-	if is_instance_valid(_active_previews):
-		pass
-
 	if scene_root:
 
 		_active_previews = _previews_by_scene.get_or_add(
 				scene_root.scene_file_path,
 				[null, null, null, null])
 
-		for i in 4:
-			_set_preview_visible(i, true)
+		if _previews_dirty_by_scene.get(scene_root.scene_file_path, false):
+			_previews_dirty_by_scene[scene_root.scene_file_path] = false
+			for i in 4:
+				var preview: Node = _active_previews[i]
+				if is_instance_valid(preview):
+					set_parallel_scene(i, preview.scene_file_path)
+		else:
+			for i in 4:
+				_set_preview_visible(i, true)
 
 
 func _on_scene_saved(path: String) -> void:
 
-	for scene_path in _previews_by_scene.keys():
-		var previews = _previews_by_scene.get(scene_path, null)
-		if not previews:
-			continue
+	for i in 4:
+		_set_preview_visible(i, false)
+
+	if _active_previews:
 		for i in 4:
-			var old_preview: Node = previews[i]
+			var old_preview: Node = _active_previews[i]
 			if not is_instance_valid(old_preview):
 				continue
-			var old_parent := old_preview.get_parent()
-			if is_instance_valid(old_parent):
-				old_parent.remove_child(old_preview)
-			previews[i] = null
+			_active_previews[i] = null
 			var preview_scn: PackedScene = load(old_preview.scene_file_path)
-			if is_instance_valid(preview_scn):
-				var preview: Node = preview_scn.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
-				previews[i] = preview
-				if is_instance_valid(old_parent):
-					old_parent.add_child(preview)
 			if is_instance_valid(old_preview):
 				old_preview.free()
+			if is_instance_valid(preview_scn):
+				var preview: Node = preview_scn.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
+				_active_previews[i] = preview
+
+	for scene_path in _previews_by_scene.keys():
+		var previews = _previews_by_scene.get(scene_path, null)
+		if previews == _active_previews:
+			continue
+		for i in 4:
+			_set_preview_visible(i, true)
+		_previews_dirty_by_scene[scene_path] = true
 
 
 func _on_scene_closed(path: String) -> void:
@@ -207,10 +213,18 @@ func _on_scene_closed(path: String) -> void:
 	var previews = _previews_by_scene.get(path, null)
 	if not previews:
 		return
-	for i in previews.size():
-		if is_instance_valid(previews[i]):
-			previews[i].free()
-	_previews_by_scene.erase(path)
+	if previews == _active_previews:
+		for i in 4:
+			_set_preview_visible(i, false)
+		_active_previews = null
+
+	await Engine.get_main_loop().process_frame
+
+	if not EditorInterface.get_open_scenes().has(path):
+		for preview in previews:
+			if is_instance_valid(preview):
+				preview.free()
+		_previews_by_scene.erase(path)
 
 
 func _on_dialog_file_selected(path: String) -> void:
