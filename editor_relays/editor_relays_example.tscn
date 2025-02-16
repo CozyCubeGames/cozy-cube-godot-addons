@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb86ktddgj5fp"]
+
+[ext_resource type="Script" path="res://addons/editor_relays/editor_relays_example.gd" id="1_7r4yk"]
+[ext_resource type="Script" path="res://addons/editor_relays/editor_relay.gd" id="2_w3oei"]
+
+[node name="editor_relays_example" type="Node"]
+script = ExtResource("1_7r4yk")
+
+[node name="relay" type="Node" parent="."]
+script = ExtResource("2_w3oei")
+
+[node name="panel_container" type="PanelContainer" parent="."]
+offset_left = 13.0
+offset_top = 15.0
+offset_right = 264.0
+offset_bottom = 159.0
+
+[node name="margin_container" type="MarginContainer" parent="panel_container"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="v_box_container" type="VBoxContainer" parent="panel_container/margin_container"]
+layout_mode = 2
+
+[node name="size_label" type="Label" parent="panel_container/margin_container/v_box_container"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Editor Size:"
+horizontal_alignment = 1
+
+[node name="h_separator" type="HSeparator" parent="panel_container/margin_container/v_box_container"]
+layout_mode = 2
+
+[node name="minimize_button" type="Button" parent="panel_container/margin_container/v_box_container"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Minimize Editor"
+
+[node name="restore_button" type="Button" parent="panel_container/margin_container/v_box_container"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Restore Editor"
+
+[node name="maximize_button" type="Button" parent="panel_container/margin_container/v_box_container"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Maximize Editor"
+
+[node name="h_separator2" type="HSeparator" parent="panel_container/margin_container/v_box_container"]
+layout_mode = 2
+
+[node name="info_label" type="Label" parent="panel_container/margin_container/v_box_container"]
+layout_mode = 2
+text = "Instructions:"
+horizontal_alignment = 1
+
+[node name="rich_text_label" type="RichTextLabel" parent="panel_container/margin_container/v_box_container"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.568182, 0.568182, 0.568182, 1)
+bbcode_enabled = true
+text = "[center]Run the game, and try resizing the editor. Observe how the label on the top changes. Try pressing the buttons. Look at the script on the root of this scene to see how everything's done."
+fit_content = true
+
+[connection signal="message_received_from_editor" from="relay" to="." method="_on_message_received_from_editor"]
+[connection signal="message_received_from_game" from="relay" to="." method="_on_message_received_from_game"]
+[connection signal="pressed" from="panel_container/margin_container/v_box_container/minimize_button" to="." method="_on_minimize_button_pressed"]
+[connection signal="pressed" from="panel_container/margin_container/v_box_container/restore_button" to="." method="_on_restore_button_pressed"]
+[connection signal="pressed" from="panel_container/margin_container/v_box_container/maximize_button" to="." method="_on_maximize_button_pressed"]

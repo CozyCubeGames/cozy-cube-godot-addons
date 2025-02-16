@@ -1,0 +1,39 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cvm58kp86cjvc"
+path.bptc="res://.godot/imported/EditorRelay.svg-e3228cf81642c8307fb50b6db2a18e2f.bptc.ctex"
+path.astc="res://.godot/imported/EditorRelay.svg-e3228cf81642c8307fb50b6db2a18e2f.astc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://addons/editor_relays/EditorRelay.svg"
+dest_files=["res://.godot/imported/EditorRelay.svg-e3228cf81642c8307fb50b6db2a18e2f.bptc.ctex", "res://.godot/imported/EditorRelay.svg-e3228cf81642c8307fb50b6db2a18e2f.astc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=true
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=false
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
