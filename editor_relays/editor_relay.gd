@@ -14,16 +14,15 @@ signal message_received_from_editor(message: StringName, data: Array)
 		var old_message_group := message_group
 		message_group = value
 		if not Engine.is_editor_hint():
-			if _is_message_capture_registered:
+			if is_node_ready():
 				EngineDebugger.unregister_message_capture("relay-" + old_message_group)
 				EngineDebugger.register_message_capture("relay-" + message_group, _on_message_captured)
 
 
 var _plugin: EditorRelaysDebuggerPlugin
-var _is_message_capture_registered: bool
 
 
-func _enter_tree() -> void:
+func _ready() -> void:
 
 	if Engine.is_editor_hint():
 		if is_instance_valid(EditorRelaysPlugin._instance):
@@ -32,17 +31,17 @@ func _enter_tree() -> void:
 				_plugin._register_relay(self)
 	else:
 		EngineDebugger.register_message_capture("relay-" + message_group, _on_message_captured)
-		_is_message_capture_registered = true
 
 
-func _exit_tree() -> void:
+func _notification(what: int) -> void:
 
-	if Engine.is_editor_hint():
-		if is_instance_valid(_plugin):
-			_plugin._unregister_relay(self)
-	else:
-		EngineDebugger.unregister_message_capture("relay-" + message_group)
-		_is_message_capture_registered = false
+	if what == NOTIFICATION_PREDELETE:
+
+		if Engine.is_editor_hint():
+			if is_instance_valid(_plugin):
+				_plugin._unregister_relay(self)
+		else:
+			EngineDebugger.unregister_message_capture("relay-" + message_group)
 
 
 func send_message_to_game(message: StringName, data: Array = []) -> void:
@@ -66,5 +65,7 @@ func send_message_to_editor(message: StringName, data: Array = []) -> void:
 
 func _on_message_captured(message: String, data: Array) -> bool:
 
-	message_received_from_editor.emit(message, data)
-	return true
+	if is_inside_tree():
+		message_received_from_editor.emit(message, data)
+		return true
+	return false

@@ -15,7 +15,7 @@ func _capture(msg: String, data: Array, session_id: int) -> bool:
 
 	var msg_tokens := msg.trim_prefix("relay-").split(":")
 	for relay in _relays:
-		if relay.message_group == msg_tokens[0]:
+		if is_instance_valid(relay) and relay.is_inside_tree() and relay.message_group == msg_tokens[0]:
 			relay.message_received_from_game.emit(msg_tokens[1], data)
 	return true
 
