@@ -8,6 +8,7 @@ script = ExtResource("1_7r4yk")
 
 [node name="relay" type="Node" parent="."]
 script = ExtResource("2_w3oei")
+channel = &"example"
 
 [node name="panel_container" type="PanelContainer" parent="."]
 offset_left = 13.0
