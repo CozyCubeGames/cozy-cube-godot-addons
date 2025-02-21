@@ -3,6 +3,8 @@ class_name EditorRelay
 extends Node
 
 
+signal game_connected()
+signal game_disconnected()
 signal message_received_from_game(message: StringName, data: Array)
 signal message_received_from_editor(message: StringName, data: Array)
 
