@@ -11,7 +11,7 @@ static var _instance: EditorRelaysPlugin
 func _enter_tree() -> void:
 
 	_instance = self
-	add_custom_type("EditorRelay", "Node", preload("editor_relay.gd"), preload("EditorRelay.svg"))
+	add_custom_type("EditorRelay", "Node", preload("res://addons/editor_relays/editor_relay.gd"), preload("EditorRelay.svg"))
 	add_debugger_plugin(_debugger_plugin)
 
 
