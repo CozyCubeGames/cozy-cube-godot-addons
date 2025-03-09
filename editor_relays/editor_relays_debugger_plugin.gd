@@ -47,7 +47,7 @@ func _on_session_started() -> void:
 	_debug_session_started = true
 
 	for relay in _relays:
-		if is_instance_valid(relay):
+		if is_instance_valid(relay) and not relay.is_queued_for_deletion():
 			relay.game_connected.emit()
 
 
@@ -59,5 +59,5 @@ func _on_session_stopped() -> void:
 	_debug_session_started = false
 
 	for relay in _relays:
-		if is_instance_valid(relay):
+		if is_instance_valid(relay) and not relay.is_queued_for_deletion():
 			relay.game_disconnected.emit()

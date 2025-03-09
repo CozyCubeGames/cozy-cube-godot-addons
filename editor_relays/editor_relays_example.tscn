@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cb86ktddgj5fp"]
 
-[ext_resource type="Script" path="res://addons/editor_relays/editor_relays_example.gd" id="1_7r4yk"]
-[ext_resource type="Script" path="res://addons/editor_relays/editor_relay.gd" id="2_w3oei"]
+[ext_resource type="Script" uid="uid://ccow8cv0e7kho" path="res://addons/editor_relays/editor_relays_example.gd" id="1_7r4yk"]
+[ext_resource type="Script" uid="uid://b3dptnxouiwpt" path="res://addons/editor_relays/editor_relay.gd" id="2_w3oei"]
 
 [node name="editor_relays_example" type="Node"]
 script = ExtResource("1_7r4yk")
