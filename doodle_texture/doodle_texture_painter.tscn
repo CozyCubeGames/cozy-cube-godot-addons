@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bf541rxq25q56"]
 
-[ext_resource type="Script" path="res://addons/doodle_texture/doodle_texture_painter.gd" id="1_nkew5"]
+[ext_resource type="Script" uid="uid://cgfg8baad3nyy" path="res://addons/doodle_texture/doodle_texture_painter.gd" id="1_nkew5"]
 
 [node name="doodle_texture_painter" type="VBoxContainer"]
 custom_minimum_size = Vector2(0, 200)

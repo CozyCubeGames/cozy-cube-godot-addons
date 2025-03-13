@@ -10,4 +10,5 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
 
-	pass
+	remove_custom_type("Trail3D")
+	remove_custom_type("Line3D")

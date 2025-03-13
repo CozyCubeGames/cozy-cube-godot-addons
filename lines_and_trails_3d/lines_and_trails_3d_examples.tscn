@@ -1,10 +1,10 @@
 [gd_scene load_steps=42 format=3 uid="uid://b687koijwjkt4"]
 
-[ext_resource type="Script" path="res://addons/lines_and_trails_3d/line_3d.gd" id="1_qw2n0"]
-[ext_resource type="Shader" path="res://addons/lines_and_trails_3d/line_3d_billboard_mix_unlit.gdshader" id="3_vk4x5"]
-[ext_resource type="Script" path="res://addons/lines_and_trails_3d/trail_3d.gd" id="4_v7nag"]
-[ext_resource type="Shader" path="res://addons/lines_and_trails_3d/line_3d_solid_unlit.gdshader" id="5_cjxmw"]
-[ext_resource type="Shader" path="res://addons/lines_and_trails_3d/line_3d_add.gdshader" id="5_qvxfe"]
+[ext_resource type="Script" uid="uid://c8rainoecpyie" path="res://addons/lines_and_trails_3d/line_3d.gd" id="1_qw2n0"]
+[ext_resource type="Shader" uid="uid://bjglkppko7dki" path="res://addons/lines_and_trails_3d/line_3d_billboard_mix_unlit.gdshader" id="3_vk4x5"]
+[ext_resource type="Script" uid="uid://bqflf4vw8mem1" path="res://addons/lines_and_trails_3d/trail_3d.gd" id="4_v7nag"]
+[ext_resource type="Shader" uid="uid://b0sgrl422h2ag" path="res://addons/lines_and_trails_3d/line_3d_solid_unlit.gdshader" id="5_cjxmw"]
+[ext_resource type="Shader" uid="uid://b2cntdsopvf2" path="res://addons/lines_and_trails_3d/line_3d_add.gdshader" id="5_qvxfe"]
 
 [sub_resource type="Environment" id="Environment_nl0ma"]
 background_mode = 1
@@ -144,9 +144,9 @@ noise = SubResource("FastNoiseLite_5bniu")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oh8ir"]
 render_priority = 0
 shader = ExtResource("5_cjxmw")
+shader_parameter/color_tex = SubResource("NoiseTexture2D_ss65v")
 shader_parameter/tex_tile_factor = 1.0
 shader_parameter/tex_offset = 0.0
-shader_parameter/color_tex = SubResource("NoiseTexture2D_ss65v")
 
 [sub_resource type="Gradient" id="Gradient_bkje4"]
 interpolation_mode = 1
@@ -159,9 +159,9 @@ gradient = SubResource("Gradient_bkje4")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bvxow"]
 render_priority = 0
 shader = ExtResource("3_vk4x5")
+shader_parameter/color_tex = SubResource("GradientTexture2D_fmbfn")
 shader_parameter/tex_tile_factor = 8.0
 shader_parameter/tex_offset = 0.0
-shader_parameter/color_tex = SubResource("GradientTexture2D_fmbfn")
 
 [sub_resource type="GDScript" id="GDScript_wgrqr"]
 script/source = "@tool
@@ -371,9 +371,9 @@ noise = SubResource("FastNoiseLite_qdatc")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_texnx"]
 render_priority = 0
 shader = ExtResource("5_qvxfe")
+shader_parameter/color_tex = SubResource("NoiseTexture2D_jil5r")
 shader_parameter/tex_tile_factor = 0.1
 shader_parameter/tex_offset = 0.0
-shader_parameter/color_tex = SubResource("NoiseTexture2D_jil5r")
 
 [node name="lines_and_trails_3d_examples" type="Node3D"]
 
