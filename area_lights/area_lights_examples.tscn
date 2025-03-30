@@ -1,0 +1,1183 @@
+[gd_scene load_steps=23 format=3 uid="uid://dmlikm6scy06c"]
+
+[ext_resource type="LightmapGIData" uid="uid://d2bopigr3ymyr" path="res://addons/area_lights/area_lights_examples.lmbake" id="1_shbdq"]
+[ext_resource type="Script" uid="uid://fpt3jomast5j" path="res://addons/area_lights/area_light_3d.gd" id="2_1plov"]
+
+[sub_resource type="Environment" id="Environment_nl0ma"]
+background_mode = 1
+background_color = Color(0.163403, 0.0792355, 0.268182, 1)
+ambient_light_source = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wy7so"]
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_shbdq"]
+lightmap_size_hint = Vector2i(204, 108)
+material = SubResource("StandardMaterial3D_wy7so")
+add_uv2 = true
+size = Vector3(20, 0.2, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0vgxa"]
+lightmap_size_hint = Vector2i(24, 18)
+material = SubResource("StandardMaterial3D_wy7so")
+add_uv2 = true
+size = Vector3(2, 0.2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ocso8"]
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_22pmh"]
+lightmap_size_hint = Vector2i(14, 32)
+material = SubResource("StandardMaterial3D_ocso8")
+add_uv2 = true
+size = Vector3(0.2, 1.8, 1.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1plov"]
+emission_enabled = true
+emission = Color(0, 0.427273, 1, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_ftaiw"]
+lightmap_size_hint = Vector2i(7, 7)
+material = SubResource("StandardMaterial3D_1plov")
+add_uv2 = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4jyf7"]
+emission_enabled = true
+emission = Color(0.609091, 1, 0, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_4jyf7"]
+lightmap_size_hint = Vector2i(2, 7)
+material = SubResource("StandardMaterial3D_4jyf7")
+add_uv2 = true
+size = Vector2(0.05, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tqma7"]
+emission_enabled = true
+emission = Color(0, 0.427273, 1, 1)
+emission_energy_multiplier = 20.0
+emission_on_uv2 = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_7r7fq"]
+lightmap_size_hint = Vector2i(7, 7)
+material = SubResource("StandardMaterial3D_tqma7")
+add_uv2 = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8emh"]
+emission_enabled = true
+emission = Color(0.609091, 1, 0, 1)
+emission_energy_multiplier = 30.0
+emission_on_uv2 = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_ocso8"]
+lightmap_size_hint = Vector2i(2, 7)
+material = SubResource("StandardMaterial3D_o8emh")
+add_uv2 = true
+size = Vector2(0.05, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r7fq"]
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_o8emh"]
+lightmap_size_hint = Vector2i(20, 51)
+material = SubResource("StandardMaterial3D_7r7fq")
+add_uv2 = true
+size = Vector3(0.2, 3, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_shbdq"]
+albedo_color = Color(0, 1, 0.127273, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1plov"]
+lightmap_size_hint = Vector2i(17, 9)
+material = SubResource("StandardMaterial3D_shbdq")
+add_uv2 = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ftaiw"]
+emission_enabled = true
+emission = Color(0, 1, 0.0727272, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7r7fq"]
+material = SubResource("StandardMaterial3D_ftaiw")
+top_radius = 0.51
+bottom_radius = 0.51
+height = 0.1
+cap_top = false
+cap_bottom = false
+
+[node name="lines_and_trails_3d_examples" type="Node3D"]
+
+[node name="world_env" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nl0ma")
+
+[node name="dummy_light" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.925871, -0.32722, 0.18892, 0, 0.5, 0.866025, -0.377841, -0.801827, 0.462935, 0, 10, 0)
+visible = false
+light_energy = 0.2
+
+[node name="lightmap_gi" type="LightmapGI" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+quality = 0
+supersampling = true
+interior = true
+environment_mode = 0
+light_data = ExtResource("1_shbdq")
+
+[node name="ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 5.25, -0.6, -0.014)
+mesh = SubResource("BoxMesh_shbdq")
+skeleton = NodePath("../example_1")
+
+[node name="example_1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="heading" type="Label3D" parent="example_1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.0775828, 1.61109)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "INTRO"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 1.6716)
+pixel_size = 0.003
+text = "You can create an area light by adding an AreaLight3D node to the scene with a lightmap. Its lighting will show up after you bake the lightmap.
+Note that AreaLight3D doesn't include geometry to represent whatever's making the light. You add that yourself."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="floor" type="MeshInstance3D" parent="example_1"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, -0.1, 0)
+mesh = SubResource("BoxMesh_0vgxa")
+
+[node name="ceiling" type="MeshInstance3D" parent="example_1"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 1.9, 0)
+mesh = SubResource("BoxMesh_0vgxa")
+
+[node name="wall1" type="MeshInstance3D" parent="example_1"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -0.700036, 0.9, -0.572756)
+mesh = SubResource("BoxMesh_22pmh")
+
+[node name="wall2" type="MeshInstance3D" parent="example_1"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0.706962, 0.9, -0.56583)
+mesh = SubResource("BoxMesh_22pmh")
+
+[node name="light_panel" type="MeshInstance3D" parent="example_1"]
+transform = Transform3D(-0.707107, 0.707107, -2.98023e-08, -8.74228e-08, -6.47848e-08, -1, -0.707107, -0.707107, 1.53437e-07, 8.50524e-09, 1.79339, 0.137)
+gi_mode = 0
+mesh = SubResource("QuadMesh_ftaiw")
+
+[node name="area_light_3d" type="Node3D" parent="example_1/light_panel"]
+transform = Transform3D(0, 1, -1.18331e-07, 1, 0, 3.09086e-08, 3.09086e-08, -1.18331e-07, -1, 0, 0, 0)
+script = ExtResource("2_1plov")
+area_range = 2.0
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 2.0
+light_angle = 120.0
+metadata/_custom_type_script = "uid://fpt3jomast5j"
+
+[node name="sublight_1" type="SpotLight3D" parent="example_1/light_panel/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -0.25, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 0.375
+light_bake_mode = 1
+spot_range = 2.0
+spot_angle = 120.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_2" type="SpotLight3D" parent="example_1/light_panel/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.25, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 0.375
+light_bake_mode = 1
+spot_range = 2.0
+spot_angle = 120.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_3" type="SpotLight3D" parent="example_1/light_panel/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0.25, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 0.375
+light_bake_mode = 1
+spot_range = 2.0
+spot_angle = 120.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_4" type="SpotLight3D" parent="example_1/light_panel/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.25, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 0.375
+light_bake_mode = 1
+spot_range = 2.0
+spot_angle = 120.0
+spot_angle_attenuation = 0.001
+
+[node name="light_strip" type="MeshInstance3D" parent="example_1"]
+transform = Transform3D(0.707107, 0.707107, 0, 0, -6.47848e-08, 1, 0.707107, -0.707107, 0, -0.525122, 0.00515348, -0.357258)
+gi_mode = 0
+mesh = SubResource("QuadMesh_4jyf7")
+
+[node name="area_light_3d" type="Node3D" parent="example_1/light_strip"]
+transform = Transform3D(0, 1, -1.18331e-07, 1, 0, 3.09086e-08, 3.09086e-08, -1.18331e-07, -1, 0, 0, 0)
+script = ExtResource("2_1plov")
+area_size = Vector2(1, 0.1)
+area_range = 1.0
+area_resolution = 4.0
+light_color = Color(1, 1, 0, 1)
+light_energy = 5.0
+light_angle = 120.0
+metadata/_custom_type_script = "uid://fpt3jomast5j"
+
+[node name="sublight_1" type="SpotLight3D" parent="example_1/light_strip/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0, 0)
+visible = false
+light_color = Color(1, 1, 0, 1)
+light_energy = 0.09375
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle = 120.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_2" type="SpotLight3D" parent="example_1/light_strip/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.125, 0, 0)
+visible = false
+light_color = Color(1, 1, 0, 1)
+light_energy = 0.09375
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle = 120.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_3" type="SpotLight3D" parent="example_1/light_strip/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0, 0)
+visible = false
+light_color = Color(1, 1, 0, 1)
+light_energy = 0.09375
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle = 120.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_4" type="SpotLight3D" parent="example_1/light_strip/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.375, 0, 0)
+visible = false
+light_color = Color(1, 1, 0, 1)
+light_energy = 0.09375
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle = 120.0
+spot_angle_attenuation = 0.001
+
+[node name="light_strip2" type="MeshInstance3D" parent="example_1"]
+transform = Transform3D(-0.707107, 0.707107, 0, 0, -6.47848e-08, 1, 0.707107, 0.707107, 0, 0.525, 0.005, -0.357)
+gi_mode = 0
+mesh = SubResource("QuadMesh_4jyf7")
+
+[node name="area_light_3d" type="Node3D" parent="example_1/light_strip2"]
+transform = Transform3D(0, 1, -1.18331e-07, 1, 0, 3.09086e-08, 3.09086e-08, -1.18331e-07, -1, 0, 0, 0)
+script = ExtResource("2_1plov")
+area_size = Vector2(1, 0.1)
+area_range = 1.0
+area_resolution = 4.0
+light_color = Color(1, 1, 0, 1)
+light_energy = 5.0
+light_angle = 120.0
+metadata/_custom_type_script = "uid://fpt3jomast5j"
+
+[node name="sublight_1" type="SpotLight3D" parent="example_1/light_strip2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0, 0)
+visible = false
+light_color = Color(1, 1, 0, 1)
+light_energy = 0.09375
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle = 120.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_2" type="SpotLight3D" parent="example_1/light_strip2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.125, 0, 0)
+visible = false
+light_color = Color(1, 1, 0, 1)
+light_energy = 0.09375
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle = 120.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_3" type="SpotLight3D" parent="example_1/light_strip2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0, 0)
+visible = false
+light_color = Color(1, 1, 0, 1)
+light_energy = 0.09375
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle = 120.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_4" type="SpotLight3D" parent="example_1/light_strip2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.375, 0, 0)
+visible = false
+light_color = Color(1, 1, 0, 1)
+light_energy = 0.09375
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle = 120.0
+spot_angle_attenuation = 0.001
+
+[node name="example_2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0.5, 0)
+
+[node name="heading" type="Label3D" parent="example_2"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 1.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "BUT WHY?"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_2"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 1.6716)
+pixel_size = 0.003
+text = "The usual way to make area lights with lightmapping is using emissive materials.
+Unfortunately, the results can be very ugly except at very high quality settings, and can appear wrong regardless.
+If you use more expensive techniques like VoxelGI or SDFGI, this is not an issue."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="floor" type="MeshInstance3D" parent="example_2"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, -0.1, 0)
+mesh = SubResource("BoxMesh_0vgxa")
+
+[node name="ceiling" type="MeshInstance3D" parent="example_2"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 1.9, 0)
+mesh = SubResource("BoxMesh_0vgxa")
+
+[node name="wall1" type="MeshInstance3D" parent="example_2"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -0.700036, 0.9, -0.572756)
+mesh = SubResource("BoxMesh_22pmh")
+
+[node name="wall2" type="MeshInstance3D" parent="example_2"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0.706962, 0.9, -0.56583)
+mesh = SubResource("BoxMesh_22pmh")
+
+[node name="light_panel" type="MeshInstance3D" parent="example_2"]
+transform = Transform3D(0.707107, -0.707107, 0, 0, -2.2638e-08, -1, 0.707107, 0.707107, 0, 8.50524e-09, 1.79339, 0.137)
+mesh = SubResource("QuadMesh_7r7fq")
+
+[node name="light_strip" type="MeshInstance3D" parent="example_2"]
+transform = Transform3D(0.707107, 0.707107, 0, 0, -6.47848e-08, 1, 0.707107, -0.707107, 0, -0.516735, 0.00515348, -0.348871)
+mesh = SubResource("QuadMesh_ocso8")
+
+[node name="light_strip2" type="MeshInstance3D" parent="example_2"]
+transform = Transform3D(0.707107, -0.707107, -3.09086e-08, 0, -4.37114e-08, 1, -0.707107, -0.707107, -3.09086e-08, 0.517, 0.005, -0.349)
+mesh = SubResource("QuadMesh_ocso8")
+
+[node name="example_3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.5, 0)
+
+[node name="heading" type="Label3D" parent="example_3"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 1.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "ARTISTIC FREEDOM"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_3"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 1.6716)
+pixel_size = 0.003
+text = "You can tweak all the settings on AreaLight3D and even fudge its position/rotation for greater control over the look and feel of your lighting.
+Each cubicle in this tower shows a unique way to use the same light."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="floor" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, -0.1, 0)
+mesh = SubResource("BoxMesh_0vgxa")
+
+[node name="ceiling" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 1.9, 0)
+mesh = SubResource("BoxMesh_0vgxa")
+
+[node name="wall1" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -0.700036, 0.9, -0.572756)
+mesh = SubResource("BoxMesh_22pmh")
+
+[node name="wall2" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0.706962, 0.9, -0.56583)
+mesh = SubResource("BoxMesh_22pmh")
+
+[node name="ceiling2" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 3.9, 0)
+mesh = SubResource("BoxMesh_0vgxa")
+
+[node name="wall3" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -0.700036, 2.9, -0.572756)
+mesh = SubResource("BoxMesh_22pmh")
+
+[node name="wall4" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0.706962, 2.9, -0.56583)
+mesh = SubResource("BoxMesh_22pmh")
+
+[node name="ceiling3" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 5.9, 0)
+mesh = SubResource("BoxMesh_0vgxa")
+
+[node name="wall5" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -0.700036, 4.9, -0.572756)
+mesh = SubResource("BoxMesh_22pmh")
+
+[node name="wall6" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0.706962, 4.9, -0.56583)
+mesh = SubResource("BoxMesh_22pmh")
+
+[node name="light_panel" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(-0.707107, 0.707107, -2.98023e-08, -8.74228e-08, -6.47848e-08, -1, -0.707107, -0.707107, 1.53437e-07, 0, 1.79339, 0.137)
+gi_mode = 0
+mesh = SubResource("QuadMesh_ftaiw")
+
+[node name="area_light_3d" type="Node3D" parent="example_3/light_panel"]
+transform = Transform3D(0, 1, -1.18331e-07, 1, 0, 3.09086e-08, 3.09086e-08, -1.18331e-07, -1, 0, 0, 0)
+script = ExtResource("2_1plov")
+area_range = 2.0
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 2.0
+light_angle = 120.0
+metadata/_custom_type_script = "uid://fpt3jomast5j"
+
+[node name="sublight_1" type="SpotLight3D" parent="example_3/light_panel/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -0.25, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 0.375
+light_bake_mode = 1
+spot_range = 2.0
+spot_angle = 120.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_2" type="SpotLight3D" parent="example_3/light_panel/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.25, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 0.375
+light_bake_mode = 1
+spot_range = 2.0
+spot_angle = 120.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_3" type="SpotLight3D" parent="example_3/light_panel/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0.25, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 0.375
+light_bake_mode = 1
+spot_range = 2.0
+spot_angle = 120.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_4" type="SpotLight3D" parent="example_3/light_panel/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.25, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 0.375
+light_bake_mode = 1
+spot_range = 2.0
+spot_angle = 120.0
+spot_angle_attenuation = 0.001
+
+[node name="light_panel2" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(-0.707107, 0.707107, -2.98023e-08, -8.74228e-08, -6.47848e-08, -1, -0.707107, -0.707107, 1.53437e-07, 0, 3.79339, 0.137)
+gi_mode = 0
+mesh = SubResource("QuadMesh_ftaiw")
+
+[node name="area_light_3d" type="Node3D" parent="example_3/light_panel2"]
+transform = Transform3D(-0.953344, 0, -0.301887, 5.96046e-08, 1, 2.98023e-08, 0.301887, 0, -0.953344, 0.00365019, 9.53674e-07, 0.2508)
+script = ExtResource("2_1plov")
+area_resolution = 5.0
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 7.0
+light_angle = 5.0
+metadata/_custom_type_script = "uid://fpt3jomast5j"
+
+[node name="sublight_1" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_2" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_3" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_4" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_5" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_6" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_7" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_8" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_9" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_10" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_11" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_12" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_13" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_14" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_15" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_16" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_17" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_18" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_19" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_20" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_21" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_22" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_23" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_24" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_25" type="SpotLight3D" parent="example_3/light_panel2/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 5.04
+light_bake_mode = 1
+spot_angle = 5.0
+spot_angle_attenuation = 0.001
+
+[node name="light_panel3" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(-0.707107, 0.707107, -2.98023e-08, -8.74228e-08, -6.47848e-08, -1, -0.707107, -0.707107, 1.53437e-07, 1.27715e-07, 5.79339, 0.136999)
+gi_mode = 0
+mesh = SubResource("QuadMesh_ftaiw")
+
+[node name="area_light_3d" type="Node3D" parent="example_3/light_panel3"]
+transform = Transform3D(0, 1, -1.18331e-07, 1, 0, 3.09086e-08, 3.09086e-08, -1.18331e-07, -1, 0, 0, 0.0461802)
+script = ExtResource("2_1plov")
+area_range = 0.2
+area_resolution = 5.0
+light_color = Color(0, 0.509091, 1, 1)
+light_energy = 50.0
+light_angle = 180.0
+metadata/_custom_type_script = "uid://fpt3jomast5j"
+
+[node name="sublight_1" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_2" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_3" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_4" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_5" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_6" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_7" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_8" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_9" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_10" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_11" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_12" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_13" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_14" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_15" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_16" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_17" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_18" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_19" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_20" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.2, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_21" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_22" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_23" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_24" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_25" type="SpotLight3D" parent="example_3/light_panel3/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.4, 0)
+visible = false
+light_color = Color(0, 0.509091, 1, 1)
+light_bake_mode = 1
+spot_range = 0.2
+spot_angle = 180.0
+spot_angle_attenuation = 0.001
+
+[node name="example_4" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0.5, 0)
+
+[node name="heading" type="Label3D" parent="example_4"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 1.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "GET CREATIVE!"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_4"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 1.6716)
+pixel_size = 0.003
+text = "You can use area lights in pretty interesting ways, so use your imagination!"
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="wall" type="MeshInstance3D" parent="example_4"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.401, -0.118359)
+mesh = SubResource("BoxMesh_o8emh")
+
+[node name="ball" type="MeshInstance3D" parent="example_4"]
+transform = Transform3D(0.706046, 0.504338, -0.497134, -0.0952466, 0.763253, 0.639041, 0.701731, -0.403842, 0.586928, -0.0163116, 1.40571, 0.658981)
+mesh = SubResource("SphereMesh_1plov")
+
+[node name="ring" type="MeshInstance3D" parent="example_4/ball"]
+gi_mode = 0
+mesh = SubResource("CylinderMesh_7r7fq")
+
+[node name="area_light_3d" type="Node3D" parent="example_4/ball"]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -0.395457, 0, 0.397169)
+script = ExtResource("2_1plov")
+area_size = Vector2(0.598, 0.1)
+area_range = 1.0
+area_resolution = 5.0
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 4.0
+light_angle = 45.0
+metadata/_custom_type_script = "uid://fpt3jomast5j"
+
+[node name="sublight_1" type="SpotLight3D" parent="example_4/ball/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.199333, 0, 0)
+visible = false
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 0.159467
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_2" type="SpotLight3D" parent="example_4/ball/area_light_3d"]
+visible = false
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 0.159467
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_3" type="SpotLight3D" parent="example_4/ball/area_light_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199333, 0, 0)
+visible = false
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 0.159467
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle_attenuation = 0.001
+
+[node name="area_light_3d2" type="Node3D" parent="example_4/ball"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.406656, 0, -0.406656)
+script = ExtResource("2_1plov")
+area_size = Vector2(0.598, 0.1)
+area_range = 1.0
+area_resolution = 5.0
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 3.0
+light_angle = 45.0
+metadata/_custom_type_script = "uid://fpt3jomast5j"
+
+[node name="sublight_1" type="SpotLight3D" parent="example_4/ball/area_light_3d2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.199333, 0, 0)
+visible = false
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 0.1196
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_2" type="SpotLight3D" parent="example_4/ball/area_light_3d2"]
+visible = false
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 0.1196
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_3" type="SpotLight3D" parent="example_4/ball/area_light_3d2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199333, 0, 0)
+visible = false
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 0.1196
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle_attenuation = 0.001
+
+[node name="area_light_3d3" type="Node3D" parent="example_4/ball"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0.395, 0, -0.397)
+script = ExtResource("2_1plov")
+area_size = Vector2(0.598, 0.1)
+area_range = 1.0
+area_resolution = 5.0
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 3.0
+light_angle = 45.0
+metadata/_custom_type_script = "uid://fpt3jomast5j"
+
+[node name="sublight_1" type="SpotLight3D" parent="example_4/ball/area_light_3d3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.199333, 0, 0)
+visible = false
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 0.1196
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_2" type="SpotLight3D" parent="example_4/ball/area_light_3d3"]
+visible = false
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 0.1196
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_3" type="SpotLight3D" parent="example_4/ball/area_light_3d3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199333, 0, 0)
+visible = false
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 0.1196
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle_attenuation = 0.001
+
+[node name="area_light_3d4" type="Node3D" parent="example_4/ball"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -0.568105, 0, -0.0178037)
+script = ExtResource("2_1plov")
+area_size = Vector2(0.598, 0.1)
+area_range = 1.0
+area_resolution = 5.0
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 3.0
+light_angle = 45.0
+metadata/_custom_type_script = "uid://fpt3jomast5j"
+
+[node name="sublight_1" type="SpotLight3D" parent="example_4/ball/area_light_3d4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.199333, 0, 0)
+visible = false
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 0.1196
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_2" type="SpotLight3D" parent="example_4/ball/area_light_3d4"]
+visible = false
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 0.1196
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_3" type="SpotLight3D" parent="example_4/ball/area_light_3d4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199333, 0, 0)
+visible = false
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 0.1196
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle_attenuation = 0.001
+
+[node name="area_light_3d5" type="Node3D" parent="example_4/ball"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0158742, 0, -0.546516)
+script = ExtResource("2_1plov")
+area_size = Vector2(0.598, 0.1)
+area_range = 1.0
+area_resolution = 5.0
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 3.0
+light_angle = 45.0
+metadata/_custom_type_script = "uid://fpt3jomast5j"
+
+[node name="sublight_1" type="SpotLight3D" parent="example_4/ball/area_light_3d5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.199333, 0, 0)
+visible = false
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 0.1196
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_2" type="SpotLight3D" parent="example_4/ball/area_light_3d5"]
+visible = false
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 0.1196
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle_attenuation = 0.001
+
+[node name="sublight_3" type="SpotLight3D" parent="example_4/ball/area_light_3d5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199333, 0, 0)
+visible = false
+light_color = Color(0.390909, 1, 0, 1)
+light_energy = 0.1196
+light_bake_mode = 1
+spot_range = 1.0
+spot_angle_attenuation = 0.001

@@ -20,7 +20,7 @@ extends Node3D
 		area_range = value
 		if Engine.is_editor_hint() and is_node_ready():
 			_refresh()
-@export_range(0.1, 5.0, 0.1) var area_resolution: float = 1.0:
+@export_range(0.1, 5.0, 0.1) var area_resolution: float = 2.0:
 	get: return area_resolution
 	set(value):
 		if value == area_resolution:
@@ -37,7 +37,7 @@ extends Node3D
 		if Engine.is_editor_hint() and is_node_ready():
 			_refresh()
 			update_gizmos()
-@export_range(0.0, 16.0) var light_energy: float = 1.0:
+@export_range(0.0, 100.0) var light_energy: float = 1.0:
 	get: return light_energy
 	set(value):
 		if value == light_energy:
@@ -46,7 +46,7 @@ extends Node3D
 		if Engine.is_editor_hint() and is_node_ready():
 			_refresh()
 			update_gizmos()
-@export_range(0.0, 180.0, 0.1) var light_angle: float = 90.0:
+@export_range(5.0, 180.0, 0.1) var light_angle: float = 90.0:
 	get: return light_angle
 	set(value):
 		if value == light_angle:
@@ -109,7 +109,8 @@ func _refresh() -> void:
 
 			sublight_count += 1
 
-	var sublight_energy := light_energy * area_size.x * area_size.y / sublight_count
+	var sublight_energy := light_energy * (area_size.x * area_size.y) * (90.0 / light_angle) / sublight_count
+	print(sublight_energy)
 	for sublight in get_children():
 		sublight.light_energy = sublight_energy
 
