@@ -3,7 +3,13 @@ class_name ParallelSceneViewButton
 extends MenuButton
 
 
+const CLEAR_ITEM_ID: int = 999
+
+
 func _ready() -> void:
+
+	if self == EditorInterface.get_edited_scene_root():
+		return
 
 	icon = EditorInterface.get_editor_theme().get_icon("PackedScene", "EditorIcons")
 	get_popup().id_pressed.connect(_on_id_pressed)
@@ -15,7 +21,7 @@ func _on_id_pressed(id: int) -> void:
 	if not plugin:
 		return
 
-	if id >= 4:
+	if id >= CLEAR_ITEM_ID:
 		plugin.clear_all_parallel_scenes()
 		return
 
@@ -26,6 +32,9 @@ func _on_id_pressed(id: int) -> void:
 
 
 func _on_about_to_popup() -> void:
+
+	if self == EditorInterface.get_edited_scene_root():
+		return
 
 	var plugin := ParallelSceneViewPlugin.instance
 	if not plugin:
@@ -60,5 +69,5 @@ func _on_about_to_popup() -> void:
 
 	get_popup().add_separator()
 
-	get_popup().add_item("Clear All")
+	get_popup().add_item("Clear All", CLEAR_ITEM_ID)
 	get_popup().set_item_disabled(get_popup().item_count - 1, not has_any_parallel_scene)
