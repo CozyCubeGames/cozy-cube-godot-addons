@@ -110,7 +110,6 @@ func _refresh() -> void:
 			sublight_count += 1
 
 	var sublight_energy := light_energy * (area_size.x * area_size.y) * (90.0 / light_angle) / sublight_count
-	print(sublight_energy)
 	for sublight in get_children():
 		sublight.light_energy = sublight_energy
 
