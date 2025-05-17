@@ -1,0 +1,550 @@
+[gd_scene load_steps=42 format=3 uid="uid://brcmgkfhh7a4g"]
+
+[ext_resource type="Script" uid="uid://kjavq4i37ayq" path="res://addons/tile_path_3d/tile_path_3d.gd" id="1_bceid"]
+
+[sub_resource type="Environment" id="Environment_nl0ma"]
+background_mode = 1
+background_color = Color(0.0863636, 0.0863636, 0.0863636, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.668182, 0.668182, 0.668182, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wy7so"]
+albedo_color = Color(0.190909, 0.190909, 0.190909, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_f5biq"]
+material = SubResource("StandardMaterial3D_wy7so")
+size = Vector2(5, 5)
+orientation = 1
+
+[sub_resource type="Curve3D" id="Curve3D_mywvn"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -1.60299, 0.41797, -0.836235, -1.02651, -0.000977039, -0.206387, 1.02651, 0.000977039, 0.206387, 0.481436, 0.819935, -1.94355, 0.711877, 0.059742, -0.954733, -0.711877, -0.059742, 0.954733, 1.43514, 0.19093, 0.278505, 0.630739, 0.66735, -1.3512, -0.630739, -0.66735, 1.3512, -1.00652, 0.130113, 1.87626),
+"tilts": PackedFloat32Array(1.27027, 0.594173, 0.391282, 0.129858)
+}
+point_count = 4
+
+[sub_resource type="BoxMesh" id="BoxMesh_bceid"]
+size = Vector3(0.5, 0.076, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_if7vp"]
+albedo_color = Color(1, 0.709091, 0, 1)
+
+[sub_resource type="MultiMesh" id="MultiMesh_bceid"]
+transform_format = 1
+instance_count = 22
+mesh = SubResource("BoxMesh_bceid")
+buffer = PackedFloat32Array(0.477095, 0.580343, -0.659987, -1.52528, -0.864439, 0.445323, -0.233306, 0.445825, 0.15851, 0.681828, 0.714133, -0.926628, 0.510266, 0.480879, -0.713011, -1.25189, -0.811176, 0.544528, -0.21327, 0.533705, 0.285697, 0.687201, 0.667931, -1.20604, 0.502503, 0.383407, -0.774913, -0.953372, -0.769566, 0.606838, -0.198788, 0.616632, 0.39403, 0.696237, 0.599995, -1.4614, 0.455815, 0.277409, -0.84574, -0.629523, -0.732276, 0.65702, -0.179155, 0.692252, 0.505969, 0.700977, 0.50262, -1.68369, 0.349205, 0.155353, -0.924079, -0.275847, -0.69715, 0.70202, -0.145428, 0.756942, 0.626129, 0.695006, 0.353453, -1.85816, 0.142936, 0.0119952, -0.989659, 0.108216, -0.659647, 0.746613, -0.0862232, 0.803324, 0.737859, 0.66515, 0.114631, -1.95655, -0.171907, -0.110792, -0.978863, 0.505881, -0.607614, 0.794054, 0.0168347, 0.81975, 0.775405, 0.597665, -0.203822, -1.93876, -0.419698, -0.143926, -0.89618, 0.883161, -0.567553, 0.812133, 0.135368, 0.790355, 0.708334, 0.565443, -0.422536, -1.81115, -0.633122, -0.166156, -0.756008, 1.21552, -0.498, 0.835148, 0.233503, 0.715162, 0.592581, 0.524328, -0.611497, -1.60332, -0.803402, -0.186539, -0.565463, 1.48163, -0.407887, 0.864264, 0.294409, 0.607948, 0.433791, 0.467174, -0.770438, -1.32582, -0.924425, -0.199728, -0.324882, 1.66167, -0.303792, 0.900645, 0.310722, 0.484689, 0.230543, 0.385936, -0.893254, -0.991821, -0.980693, -0.191441, -0.0398843, 1.73611, -0.194881, 0.939917, 0.280317, 0.363738, -0.0161762, 0.282678, -0.959079, -0.619206, -0.954637, -0.150749, 0.256795, 1.69177, -0.0991522, 0.974097, 0.203234, 0.26512, -0.280781, 0.168553, -0.944856, -0.234957, -0.857721, -0.0799154, 0.507867, 1.53675, -0.0344674, 0.994561, 0.0982882, 0.204508, -0.512959, 0.066799, -0.85581, 0.126506, -0.706374, 0.0183074, 0.707602, 1.29434, 0.00260784, 0.999726, -0.023262, 0.187889, -0.707834, -0.0145864, -0.706228, 0.441747, -0.469972, 0.135465, 0.872224, 0.974106, 0.0108262, 0.988964, -0.147763, 0.224674, -0.882615, -0.0600015, -0.466252, 0.678645, -0.280701, 0.196354, 0.939496, 0.609263, 0.0101038, 0.9794, -0.201675, 0.300611, -0.959742, -0.0471178, -0.276902, 0.821711, -0.234044, 0.170155, 0.95722, 0.229147, 0.038059, 0.985414, -0.165861, 0.380427, -0.971481, -0.00238786, -0.237106, 0.917411, -0.356565, 0.0677217, 0.931813, -0.150845, 0.0891219, 0.995287, -0.0382316, 0.427164, -0.93001, 0.0694128, -0.36092, 1.03115, -0.604626, -0.0591229, 0.794313, -0.50139, 0.108232, 0.981893, 0.155471, 0.404694, -0.789122, 0.179972, -0.587279, 1.22181, -0.801288, -0.130449, 0.583883, -0.775586, 0.0722073, 0.947719, 0.310829, 0.308445, -0.593905, 0.291225, -0.749977, 1.4912, -0.897591, -0.142701, 0.417092, -0.975779, 0.0306139, 0.923693, 0.381908, 0.160652, -0.439764, 0.355566, -0.824731, 1.81373)
+
+[sub_resource type="Curve3D" id="Curve3D_bceid"]
+_data = {
+"points": PackedVector3Array(-0.58213, 0.00732422, -1.09657, 0.58213, -0.00732422, 1.09657, 0.21333, 0.28125, -1.53004, -1.05776, 0.950045, -1.48997, 1.05776, -0.950045, 1.48997, 0.210185, 0.130127, 1.70553),
+"tilts": PackedFloat32Array(0, -0.454694)
+}
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mywvn"]
+albedo_color = Color(0.136074, 0.809091, 0.313506, 1)
+
+[sub_resource type="MultiMesh" id="MultiMesh_mywvn"]
+transform_format = 1
+instance_count = 6
+mesh = SubResource("BoxMesh_bceid")
+buffer = PackedFloat32Array(-0.927008, -0.00512492, -0.375007, 0.266376, 0.0341951, 0.994587, -0.0981215, 0.283269, 0.37348, -0.103783, -0.921814, -1.41716, -0.967251, 0.0741804, 0.242741, 0.300691, 0.0198323, 0.975505, -0.219084, 0.397412, -0.253047, -0.207095, -0.945029, -0.734521, -0.91073, 0.136696, 0.389723, 0.0458927, 0.0840344, 0.98523, -0.149195, 0.553875, -0.404362, -0.103126, -0.908767, -0.0886792, -0.98096, 0.170954, 0.0921539, -0.147678, 0.181726, 0.975367, 0.125038, 0.577863, -0.068508, 0.139404, -0.987863, 0.577433, -0.901269, 0.26875, -0.339834, -0.048604, 0.130965, 0.916664, 0.377592, 0.384689, 0.412992, 0.295806, -0.861358, 1.23958, -0.788216, 0.334196, -0.516748, 0.269497, 0.0794797, 0.887947, 0.453028, 0.076855, 0.610244, 0.316013, -0.726456, 1.78908)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nx7bj"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.062
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0kmqi"]
+albedo_color = Color(0, 0.590909, 1, 1)
+
+[sub_resource type="Curve" id="Curve_8k5cn"]
+_data = [Vector2(0, 1), 0.0, 0.0638608, 0, 0, Vector2(0.528672, 0.216014), 0.0, 0.0, 0, 0, Vector2(1, 1), -1.09934, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="MultiMesh" id="MultiMesh_nx7bj"]
+transform_format = 1
+instance_count = 10
+mesh = SubResource("CylinderMesh_nx7bj")
+buffer = PackedFloat32Array(-0.976545, 0.00540362, -0.215245, 0.315602, 0.0390306, 0.987566, -0.152286, 0.296479, 0.211746, -0.157115, -0.964613, -1.2559, -0.688035, 0.0951875, 0.227537, 0.261892, 0.015885, 0.972874, -0.167658, 0.430906, -0.237324, -0.210843, -0.670884, -0.606782, -0.358822, 0.138481, 0.155677, 0.0962046, 0.0251415, 0.978338, -0.0777961, 0.531368, -0.163078, -0.153872, -0.354531, -0.203441, -0.242286, 0.14634, 0.0968226, -0.00293704, 0.0278906, 0.986059, -0.0338866, 0.572635, -0.100432, -0.0792016, -0.24299, 0.0283417, -0.206967, 0.148991, 0.0682156, -0.0660577, 0.0304293, 0.98878, -0.0125622, 0.589692, -0.0693218, -0.0107935, -0.209178, 0.201048, -0.214266, 0.154935, 0.0513788, -0.111339, 0.0363602, 0.986486, 0.00365612, 0.593271, -0.050118, 0.0533037, -0.217004, 0.360631, -0.2682, 0.166876, 0.0326443, -0.143621, 0.0493633, 0.977362, 0.0304042, 0.582248, -0.0268315, 0.130059, -0.270366, 0.53977, -0.380431, 0.195907, -0.0184426, -0.152123, 0.07002, 0.956707, 0.0887504, 0.542802, 0.0350309, 0.21525, -0.377678, 0.775434, -0.563012, 0.251077, -0.161437, -0.0936294, 0.0892285, 0.923313, 0.214568, 0.439185, 0.20293, 0.29061, -0.542239, 1.10976, -0.760059, 0.315158, -0.440521, 0.117036, 0.086465, 0.896702, 0.400504, 0.215773, 0.521238, 0.310808, -0.708796, 1.56546)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lhqwy"]
+albedo_color = Color(1, 0.181818, 0.293388, 1)
+
+[sub_resource type="Curve" id="Curve_gdyx0"]
+_data = [Vector2(0, 0.420314), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_jemon"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 0.227636), 0.0, 0.0, 0, 0, Vector2(0.499329, 10), 0.0, 0.0, 0, 0, Vector2(1, 0.20011), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="MultiMesh" id="MultiMesh_0kmqi"]
+transform_format = 1
+instance_count = 15
+mesh = SubResource("BoxMesh_bceid")
+buffer = PackedFloat32Array(-0.379347, -0.00167811, -0.18097, 0.233372, 0.003685, 0.227484, -0.0149161, 0.281649, 0.180959, -0.00815028, -0.379066, -1.48918, -0.409827, 0.000902456, -0.0933029, 0.313976, 0.0106932, 0.71663, -0.044613, 0.295695, 0.0926897, -0.078684, -0.407392, -1.26298, -0.420121, 0.0558461, 0.0050088, 0.341847, 0.0105818, 1.96864, -0.0779445, 0.332045, -0.00709236, -0.370866, -0.412993, -1.0207, -0.410155, 0.256386, 0.0873182, 0.313451, 0.00762188, 3.67779, -0.0975907, 0.383956, -0.0915333, -0.842604, -0.399394, -0.788405, -0.394708, 0.595432, 0.137772, 0.247371, 0.00952679, 5.58753, -0.10134, 0.441914, -0.144148, -1.26113, -0.383944, -0.564912, -0.384423, 0.966516, 0.161418, 0.159857, 0.0181214, 7.44856, -0.0918166, 0.498059, -0.168981, -1.39999, -0.377065, -0.348171, -0.382514, 1.27191, 0.16407, 0.0620941, 0.0321339, 8.96729, -0.072387, 0.546848, -0.171214, -1.15861, -0.380138, -0.125748, -0.388845, 1.45206, 0.147274, -0.0259995, 0.0492615, 9.81395, -0.0431156, 0.57994, -0.151779, -0.534841, -0.391299, 0.0876754, -0.401213, 1.49677, 0.107511, -0.100082, 0.0658947, 9.66446, -0.00231934, 0.593511, -0.106535, 0.340869, -0.406325, 0.315824, -0.411704, 1.47334, 0.0464, -0.144943, 0.0759086, 8.5489, 0.0469364, 0.581004, -0.0374372, 1.13134, -0.4151, 0.551101, -0.411374, 1.40104, -0.0241142, -0.151487, 0.0753867, 6.80928, 0.0953193, 0.540087, 0.041859, 1.50561, -0.408652, 0.787235, -0.398914, 1.20772, -0.0889028, -0.118603, 0.0667311, 4.83394, 0.134041, 0.473923, 0.114362, 1.39209, -0.388321, 1.01537, -0.379815, 0.868889, -0.139869, -0.0524095, 0.0554331, 2.94697, 0.160856, 0.389047, 0.171265, 0.9731, -0.362251, 1.22982, -0.35923, 0.468501, -0.177718, 0.0394853, 0.0448858, 1.39809, 0.178503, 0.291129, 0.213548, 0.494246, -0.336477, 1.4304, -0.34043, 0.150787, -0.205206, 0.152842, 0.036763, 0.41293, 0.18805, 0.182538, 0.243761, 0.148308, -0.314946, 1.62073)
+
+[sub_resource type="Curve3D" id="Curve3D_if7vp"]
+_data = {
+"points": PackedVector3Array(-0.881555, -0.141054, -1.48273, 0.881555, 0.141054, 1.48273, 0.21333, 0.28125, -1.53004, -1.03841, -0.336997, -2.09387, 1.03841, 0.336997, 2.09387, -0.542528, 0.434006, 1.35306),
+"tilts": PackedFloat32Array(0, -0.454694)
+}
+point_count = 2
+
+[sub_resource type="TextMesh" id="TextMesh_if7vp"]
+material = SubResource("StandardMaterial3D_mywvn")
+text = "A"
+font_size = 46
+depth = 0.089
+offset = Vector2(0, 14.721)
+
+[sub_resource type="TextMesh" id="TextMesh_lhqwy"]
+material = SubResource("StandardMaterial3D_0kmqi")
+text = "B"
+font_size = 46
+depth = 0.089
+offset = Vector2(0, 14.721)
+
+[sub_resource type="TextMesh" id="TextMesh_8k5cn"]
+material = SubResource("StandardMaterial3D_lhqwy")
+text = "C"
+font_size = 46
+depth = 0.089
+offset = Vector2(0, 14.721)
+
+[sub_resource type="MultiMesh" id="MultiMesh_if7vp"]
+transform_format = 1
+instance_count = 4
+mesh = SubResource("TextMesh_if7vp")
+buffer = PackedFloat32Array(-0.644622, 0.0544115, 0.762563, 0.163504, 0.134082, 0.99005, 0.0427011, 0.307686, -0.752652, 0.129772, -0.645503, -0.576292, -0.777069, 0.25839, 0.573932, -0.643156, 0.292074, 0.955761, -0.0348437, 0.277271, -0.557545, 0.140554, -0.818161, 0.0454538, -0.898808, 0.411762, -0.150319, -0.771084, 0.430068, 0.894684, -0.120756, 0.337256, 0.0847652, -0.173184, -0.981235, 0.694917, -0.801648, 0.416826, -0.428506, -0.549606, 0.511581, 0.849186, -0.131024, 0.431664, 0.309267, -0.324251, -0.893988, 1.3384)
+
+[sub_resource type="MultiMesh" id="MultiMesh_lhqwy"]
+transform_format = 1
+instance_count = 5
+mesh = SubResource("TextMesh_lhqwy")
+buffer = PackedFloat32Array(-0.871148, -0.0353389, -0.489747, 0.229865, 0.00187033, 0.997161, -0.0752794, 0.283944, 0.491017, -0.0664955, -0.868609, -1.50046, -0.941742, 0.0547823, 0.331846, 0.367291, 0.0594889, 0.998221, 0.00403321, 0.318917, -0.331035, 0.0235394, -0.943325, -0.842566, -0.53234, 0.0677978, 0.843811, -0.118154, 0.194417, 0.979935, 0.0439179, 0.289874, -0.823903, 0.18743, -0.53484, -0.383542, -0.911293, 0.372818, 0.174789, -0.772689, 0.362562, 0.927742, -0.08856, 0.298888, -0.195176, -0.0173323, -0.980615, 0.356922, -0.847747, 0.415044, -0.330247, -0.685004, 0.477806, 0.86791, -0.135768, 0.382673, 0.230275, -0.272891, -0.934079, 1.02148)
+
+[sub_resource type="MultiMesh" id="MultiMesh_8k5cn"]
+transform_format = 1
+instance_count = 2
+mesh = SubResource("TextMesh_8k5cn")
+buffer = PackedFloat32Array(-0.96688, 0.00705501, -0.255133, 0.370119, 0.0214503, 0.998328, -0.0536846, 0.308807, 0.254327, -0.0573792, -0.965415, -1.17924, -0.594738, 0.133988, 0.792675, -0.402352, 0.241346, 0.970289, 0.0170694, 0.276867, -0.766837, 0.201461, -0.609406, -0.194466)
+
+[sub_resource type="MultiMesh" id="MultiMesh_m2825"]
+transform_format = 1
+instance_count = 9
+mesh = SubResource("BoxMesh_bceid")
+buffer = PackedFloat32Array(-1.05055, -0.0181352, -0.373804, 0.280352, -0.00242985, 0.727405, -0.0757677, 0.292229, 0.374825, -0.0461132, -1.04818, -1.40802, -0.511934, 0.0263428, 0.286557, 0.392009, 0.00555243, 0.840262, -0.0276865, 0.315397, -0.287092, -0.0307229, -0.511515, -1.03889, -1.32366, 0.0493258, 0.567044, 0.293319, 0.119594, 0.883705, 0.0764046, 0.315787, -0.560048, 0.0721284, -1.32388, -0.70804, 0.114269, 0.0784896, 0.677512, -0.0954791, 0.116362, 1.13543, -0.0661865, 0.291204, -0.669076, 0.210872, 0.104198, -0.397617, -0.477993, 0.0737211, 1.01355, -0.379372, 0.262905, 0.523969, -0.0437946, 0.277554, -0.991007, 0.103446, -0.500485, -0.211904, -1.13163, 0.37682, 0.857096, -0.714907, 0.451544, 1.1352, -0.178339, 0.28432, -0.866645, 0.099433, -1.21208, 0.175051, -0.485243, 0.260385, 0.277027, -0.776076, 0.169846, 0.571564, -0.20408, 0.332828, -0.333464, -0.0877822, -0.507064, 0.660162, -0.831442, 0.45009, -0.75667, -0.699969, 0.604461, 0.945717, 0.0631633, 0.376366, 0.684917, -0.288246, -0.97429, 0.978658, -0.224372, 0.410847, -0.496263, -0.533879, 0.291909, 0.834717, 0.12446, 0.436813, 0.472973, -0.32027, -0.312234, 1.3705)
+
+[sub_resource type="SphereMesh" id="SphereMesh_bceid"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8k5cn"]
+albedo_color = Color(0.404545, 0.404545, 0.404545, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_jemon"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -2, 0, 0, 0, 0, 0, 0.825199, 0.0367022, 0.113701, 2, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="MultiMesh" id="MultiMesh_gdyx0"]
+transform_format = 1
+instance_count = 11
+mesh = SubResource("BoxMesh_bceid")
+buffer = PackedFloat32Array(0, 0, -1, -1.88148, 0, 1, 0, 0, 1, 0, 0, 0, 0, -0.0379823, -0.999278, -1.47622, 0, 0.999278, -0.0379823, 0, 1, 0, 0, 0, -0.0218162, -0.375708, -0.926481, -1.07508, 0.0419734, 0.925541, -0.376315, 0.0306512, 0.998881, -0.0470973, -0.00442202, 0, -0.0035571, -0.444835, -0.895605, -0.675597, 0.0183774, 0.895431, -0.444822, 0.325, 0.999825, -0.0180411, 0.00498976, 0, -0.000448203, -0.145787, -0.989316, -0.275269, 0.00672788, 0.989293, -0.145787, 0.427983, 0.999977, -0.00672134, 0.000537436, 0, -0.000129866, 0.0637149, -0.997968, 0.125109, -0.0033397, 0.997963, 0.0637149, 0.442997, 0.999994, 0.00334118, 8.31869e-05, 0, -0.00228484, 0.301622, -0.953425, 0.525291, -0.0147967, 0.953313, 0.301622, 0.376871, 0.999888, 0.0147967, 0.00228484, 0, -0.00864558, 0.425565, -0.904886, 0.925364, -0.0280432, 0.904461, 0.425633, 0.187455, 0.999569, 0.0290557, 0.0041146, 0, 0, 0.229172, -0.973386, 1.32626, 0, 0.973386, 0.229172, 0, 1, 0, 0, 0, 0, 0, -1, 1.72156, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, -1, 2.125, 0, 1, 0, 0, 1, 0, 0, 0)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bceid"]
+height = 3.614
+
+[sub_resource type="Curve3D" id="Curve3D_inn4n"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -2, 0, 0, 0, 0, 0, 0.825199, 0.0367022, 0.113701, 2, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_mywvn"]
+size = Vector3(0.2, 0.982, 0.2)
+
+[sub_resource type="Curve" id="Curve_mywvn"]
+_data = [Vector2(0, 0.186348), 0.0, 0.0, 0, 0, Vector2(0.499356, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.172585), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="MultiMesh" id="MultiMesh_jemon"]
+transform_format = 1
+instance_count = 12
+mesh = SubResource("BoxMesh_mywvn")
+buffer = PackedFloat32Array(-0.398452, 0, -0.788953, -1.92367, 0, 0.177124, 0, 0, 0.788953, 0, -0.398452, 0, 0.743525, 0, -0.831721, -1.56233, 0, 0.274246, 0, 0, 0.831721, 0, 0.743525, 0, 0.024897, -0.045996, -0.863362, -1.18423, 0.00294, 0.389511, -0.101951, 0, 0.86936, 0, 0.02507, 0, 0.0539089, -0.338364, -0.811012, -0.861097, 0.0290483, 0.627947, -0.437007, 0.11233, 0.921257, 2.47193e-08, 0.061237, 0, 0.128585, -0.238507, -0.971295, -0.512474, 0.0443417, 0.691639, -0.334945, 0.301175, 1.02743, 3.06222e-08, 0.136016, 0, -0.676703, -0.0799474, -0.886904, -0.125591, -0.0587979, 0.920111, -0.0770619, 0.376427, 0.890245, 4.02613e-08, -0.679252, 0, -0.0482953, 0.103839, -0.903084, 0.26247, 0.00521621, 0.961408, 0.0975396, 0.371655, 0.908336, 4.1945e-08, -0.0485762, 0, 0.285947, 0.273576, -0.757572, 0.589464, -0.100537, 0.778101, 0.266358, 0.303926, 0.803033, 3.45364e-08, 0.303106, 0, -0.628032, 0.309005, -0.811088, 0.93202, 0.317888, 0.610482, 0.410545, 0.125073, 0.909072, 2.39483e-08, -0.703901, 0, -0.474166, 0.0439557, -0.853019, 1.33566, 0.0574558, 0.362753, 0.103362, 0, 0.859258, 0, -0.477634, 0, -0.444734, 0, -0.922129, 1.69276, 0, 0.231796, 0, 0, 0.922129, 0, -0.444734, 0, -0.601733, 0, -0.649345, 2.05725, 0, 0.190469, 0, 0, 0.649345, 0, -0.601733, 0)
+
+[sub_resource type="MultiMesh" id="MultiMesh_inn4n"]
+transform_format = 1
+instance_count = 12
+mesh = SubResource("BoxMesh_mywvn")
+buffer = PackedFloat32Array(0, 0, -1, -1.91054, 0, 0.186348, 0, 0, 1, 0, 0, 0, 0, 0, -1, -1.54004, 0, 0.255751, 0, 0, 1, 0, 0, 0, 0, 0, -1, -1.18303, 0, 0.426169, 0, 0, 1, 0, 0, 0, 0, 0, -1, -0.823826, 0, 0.640912, 0, 0.174667, 1, 0, 0, 0, 0, 0, -1, -0.464458, 0, 0.843293, 0, 0.32748, 1, 0, 0, 0, 0, 0, -1, -0.105101, 0, 0.976624, 0, 0.381211, 1, 0, 0, 0, 0, 0, -1, 0.254229, 0, 0.985616, 0, 0.367244, 1, 0, 0, 0, 0, 0, -1, 0.613527, 0, 0.863707, 0, 0.280614, 1, 0, 0, 0, 0, 0, -1, 0.97294, 0, 0.664405, 0, 0.0330049, 1, 0, 0, 0, 0, 0, -1, 1.33219, 0, 0.444912, 0, 0, 1, 0, 0, 0, 0, 0, -1, 1.68522, 0, 0.262432, 0, 0, 1, 0, 0, 0, 0, 0, -1, 2.049, 0, 0.174168, 0, 0, 1, 0, 0, 0)
+
+[sub_resource type="Curve3D" id="Curve3D_cx8gr"]
+_data = {
+"points": PackedVector3Array(-0.852166, 0.114997, -0.519663, 0.852166, -0.114997, 0.519663, 0.596826, 1.38007, -0.497757, 0.167677, 0.124641, -0.462757, -0.167677, -0.124641, 0.462757, 1.06786, 0.899148, 1.0002, 0.539387, -0.423167, 0.133148, -0.539387, 0.423167, -0.133148, -0.572215, 1.0565, 1.77598, -0.10636, -0.447994, 0.21974, 0.10636, 0.447994, -0.21974, -1.02677, 2.43144, 1.12686, -1.32098, 0.216738, -0.172466, 1.32098, -0.216738, 0.172466, 0.755322, 3.14848, 0.910987),
+"tilts": PackedFloat32Array(-1.90977, -2.30471, -1.73903, -0.363956, 0.303897)
+}
+point_count = 5
+up_vector_enabled = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mywvn"]
+top_radius = 0.287
+bottom_radius = 0.011
+height = 0.782
+radial_segments = 5
+
+[sub_resource type="Curve" id="Curve_cx8gr"]
+_data = [Vector2(0, 0.489128), 0.0, 0.341063, 0, 0, Vector2(1, 1), 0.544632, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="MultiMesh" id="MultiMesh_cx8gr"]
+transform_format = 1
+instance_count = 13
+mesh = SubResource("CylinderMesh_mywvn")
+buffer = PackedFloat32Array(0.133295, 0.240997, -0.404226, 0.590431, 0.46411, -0.136926, 0.0714078, 1.44796, -0.0779752, -0.403011, -0.265985, -0.226773, 0.216395, 0.35058, -0.298958, 0.864872, 0.459596, -0.187511, 0.11278, 1.38754, -0.032453, -0.317871, -0.396249, 0.0304961, 0.277938, 0.445947, -0.0804679, 0.98909, 0.438926, -0.24147, 0.177847, 1.28219, 0.112642, -0.159425, -0.494458, 0.325471, 0.282408, 0.469395, 0.100915, 0.976294, 0.426161, -0.298995, 0.198138, 1.13174, 0.221138, -0.0232482, -0.510713, 0.685346, 0.285685, 0.385365, 0.335687, 0.81422, 0.411391, -0.401581, 0.110899, 1.01788, 0.303232, 0.181754, -0.466716, 1.05431, 0.222753, 0.241926, 0.522336, 0.487495, 0.40377, -0.464858, 0.0431148, 0.912938, 0.410284, 0.32613, -0.326019, 1.29792, 0.190195, 0.0203133, 0.623772, 0.0470352, 0.415097, -0.491065, -0.110576, 0.90363, 0.466045, 0.429092, -0.156076, 1.43621, 0.198181, -0.28089, 0.59975, -0.365175, 0.426734, -0.42458, -0.33986, 1.02589, 0.506456, 0.467661, 0.0516741, 1.45646, 0.280525, -0.505462, 0.452151, -0.741245, 0.401748, -0.270355, -0.551484, 1.3314, 0.546381, 0.458305, 0.173354, 1.38943, 0.390065, -0.66636, 0.113216, -0.940514, 0.329442, 0.073296, -0.703633, 1.85391, 0.590187, 0.399495, 0.317941, 1.25405, 0.340162, -0.679801, -0.3349, -0.842449, 0.245204, 0.446077, -0.65642, 2.4279, 0.717051, 0.169949, 0.383344, 0.972519, 0.164909, -0.349621, -0.795573, -0.42458, -0.0620437, 0.802968, -0.365731, 2.79921, 0.866788, 0.123992, 0.125181, 0.849586, -0.0595685, 0.121445, -0.931719, 0.22122, -0.0490105, 0.931917, 0.124604, 2.89449, 0.938322, 0.0563858, -0.052641, 0.792619)
+
+[node name="tile_path_3d_examples" type="Node3D"]
+
+[node name="world_env" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nl0ma")
+
+[node name="main_light" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.688355, 0.697622, -0.198723, 0, 0.273959, 0.961741, 0.725375, -0.662019, 0.188581, 0, 10, 0)
+shadow_enabled = true
+
+[node name="example_1" type="Node3D" parent="."]
+
+[node name="heading" type="Label3D" parent="example_1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.0775828, 2.61109)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "TILE PATH INTRO"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 2.6716)
+pixel_size = 0.003
+text = "You can create a tile path by adding a TilePath3D node to the scene.
+Give it a tile mesh, add some points to the curve, and you're good to go.
+Try editing the curve of the yellow path."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_1"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="path" type="Path3D" parent="example_1" node_paths=PackedStringArray("_tile_mmis")]
+curve = SubResource("Curve3D_mywvn")
+script = ExtResource("1_bceid")
+_tile_meshes = Array[Mesh]([SubResource("BoxMesh_bceid")])
+_tile_material = SubResource("StandardMaterial3D_if7vp")
+_tile_mmis = [NodePath("tile_mmi_0")]
+metadata/_custom_type_script = "uid://kjavq4i37ayq"
+
+[node name="tile_mmi_0" type="MultiMeshInstance3D" parent="example_1/path"]
+material_override = SubResource("StandardMaterial3D_if7vp")
+multimesh = SubResource("MultiMesh_bceid")
+
+[node name="example_2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 0)
+
+[node name="heading" type="Label3D" parent="example_2"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 2.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "BASIC APPERANCE"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_2"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 2.6716)
+pixel_size = 0.003
+text = "You can change basic settings that control the appearance of your path, such as the mesh, material, spacing, and contour curves."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_2"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="path1" type="Path3D" parent="example_2" node_paths=PackedStringArray("_tile_mmis")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27256, 0, 0)
+curve = SubResource("Curve3D_bceid")
+script = ExtResource("1_bceid")
+_tile_meshes = Array[Mesh]([SubResource("BoxMesh_bceid")])
+_tile_material = SubResource("StandardMaterial3D_mywvn")
+_tile_spacing = 0.456
+_tile_mmis = [NodePath("tile_mmi_0")]
+metadata/_custom_type_script = "uid://kjavq4i37ayq"
+
+[node name="tile_mmi_0" type="MultiMeshInstance3D" parent="example_2/path1"]
+material_override = SubResource("StandardMaterial3D_mywvn")
+multimesh = SubResource("MultiMesh_mywvn")
+
+[node name="path2" type="Path3D" parent="example_2" node_paths=PackedStringArray("_tile_mmis")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0826674, 0, 0)
+curve = SubResource("Curve3D_bceid")
+script = ExtResource("1_bceid")
+_tile_meshes = Array[Mesh]([SubResource("CylinderMesh_nx7bj")])
+_tile_material = SubResource("StandardMaterial3D_0kmqi")
+_tile_lateral_scale_curve = SubResource("Curve_8k5cn")
+_tile_mmis = [NodePath("tile_mmi_0")]
+metadata/_custom_type_script = "uid://kjavq4i37ayq"
+
+[node name="tile_mmi_0" type="MultiMeshInstance3D" parent="example_2/path2"]
+material_override = SubResource("StandardMaterial3D_0kmqi")
+multimesh = SubResource("MultiMesh_nx7bj")
+
+[node name="path3" type="Path3D" parent="example_2" node_paths=PackedStringArray("_tile_mmis")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1423, 0, 0)
+curve = SubResource("Curve3D_bceid")
+script = ExtResource("1_bceid")
+_tile_meshes = Array[Mesh]([SubResource("BoxMesh_bceid")])
+_tile_material = SubResource("StandardMaterial3D_lhqwy")
+_tile_spacing = 0.322
+_tile_lateral_scale_curve = SubResource("Curve_gdyx0")
+_tile_vertical_scale_curve = SubResource("Curve_jemon")
+_tile_mmis = [NodePath("tile_mmi_0")]
+metadata/_custom_type_script = "uid://kjavq4i37ayq"
+
+[node name="tile_mmi_0" type="MultiMeshInstance3D" parent="example_2/path3"]
+material_override = SubResource("StandardMaterial3D_lhqwy")
+multimesh = SubResource("MultiMesh_0kmqi")
+
+[node name="example_3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0)
+
+[node name="heading" type="Label3D" parent="example_3"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 2.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "RANDOMNESS"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_3"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 2.6716)
+pixel_size = 0.003
+text = "You can add randomness to your path by letting it select between multiple tile meshes, or by automatically varying the orientations or sizes of the tiles."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_3"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="path1" type="Path3D" parent="example_3" node_paths=PackedStringArray("_tile_mmis")]
+transform = Transform3D(-0.988494, 0, -0.151261, 0, 1, 0, 0.151261, 0, -0.988494, -1.1642, 0, 0.126518)
+curve = SubResource("Curve3D_if7vp")
+script = ExtResource("1_bceid")
+_tile_meshes = Array[Mesh]([SubResource("TextMesh_if7vp"), SubResource("TextMesh_lhqwy"), SubResource("TextMesh_8k5cn")])
+_tile_spacing = 0.252
+_tile_mmis = [NodePath("tile_mmi_0"), NodePath("tile_mmi_1"), NodePath("tile_mmi_2")]
+metadata/_custom_type_script = "uid://kjavq4i37ayq"
+
+[node name="tile_mmi_0" type="MultiMeshInstance3D" parent="example_3/path1"]
+multimesh = SubResource("MultiMesh_if7vp")
+
+[node name="tile_mmi_1" type="MultiMeshInstance3D" parent="example_3/path1"]
+multimesh = SubResource("MultiMesh_lhqwy")
+
+[node name="tile_mmi_2" type="MultiMeshInstance3D" parent="example_3/path1"]
+multimesh = SubResource("MultiMesh_8k5cn")
+
+[node name="path2" type="Path3D" parent="example_3" node_paths=PackedStringArray("_tile_mmis")]
+transform = Transform3D(-0.980673, 0, -0.195655, 0, 1, 0, 0.195655, 0, -0.980673, 0.608006, 0, 0)
+curve = SubResource("Curve3D_if7vp")
+script = ExtResource("1_bceid")
+_tile_meshes = Array[Mesh]([SubResource("BoxMesh_bceid")])
+_tile_material = SubResource("StandardMaterial3D_if7vp")
+_tile_spacing = 0.162
+_tile_mmis = [NodePath("tile_mmi_0")]
+_tile_angle_jitter = 90.0
+_tile_lateral_scale_jitter = 1.0
+_tile_vertical_scale_jitter = 1.0
+_rand_seed = 8
+metadata/_custom_type_script = "uid://kjavq4i37ayq"
+
+[node name="tile_mmi_0" type="MultiMeshInstance3D" parent="example_3/path2"]
+material_override = SubResource("StandardMaterial3D_if7vp")
+multimesh = SubResource("MultiMesh_m2825")
+
+[node name="example_4" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 0)
+
+[node name="heading" type="Label3D" parent="example_4"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 2.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "BASIC GROUNDING"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_4"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 2.6716)
+pixel_size = 0.003
+text = "If given references to ground mesh instances, your path can automatically snap to ground. This was the original intended usage of the addon.
+Try moving the path around over the hill."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_4"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="hill" type="MeshInstance3D" parent="example_4"]
+transform = Transform3D(2.2814, 0, 0, 0, 1.24954, 0, 0, 0, 2.2814, 0, -0.177595, 0)
+mesh = SubResource("SphereMesh_bceid")
+surface_material_override/0 = SubResource("StandardMaterial3D_8k5cn")
+
+[node name="path" type="Path3D" parent="example_4" node_paths=PackedStringArray("_tile_mmis", "_ground_nodes")]
+curve = SubResource("Curve3D_jemon")
+script = ExtResource("1_bceid")
+_tile_meshes = Array[Mesh]([SubResource("BoxMesh_bceid")])
+_tile_material = SubResource("StandardMaterial3D_if7vp")
+_tile_mmis = [NodePath("tile_mmi_0")]
+_ground_nodes = [NodePath("../ground"), NodePath("../hill")]
+_ground_normal_relaxation = 1.0
+metadata/_custom_type_script = "uid://kjavq4i37ayq"
+
+[node name="tile_mmi_0" type="MultiMeshInstance3D" parent="example_4/path"]
+material_override = SubResource("StandardMaterial3D_if7vp")
+multimesh = SubResource("MultiMesh_gdyx0")
+
+[node name="example_5" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 0)
+
+[node name="heading" type="Label3D" parent="example_5"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 2.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "ADVANCED GROUNDING"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_5"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 2.6716)
+pixel_size = 0.003
+text = "You can tweak how the path adheres to the ground by tweaking its adherence and relaxation properties."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_5"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="hill" type="MeshInstance3D" parent="example_5"]
+transform = Transform3D(2.06406, 0, 0, 0, -4.37114e-08, -1.04762, 0, 1, -4.57929e-08, 0, -0.139786, 0)
+mesh = SubResource("CylinderMesh_bceid")
+surface_material_override/0 = SubResource("StandardMaterial3D_8k5cn")
+
+[node name="path1" type="Path3D" parent="example_5" node_paths=PackedStringArray("_tile_mmis", "_ground_nodes")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.043005, 0, -0.70578)
+curve = SubResource("Curve3D_inn4n")
+script = ExtResource("1_bceid")
+_tile_meshes = Array[Mesh]([SubResource("BoxMesh_mywvn")])
+_tile_material = SubResource("StandardMaterial3D_if7vp")
+_tile_spacing = 0.165
+_tile_vertical_scale_curve = SubResource("Curve_mywvn")
+_tile_mmis = [NodePath("tile_mmi_0")]
+_tile_angle_jitter = 90.0
+_tile_lateral_scale_jitter = 0.31
+_tile_vertical_scale_jitter = 0.35
+_ground_nodes = [NodePath("../ground"), NodePath("../hill")]
+_ground_normal_relaxation = 0.74
+metadata/_custom_type_script = "uid://kjavq4i37ayq"
+
+[node name="tile_mmi_0" type="MultiMeshInstance3D" parent="example_5/path1"]
+material_override = SubResource("StandardMaterial3D_if7vp")
+multimesh = SubResource("MultiMesh_jemon")
+
+[node name="path2" type="Path3D" parent="example_5" node_paths=PackedStringArray("_tile_mmis", "_ground_nodes")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.657091)
+curve = SubResource("Curve3D_inn4n")
+script = ExtResource("1_bceid")
+_tile_meshes = Array[Mesh]([SubResource("BoxMesh_mywvn")])
+_tile_material = SubResource("StandardMaterial3D_if7vp")
+_tile_spacing = 0.159
+_tile_vertical_scale_curve = SubResource("Curve_mywvn")
+_tile_mmis = [NodePath("tile_mmi_0")]
+_ground_nodes = [NodePath("../ground"), NodePath("../hill")]
+_ground_normal_adherence = 0.0
+_ground_normal_relaxation = 0.0
+metadata/_custom_type_script = "uid://kjavq4i37ayq"
+
+[node name="tile_mmi_0" type="MultiMeshInstance3D" parent="example_5/path2"]
+material_override = SubResource("StandardMaterial3D_if7vp")
+multimesh = SubResource("MultiMesh_inn4n")
+
+[node name="example_6" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 0)
+
+[node name="heading" type="Label3D" parent="example_6"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 2.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "GROUNDING BONUS"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_6"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 2.6716)
+pixel_size = 0.003
+text = "You can choose how the path determines the direction in which it seeks ground. By default, this is the world -Y axis, but you can make it use the specific orientation at sampled points along the curve.
+TLDR, you can make paths stick to upside-down surfaces."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_6"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="orb" type="MeshInstance3D" parent="example_6"]
+transform = Transform3D(1.97011, 1.05784, 0.363562, -1.06258, 2.01337, 5.96819e-08, -0.320923, -0.172319, 2.23187, -0.0437279, 1.67527, -0.0217679)
+mesh = SubResource("SphereMesh_bceid")
+surface_material_override/0 = SubResource("StandardMaterial3D_8k5cn")
+
+[node name="path" type="Path3D" parent="example_6" node_paths=PackedStringArray("_tile_mmis", "_ground_nodes")]
+transform = Transform3D(0.871235, 0.46379, 0.160777, -0.469903, 0.882718, 3.86028e-08, -0.141921, -0.0755496, 0.986991, -1.01667, 0.130993, -0.578362)
+curve = SubResource("Curve3D_cx8gr")
+script = ExtResource("1_bceid")
+_tile_meshes = Array[Mesh]([SubResource("CylinderMesh_mywvn")])
+_tile_material = SubResource("StandardMaterial3D_if7vp")
+_tile_spacing = 0.303
+_tile_lateral_scale_curve = SubResource("Curve_cx8gr")
+_tile_vertical_scale_curve = SubResource("Curve_cx8gr")
+_tile_mmis = [NodePath("tile_mmi_0")]
+_ground_nodes = [NodePath("../orb")]
+_ground_normal_relaxation = 0.0
+_ground_seek_direction_mode = 2
+metadata/_custom_type_script = "uid://kjavq4i37ayq"
+
+[node name="tile_mmi_0" type="MultiMeshInstance3D" parent="example_6/path"]
+material_override = SubResource("StandardMaterial3D_if7vp")
+multimesh = SubResource("MultiMesh_cx8gr")
+
+[node name="example_7" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0, 0)
+
+[node name="heading" type="Label3D" parent="example_7"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 2.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "TIPS"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_7"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 2.6716)
+pixel_size = 0.003
+text = "
+- If sometimes the path doesn't refresh, just jiggle it.
+
+- The path does not spawn separate meshes for each tile, it uses MultiMeshInstance for performance.
+
+- There is no collision yet."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
