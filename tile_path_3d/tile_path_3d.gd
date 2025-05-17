@@ -324,7 +324,13 @@ func rebuild() -> void:
 		var p := sampled_tf.origin
 		if center_dist > length:
 			p -= sampled_tf.basis.z * (center_dist - length)
-		var b := sampled_tf.basis * turn_basis
+		var b := sampled_tf.basis
+		match _ground_seek_direction_mode:
+			GroundSeekDirectionMode.WORLD_DOWN:
+				b = Basis(Quaternion(b.y, inv_tf.basis.y.normalized())) * b
+			GroundSeekDirectionMode.OBJECT_DOWN:
+				b = Basis(Quaternion(b.y, Vector3.UP)) * b
+		b *= turn_basis
 
 		if _grounded and not _ground_nodes.is_empty():
 
