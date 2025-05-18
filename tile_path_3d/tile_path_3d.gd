@@ -193,9 +193,9 @@ func _notification(what: int) -> void:
 
 func rebuild() -> void:
 
-	if owner != EditorInterface.get_edited_scene_root():
-		return
 	if not Engine.is_editor_hint() or not is_node_ready():
+		return
+	if owner != EditorInterface.get_edited_scene_root():
 		return
 
 	# Remove any invalid ground nodes.
