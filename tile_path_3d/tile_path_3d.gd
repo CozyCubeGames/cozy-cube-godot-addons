@@ -6,6 +6,7 @@ extends Path3D
 enum TileDirectionMode { FORWARD, FORWARD_OR_BACK, CARDINAL, FREE }
 enum TileSelectionMode { RANDOM, RANDOM_NO_REPEATS, SEQUENTIAL }
 enum GroundSeekDirectionMode { WORLD_DOWN, OBJECT_DOWN, CURVE_SAMPLE_DOWN }
+enum OutputFormat { MESH_INSTANCES, MULTI_MESH_INSTANCES }
 
 
 @export var _tile_meshes: Array[Mesh]:
@@ -63,7 +64,17 @@ enum GroundSeekDirectionMode { WORLD_DOWN, OBJECT_DOWN, CURVE_SAMPLE_DOWN }
 			if _tile_vertical_scale_curve:
 				_tile_vertical_scale_curve.changed.connect(rebuild, CONNECT_REFERENCE_COUNTED)
 		rebuild()
+@export var _output_format: OutputFormat = OutputFormat.MULTI_MESH_INSTANCES:
+	get: return _output_format
+	set(value):
+		if _output_format == value:
+			return
+		_output_format = value
+		notify_property_list_changed()
+		rebuild()
+@export var _tile_mis: Array[MeshInstance3D]
 @export var _tile_mmis: Array[MultiMeshInstance3D]
+@export_storage var _last_built_curve: Curve3D
 
 @export_group("Randomness")
 @export var _tile_selection_mode: TileSelectionMode = TileSelectionMode.RANDOM_NO_REPEATS:
@@ -80,12 +91,26 @@ enum GroundSeekDirectionMode { WORLD_DOWN, OBJECT_DOWN, CURVE_SAMPLE_DOWN }
 			return
 		_tile_direction_mode = value
 		rebuild()
-@export_range(0.0, 90.0, 0.5) var _tile_angle_jitter: float = 0.0:
-	get: return _tile_angle_jitter
+@export_range(0.0, 180.0, 0.1) var _tile_yaw_jitter: float = 0.0:
+	get: return _tile_yaw_jitter
 	set(value):
-		if _tile_angle_jitter == value:
+		if _tile_yaw_jitter == value:
 			return
-		_tile_angle_jitter = value
+		_tile_yaw_jitter = value
+		rebuild()
+@export_range(0.0, 180.0, 0.1) var _tile_pitch_jitter: float = 0.0:
+	get: return _tile_pitch_jitter
+	set(value):
+		if _tile_pitch_jitter == value:
+			return
+		_tile_pitch_jitter = value
+		rebuild()
+@export_range(0.0, 180.0, 0.1) var _tile_roll_jitter: float = 0.0:
+	get: return _tile_roll_jitter
+	set(value):
+		if _tile_roll_jitter == value:
+			return
+		_tile_roll_jitter = value
 		rebuild()
 @export_range(0.0, 1.0, 0.01) var _tile_lateral_scale_jitter: float = 0.0:
 	get: return _tile_lateral_scale_jitter
@@ -171,18 +196,29 @@ enum GroundSeekDirectionMode { WORLD_DOWN, OBJECT_DOWN, CURVE_SAMPLE_DOWN }
 func _ready() -> void:
 
 	if Engine.is_editor_hint():
-		curve_changed.connect(rebuild)
+		curve_changed.connect(_on_curve_changed)
 		set_notify_transform(true)
 
 
 func _validate_property(property: Dictionary) -> void:
 
-	if not _grounded:
-		if property.name.contains("ground") and property.name != "_grounded":
-			property.usage = PROPERTY_USAGE_STORAGE
+	match _output_format:
+		OutputFormat.MESH_INSTANCES:
+			match property.name:
+				"_tile_mis":
+					property.usage |= PROPERTY_USAGE_READ_ONLY
+				"_tile_mmis":
+					property.usage = PROPERTY_USAGE_STORAGE
+		OutputFormat.MULTI_MESH_INSTANCES:
+			match property.name:
+				"_tile_mmis":
+					property.usage |= PROPERTY_USAGE_READ_ONLY
+				"_tile_mis":
+					property.usage = PROPERTY_USAGE_STORAGE
 
-	if property.name == "_tile_mmis":
-		property.usage |= PROPERTY_USAGE_READ_ONLY
+	if not _grounded:
+		if property.name == "_ground_nodes":
+			property.usage |= PROPERTY_USAGE_READ_ONLY
 
 
 func _notification(what: int) -> void:
@@ -198,34 +234,72 @@ func rebuild() -> void:
 	if Engine.is_editor_hint() and owner != EditorInterface.get_edited_scene_root():
 		return
 
-	# Remove any invalid ground nodes.
-	for i in range(_ground_nodes.size() - 1, -1, -1):
-		if not is_instance_valid(_ground_nodes[i]) or not _ground_nodes[i].is_inside_tree():
-			_ground_nodes.pop_back()
+	match _output_format:
 
-	# Ensure MultiMeshInstance parity.
-	while _tile_mmis.size() > _tile_meshes.size():
-		var mmi := _tile_mmis.pop_back() as MultiMeshInstance3D
-		if is_instance_valid(mmi):
-			mmi.free()
-	_tile_mmis.resize(_tile_meshes.size())
+		OutputFormat.MESH_INSTANCES:
 
-	# Ensure MultiMesh parity.
-	for i in _tile_mmis.size():
-		var mmi := _tile_mmis[i]
-		if not is_instance_valid(mmi) or not mmi.is_inside_tree():
-			mmi = MultiMeshInstance3D.new()
-			mmi.name = "tile_mmi_" + str(i)
-			_tile_mmis[i] = mmi
-			add_child(mmi)
-			mmi.owner = owner
-		mmi.multimesh = MultiMesh.new()
-		mmi.multimesh.instance_count = 0
-		mmi.multimesh.transform_format = MultiMesh.TRANSFORM_3D
-		var mesh := _tile_meshes[i]
-		mmi.multimesh.mesh = mesh
-		mmi.transform = Transform3D.IDENTITY
-		mmi.material_override = _tile_material
+			# Destroy MultiMeshInstances
+			for i in range(_tile_mmis.size() - 1, -1, -1):
+				var mmi := _tile_mmis[i]
+				if is_instance_valid(mmi):
+					mmi.free()
+			_tile_mmis.clear()
+
+			# Ensure MeshInstance parity.
+			for i in range(_tile_mis.size() - 1, _tile_meshes.size() - 1, -1):
+				var mi := _tile_mis[i]
+				if is_instance_valid(mi):
+					mi.free()
+			_tile_mis.resize(_tile_meshes.size())
+			for i in _tile_mis.size():
+				var mi := _tile_mis[i]
+				if not is_instance_valid(mi) or not mi.is_inside_tree():
+					mi = MeshInstance3D.new()
+					mi.name = "tile_mi_" + str(i)
+					_tile_mis[i] = mi
+					add_child(mi)
+					mi.owner = owner
+
+			# Assign mesh.
+			for i in _tile_mis.size():
+				var mi := _tile_mis[i]
+				mi.transform = Transform3D.IDENTITY
+				mi.material_override = _tile_material
+
+		OutputFormat.MULTI_MESH_INSTANCES:
+
+			# Destroy MeshInstances
+			for i in range(_tile_mis.size() - 1, -1, -1):
+				var mi := _tile_mis[i]
+				if is_instance_valid(mi):
+					mi.free()
+			_tile_mis.clear()
+
+			# Ensure MultiMeshInstance3D parity.
+			for i in range(_tile_mmis.size() - 1, _tile_meshes.size() - 1, -1):
+				var mmi := _tile_mmis[i]
+				if is_instance_valid(mmi):
+					mmi.free()
+			_tile_mmis.resize(_tile_meshes.size())
+			for i in _tile_mmis.size():
+				var mmi := _tile_mmis[i]
+				if not is_instance_valid(mmi) or not mmi.is_inside_tree():
+					mmi = MultiMeshInstance3D.new()
+					mmi.name = "tile_mmi_" + str(i)
+					_tile_mmis[i] = mmi
+					add_child(mmi)
+					mmi.owner = owner
+
+			# Assign mesh.
+			for i in _tile_mmis.size():
+				var mmi := _tile_mmis[i]
+				mmi.multimesh = MultiMesh.new()
+				mmi.multimesh.instance_count = 0
+				mmi.multimesh.transform_format = MultiMesh.TRANSFORM_3D
+				var mesh := _tile_meshes[i]
+				mmi.multimesh.mesh = mesh
+				mmi.transform = Transform3D.IDENTITY
+				mmi.material_override = _tile_material
 
 	# TODO: Wipe collisions.
 
@@ -237,12 +311,10 @@ func rebuild() -> void:
 	var ground_tris: Array[PackedVector3Array]
 	var ground_normals: Array[PackedVector3Array]
 	if _grounded and not _ground_nodes.is_empty():
-		for i in range(_ground_nodes.size() - 1, -1, -1):
-			var ground_mi := _ground_nodes.back()
-			if not is_instance_valid(ground_mi) or not is_instance_valid(ground_mi.mesh):
-				_ground_nodes.pop_back()
 		var st: SurfaceTool
 		for ground_mi in _ground_nodes:
+			if not is_instance_valid(ground_mi) or not is_instance_valid(ground_mi.mesh):
+				continue
 			ground_tfs.append(ground_mi.global_transform)
 			ground_inv_tfs.append(ground_mi.global_transform.affine_inverse())
 			var tris: PackedVector3Array
@@ -264,7 +336,7 @@ func rebuild() -> void:
 				normals[j] = (c - a).cross(b - a).normalized()
 			ground_normals.append(normals)
 	var tile_tfs: Array[Array]
-	for i in _tile_mmis.size():
+	for i in _tile_meshes.size():
 		tile_tfs.append(Array())
 
 	var length: float = curve.get_baked_length()
@@ -292,9 +364,9 @@ func rebuild() -> void:
 				yaw = (rand.randi() % 4) * 90
 			TileDirectionMode.FREE:
 				yaw = rand.randf() * 360
-		yaw += rand.randf_range(-0.5, 0.5) * _tile_angle_jitter
+		yaw += rand.randf_range(-0.5, 0.5) * _tile_yaw_jitter
 
-		var turn_basis := Basis(Vector3.UP, deg_to_rad(yaw))
+		var orient_basis := Basis(Vector3.UP, deg_to_rad(yaw))
 
 		var t := dist / length
 		var lateral_scale := _tile_lateral_scale_curve.sample(t) if _tile_lateral_scale_curve else 1.0
@@ -310,7 +382,7 @@ func rebuild() -> void:
 
 		if is_instance_valid(mesh):
 			var aabb := mesh.get_aabb()
-			if absf(turn_basis.z.z) >= root_half:
+			if absf(orient_basis.z.z) >= root_half:
 				tile_length = maxf(absf(aabb.position.z), absf(aabb.end.z)) * 2
 			else:
 				tile_length = maxf(absf(aabb.position.x), absf(aabb.end.x)) * 2
@@ -330,7 +402,6 @@ func rebuild() -> void:
 				b = Basis(Quaternion(b.y, inv_tf.basis.y.normalized())) * b
 			GroundSeekDirectionMode.OBJECT_DOWN:
 				b = Basis(Quaternion(b.y, Vector3.UP)) * b
-		b *= turn_basis
 
 		if _grounded and not _ground_nodes.is_empty():
 
@@ -367,6 +438,7 @@ func rebuild() -> void:
 				else:
 					b = b_ground_adhering
 
+		b *= orient_basis
 		b *= Basis.from_scale(Vector3(lateral_scale, vertical_scale, lateral_scale))
 
 		tile_tfs[mesh_idx].append(Transform3D(b, p))
@@ -401,13 +473,44 @@ func rebuild() -> void:
 			tile_tfs[s[0]][s[1]] = tile_tf
 
 	for i in tile_tfs.size():
+		var tfs: Array = tile_tfs[i]
+		for j in tfs.size():
+			tfs[j].basis *= Basis.from_euler(Vector3(
+					deg_to_rad(rand.randf_range(-0.5, 0.5) * _tile_pitch_jitter),
+					deg_to_rad(rand.randf_range(-0.5, 0.5) * _tile_yaw_jitter),
+					deg_to_rad(rand.randf_range(-0.5, 0.5) * _tile_roll_jitter)))
+
+	for i in tile_tfs.size():
+
+		var source_mesh := _tile_meshes[i]
+		if not is_instance_valid(source_mesh):
+			continue
+
 		var tfs := tile_tfs[i]
-		var mmi := _tile_mmis[i]
-		var mm := mmi.multimesh
-		if is_instance_valid(mmi.multimesh.mesh):
-			mm.instance_count = tfs.size()
-			for j in tfs.size():
-				mm.set_instance_transform(j, tfs[j])
+
+		match _output_format:
+
+			OutputFormat.MESH_INSTANCES:
+
+				var mi := _tile_mis[i]
+				var mesh := ArrayMesh.new()
+				var st := SurfaceTool.new()
+				for j in source_mesh.get_surface_count():
+					st.clear()
+					for k in tfs.size():
+						st.append_from(source_mesh, j, tfs[k])
+					st.commit(mesh)
+					mesh.surface_set_material(j, source_mesh.surface_get_material(j))
+				if source_mesh.lightmap_size_hint != Vector2i.ZERO:
+					mesh.lightmap_unwrap(mi.global_transform, mi.gi_lightmap_texel_scale)
+				mi.mesh = mesh
+
+			OutputFormat.MULTI_MESH_INSTANCES:
+
+				var mmi := _tile_mmis[i]
+				mmi.multimesh.instance_count = tfs.size()
+				for j in tfs.size():
+					mmi.multimesh.set_instance_transform(j, tfs[j])
 
 
 func _select_tile_mesh(rand: RandomNumberGenerator, last_idx: int) -> int:
@@ -464,3 +567,31 @@ func _get_ground_intersect(
 				nearest_intersect = [world_intersect, normal_basis * normals[j]]
 
 	return nearest_intersect
+
+
+func _on_curve_changed() -> void:
+
+	# Did it ACTUALLY change though, Godot? -_-
+
+	if curve == null:
+		_last_built_curve = null
+		return
+
+	var did_change := _last_built_curve == null
+	if not did_change:
+		did_change = curve.point_count != _last_built_curve.point_count or\
+				curve.closed != _last_built_curve.closed or\
+				curve.bake_interval != _last_built_curve.bake_interval or\
+				curve.up_vector_enabled != _last_built_curve.up_vector_enabled
+	if not did_change:
+		for i in curve.point_count:
+			if curve.get_point_position(i) != _last_built_curve.get_point_position(i) or\
+					curve.get_point_in(i) != _last_built_curve.get_point_in(i) or\
+					curve.get_point_out(i) != _last_built_curve.get_point_out(i) or\
+					curve.get_point_tilt(i) != _last_built_curve.get_point_tilt(i):
+				did_change = true
+				break
+
+	if did_change:
+		rebuild()
+		_last_built_curve = curve.duplicate()

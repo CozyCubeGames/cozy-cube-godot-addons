@@ -365,7 +365,6 @@ _tile_meshes = Array[Mesh]([SubResource("BoxMesh_bceid")])
 _tile_material = SubResource("StandardMaterial3D_if7vp")
 _tile_spacing = 0.162
 _tile_mmis = [NodePath("tile_mmi_0")]
-_tile_angle_jitter = 90.0
 _tile_lateral_scale_jitter = 1.0
 _tile_vertical_scale_jitter = 1.0
 _rand_seed = 8
@@ -451,7 +450,6 @@ _tile_material = SubResource("StandardMaterial3D_if7vp")
 _tile_spacing = 0.165
 _tile_vertical_scale_curve = SubResource("Curve_mywvn")
 _tile_mmis = [NodePath("tile_mmi_0")]
-_tile_angle_jitter = 90.0
 _tile_lateral_scale_jitter = 0.31
 _tile_vertical_scale_jitter = 0.35
 _ground_nodes = [NodePath("../ground"), NodePath("../hill")]
@@ -540,9 +538,9 @@ font_size = 40
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 2.6716)
 pixel_size = 0.003
 text = "
-- If sometimes the path doesn't refresh, just jiggle it.
+- The path will not refresh if you only move its ground nodes. In these cases, just jiggle the path and it will refresh.
 
-- The path does not spawn separate meshes for each tile, it uses MultiMeshInstance for performance.
+- The default output format uses MultiMeshInstance3D, which does not support lightmapping. If you want to use lightmaps, use the MeshInstance3D output format.
 
 - There is no collision yet."
 vertical_alignment = 0
