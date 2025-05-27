@@ -65,51 +65,47 @@ const LocalTransformListener = preload("uid://c1u7eyhigk821")
 		uv_tile_count = value
 		if is_node_ready():
 			_rebuild()
-		if is_node_ready():
-			_rebuild()
 
 
 func _ready() -> void:
 
-	if Engine.is_editor_hint():
-
-		var needs_rebuild: bool = false
-
-		if not is_instance_valid(outline):
-			var new_outline = Path3D.new()
-			new_outline.set_script(LocalTransformListener)
-			new_outline.name = "outline"
-			new_outline.curve = Curve3D.new()
-			new_outline.curve.clear_points()
-			new_outline.curve.add_point(Vector3(-1, 0, -1))
-			new_outline.curve.add_point(Vector3(1, 0, -1))
-			new_outline.curve.add_point(Vector3(1, 0, 1))
-			new_outline.curve.add_point(Vector3(-1, 0, 1))
-			new_outline.curve.closed = true
-			add_child(new_outline)
-			new_outline.owner = owner
-			outline = new_outline
-			needs_rebuild = true
-
-		if not is_instance_valid(origin):
-			var new_origin = Marker3D.new()
-			new_origin.set_script(LocalTransformListener)
-			new_origin.name = "origin"
-			new_origin.transform = Transform3D(Basis(Vector3.RIGHT, deg_to_rad(-90)), Vector3(0, 1, 0))
-			add_child(new_origin)
-			new_origin.owner = owner
-			origin = new_origin
-			needs_rebuild = true
-
-		if not is_instance_valid(mesh):
-			mesh = ArrayMesh.new()
-			needs_rebuild = true
-
-		if needs_rebuild:
-			_rebuild()
+	if not is_instance_valid(outline) or not is_instance_valid(origin) or not is_instance_valid(mesh):
+		_rebuild()
 
 
 func _rebuild() -> void:
+
+	if not is_node_ready():
+		return
+	if Engine.is_editor_hint() and EditorInterface.get_edited_scene_root() != owner:
+		return
+
+	if not is_instance_valid(outline):
+		var new_outline = Path3D.new()
+		new_outline.set_script(LocalTransformListener)
+		new_outline.name = "outline"
+		new_outline.curve = Curve3D.new()
+		new_outline.curve.clear_points()
+		new_outline.curve.add_point(Vector3(-1, 0, -1))
+		new_outline.curve.add_point(Vector3(1, 0, -1))
+		new_outline.curve.add_point(Vector3(1, 0, 1))
+		new_outline.curve.add_point(Vector3(-1, 0, 1))
+		new_outline.curve.closed = true
+		add_child(new_outline)
+		new_outline.owner = owner
+		outline = new_outline
+
+	if not is_instance_valid(origin):
+		var new_origin = Marker3D.new()
+		new_origin.set_script(LocalTransformListener)
+		new_origin.name = "origin"
+		new_origin.transform = Transform3D(Basis(Vector3.RIGHT, deg_to_rad(-90)), Vector3(0, 1, 0))
+		add_child(new_origin)
+		new_origin.owner = owner
+		origin = new_origin
+
+	if not is_instance_valid(mesh):
+		mesh = ArrayMesh.new()
 
 	var verts: PackedVector3Array
 	var normals: PackedVector3Array

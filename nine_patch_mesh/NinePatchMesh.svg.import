@@ -4,16 +4,15 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dpv60tlbs6wif"
 path.bptc="res://.godot/imported/NinePatchMesh.svg-dd46134f4212c4b57cc8c6dd01f1c8ed.bptc.ctex"
-path.astc="res://.godot/imported/NinePatchMesh.svg-dd46134f4212c4b57cc8c6dd01f1c8ed.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/nine_patch_mesh/NinePatchMesh.svg"
-dest_files=["res://.godot/imported/NinePatchMesh.svg-dd46134f4212c4b57cc8c6dd01f1c8ed.bptc.ctex", "res://.godot/imported/NinePatchMesh.svg-dd46134f4212c4b57cc8c6dd01f1c8ed.astc.ctex"]
+dest_files=["res://.godot/imported/NinePatchMesh.svg-dd46134f4212c4b57cc8c6dd01f1c8ed.bptc.ctex"]
 
 [params]
 

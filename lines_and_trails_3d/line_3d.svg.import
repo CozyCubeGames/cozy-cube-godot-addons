@@ -4,16 +4,15 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d2k4q6d7tyw2f"
 path.bptc="res://.godot/imported/line_3d.svg-92cdec24ea3d4ed628b1ebf68daa5384.bptc.ctex"
-path.astc="res://.godot/imported/line_3d.svg-92cdec24ea3d4ed628b1ebf68daa5384.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/lines_and_trails_3d/line_3d.svg"
-dest_files=["res://.godot/imported/line_3d.svg-92cdec24ea3d4ed628b1ebf68daa5384.bptc.ctex", "res://.godot/imported/line_3d.svg-92cdec24ea3d4ed628b1ebf68daa5384.astc.ctex"]
+dest_files=["res://.godot/imported/line_3d.svg-92cdec24ea3d4ed628b1ebf68daa5384.bptc.ctex"]
 
 [params]
 

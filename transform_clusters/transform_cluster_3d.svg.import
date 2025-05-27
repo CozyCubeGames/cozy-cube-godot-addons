@@ -4,16 +4,15 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dyl8d4uhcw35j"
 path.bptc="res://.godot/imported/transform_cluster_3d.svg-fae862f21f75d46a04bef942244a033d.bptc.ctex"
-path.astc="res://.godot/imported/transform_cluster_3d.svg-fae862f21f75d46a04bef942244a033d.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/transform_clusters/transform_cluster_3d.svg"
-dest_files=["res://.godot/imported/transform_cluster_3d.svg-fae862f21f75d46a04bef942244a033d.bptc.ctex", "res://.godot/imported/transform_cluster_3d.svg-fae862f21f75d46a04bef942244a033d.astc.ctex"]
+dest_files=["res://.godot/imported/transform_cluster_3d.svg-fae862f21f75d46a04bef942244a033d.bptc.ctex"]
 
 [params]
 
