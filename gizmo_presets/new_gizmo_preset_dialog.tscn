@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://cm1cf82jitim5"]
+
+[ext_resource type="Script" uid="uid://b4dj8lmori3dk" path="res://addons/gizmo_presets/new_gizmo_preset_dialog.gd" id="1_12xop"]
+
+[node name="new_gizmo_preset_dialog" type="ConfirmationDialog" node_paths=PackedStringArray("preset_name_field")]
+title = "New Gizmo Preset"
+size = Vector2i(400, 100)
+visible = true
+ok_button_text = "Save"
+script = ExtResource("1_12xop")
+preset_name_field = NodePath("v_box_container/h_box_container/preset_name_field")
+
+[node name="v_box_container" type="VBoxContainer" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 392.0
+offset_bottom = 51.0
+
+[node name="h_box_container" type="HBoxContainer" parent="v_box_container"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="v_box_container/h_box_container"]
+layout_mode = 2
+text = "Preset Name"
+
+[node name="preset_name_field" type="TextEdit" parent="v_box_container/h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+scroll_fit_content_height = true
+caret_multiple = false
+
+[connection signal="text_changed" from="v_box_container/h_box_container/preset_name_field" to="." method="_on_preset_name_field_text_changed"]
