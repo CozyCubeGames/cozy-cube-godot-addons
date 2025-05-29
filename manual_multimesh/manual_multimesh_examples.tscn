@@ -1,0 +1,240 @@
+[gd_scene load_steps=14 format=3 uid="uid://s737a2dk44gr"]
+
+[ext_resource type="Script" uid="uid://bt3fnycwurouo" path="res://addons/manual_multimesh/manual_multi_mesh_instance_3d.gd" id="1_se4ne"]
+[ext_resource type="Script" uid="uid://bq4hgulf0pjpt" path="res://addons/manual_multimesh/manual_multi_mesh_child_3d.gd" id="2_034lr"]
+
+[sub_resource type="Environment" id="Environment_nl0ma"]
+background_mode = 1
+background_color = Color(0.0863636, 0.0863636, 0.0863636, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iblk6"]
+albedo_color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_f5biq"]
+material = SubResource("StandardMaterial3D_iblk6")
+size = Vector2(2, 1)
+orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_se4ne"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_034lr"]
+inner_radius = 0.15
+outer_radius = 0.3
+
+[sub_resource type="MultiMesh" id="MultiMesh_iblk6"]
+transform_format = 1
+instance_count = 4
+visible_instance_count = 4
+mesh = SubResource("TorusMesh_034lr")
+buffer = PackedFloat32Array(0.978767, -0.0514392, 0.198415, -0.5024, 0.120287, -0.63965, -0.759197, 0.680578, 0.165969, 0.766944, -0.619881, 0, 0.90575, 0, 0, -0.0778953, 0, 0.723507, -0.544904, 1.19318, 0, 0.544904, 0.723507, 0.00635314, 0.508707, -0.556637, -2.24732e-08, 0.0268787, 0.444638, 0.406352, -0.453656, 0.415122, 0.334876, 0.306041, 0.60235, 0.0631347, 1.10007, 0.382267, 0, 0.474057, -0.222179, 0.639377, -0.94769, 0.76772, -0.31107, 0.895183, 0.67688, 0.113749)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_034lr"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="TorusMesh" id="TorusMesh_iblk6"]
+inner_radius = 0.15
+outer_radius = 0.3
+
+[sub_resource type="MultiMesh" id="MultiMesh_034lr"]
+transform_format = 1
+use_colors = true
+instance_count = 4
+visible_instance_count = 4
+mesh = SubResource("TorusMesh_iblk6")
+buffer = PackedFloat32Array(0.978767, -0.0514392, 0.198415, -0.5024, 0.120287, -0.63965, -0.759197, 0.680578, 0.165969, 0.766944, -0.619881, 0, 1, 0.0363637, 0.0363637, 1, 0.90575, 0, 0, -0.0778953, 0, 0.723507, -0.544904, 1.19318, 0, 0.544904, 0.723507, 0.00635314, 0.05, 0.05, 0.05, 1, 0.508707, -0.556637, -2.24732e-08, 0.0268787, 0.444638, 0.406352, -0.453656, 0.415122, 0.334876, 0.306041, 0.60235, 0.0631347, 0, 0.513636, 0.0793801, 1, 1.10007, 0.382267, 0, 0.474057, -0.222179, 0.639377, -0.94769, 0.76772, -0.31107, 0.895183, 0.67688, 0.113749, 1, 1, 1, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_se4ne"]
+inner_radius = 0.15
+outer_radius = 0.3
+
+[sub_resource type="MultiMesh" id="MultiMesh_se4ne"]
+transform_format = 1
+instance_count = 4
+visible_instance_count = 2
+mesh = SubResource("TorusMesh_se4ne")
+buffer = PackedFloat32Array(0.978767, -0.0514392, 0.198415, -0.5024, 0.120287, -0.63965, -0.759197, 0.680578, 0.165969, 0.766944, -0.619881, 0, 1.10007, 0.382267, 0, 0.474057, -0.222179, 0.639377, -0.94769, 0.76772, -0.31107, 0.895183, 0.67688, 0.113749, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="manual_multimesh_examples" type="Node3D"]
+
+[node name="world_env" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nl0ma")
+
+[node name="main_light" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.925871, -0.32722, 0.18892, 0, 0.5, 0.866025, -0.377841, -0.801827, 0.462935, 0, 10, 0)
+directional_shadow_mode = 0
+
+[node name="example_1" type="Node3D" parent="."]
+
+[node name="heading" type="Label3D" parent="example_1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.0775828, 0.61109)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "BASICS"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "Add a ManualMultiMeshInstance3D node to your scene.
+Set it up as you would a regular MultiMeshInstance3D (give it a MultiMesh, Mesh, etc.)
+Add ManualMultiMeshChild3D nodes as children, and they will automatically be synced to the MultiMesh. "
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_1"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="mmmi" type="MultiMeshInstance3D" parent="example_1"]
+material_override = SubResource("StandardMaterial3D_se4ne")
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_iblk6")
+script = ExtResource("1_se4ne")
+metadata/_custom_type_script = "uid://bt3fnycwurouo"
+
+[node name="mmmc" type="Node3D" parent="example_1/mmmi"]
+transform = Transform3D(0.978767, -0.0514392, 0.198415, 0.120287, -0.63965, -0.759197, 0.165969, 0.766944, -0.619881, -0.5024, 0.680578, 0)
+script = ExtResource("2_034lr")
+metadata/_custom_type_script = "uid://bq4hgulf0pjpt"
+
+[node name="mmmc2" type="Node3D" parent="example_1/mmmi"]
+transform = Transform3D(0.90575, 0, 0, 0, 0.723507, -0.544904, 0, 0.544904, 0.723507, -0.0778953, 1.19318, 0.00635314)
+script = ExtResource("2_034lr")
+metadata/_custom_type_script = "uid://bq4hgulf0pjpt"
+
+[node name="mmmc3" type="Node3D" parent="example_1/mmmi"]
+transform = Transform3D(0.508707, -0.556637, -2.24732e-08, 0.444638, 0.406352, -0.453656, 0.334876, 0.306041, 0.60235, 0.0268787, 0.415122, 0.0631347)
+script = ExtResource("2_034lr")
+metadata/_custom_type_script = "uid://bq4hgulf0pjpt"
+
+[node name="mmmc4" type="Node3D" parent="example_1/mmmi"]
+transform = Transform3D(1.10007, 0.382267, 0, -0.222179, 0.639377, -0.94769, -0.31107, 0.895183, 0.67688, 0.474057, 0.76772, 0.113749)
+script = ExtResource("2_034lr")
+metadata/_custom_type_script = "uid://bq4hgulf0pjpt"
+
+[node name="example_2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
+
+[node name="heading" type="Label3D" parent="example_2"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 0.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "COLORS"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_2"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "You can specify colors and custom data for the individual instances through the ManualMultiMeshChild3D nodes."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_2"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="mmmi" type="MultiMeshInstance3D" parent="example_2"]
+material_override = SubResource("StandardMaterial3D_034lr")
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_034lr")
+script = ExtResource("1_se4ne")
+metadata/_custom_type_script = "uid://bt3fnycwurouo"
+
+[node name="mmmc" type="Node3D" parent="example_2/mmmi"]
+transform = Transform3D(0.978767, -0.0514392, 0.198415, 0.120287, -0.63965, -0.759197, 0.165969, 0.766944, -0.619881, -0.5024, 0.680578, 0)
+script = ExtResource("2_034lr")
+color = Color(1, 0.0363637, 0.0363637, 1)
+metadata/_custom_type_script = "uid://bq4hgulf0pjpt"
+
+[node name="mmmc2" type="Node3D" parent="example_2/mmmi"]
+transform = Transform3D(0.90575, 0, 0, 0, 0.723507, -0.544904, 0, 0.544904, 0.723507, -0.0778953, 1.19318, 0.00635314)
+script = ExtResource("2_034lr")
+color = Color(0.05, 0.05, 0.05, 1)
+metadata/_custom_type_script = "uid://bq4hgulf0pjpt"
+
+[node name="mmmc3" type="Node3D" parent="example_2/mmmi"]
+transform = Transform3D(0.508707, -0.556637, -2.24732e-08, 0.444638, 0.406352, -0.453656, 0.334876, 0.306041, 0.60235, 0.0268787, 0.415122, 0.0631347)
+script = ExtResource("2_034lr")
+color = Color(0, 0.513636, 0.0793801, 1)
+metadata/_custom_type_script = "uid://bq4hgulf0pjpt"
+
+[node name="mmmc4" type="Node3D" parent="example_2/mmmi"]
+transform = Transform3D(1.10007, 0.382267, 0, -0.222179, 0.639377, -0.94769, -0.31107, 0.895183, 0.67688, 0.474057, 0.76772, 0.113749)
+script = ExtResource("2_034lr")
+metadata/_custom_type_script = "uid://bq4hgulf0pjpt"
+
+[node name="example_3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="heading" type="Label3D" parent="example_3"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 0.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "VISIBILITY"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_3"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "The visibility of the children are automatically synced to the MultiMesh.
+There are two donuts hidden in the scene above. Try revealing them!"
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_3"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="mmmi" type="MultiMeshInstance3D" parent="example_3"]
+material_override = SubResource("StandardMaterial3D_se4ne")
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_se4ne")
+script = ExtResource("1_se4ne")
+metadata/_custom_type_script = "uid://bt3fnycwurouo"
+
+[node name="mmmc" type="Node3D" parent="example_3/mmmi"]
+transform = Transform3D(0.978767, -0.0514392, 0.198415, 0.120287, -0.63965, -0.759197, 0.165969, 0.766944, -0.619881, -0.5024, 0.680578, 0)
+script = ExtResource("2_034lr")
+metadata/_custom_type_script = "uid://bq4hgulf0pjpt"
+
+[node name="mmmc2" type="Node3D" parent="example_3/mmmi"]
+transform = Transform3D(0.90575, 0, 0, 0, 0.723507, -0.544904, 0, 0.544904, 0.723507, -0.0778953, 1.19318, 0.00635314)
+visible = false
+script = ExtResource("2_034lr")
+metadata/_custom_type_script = "uid://bq4hgulf0pjpt"
+
+[node name="mmmc3" type="Node3D" parent="example_3/mmmi"]
+transform = Transform3D(0.508707, -0.556637, -2.24732e-08, 0.444638, 0.406352, -0.453656, 0.334876, 0.306041, 0.60235, 0.0268787, 0.415122, 0.0631347)
+visible = false
+script = ExtResource("2_034lr")
+metadata/_custom_type_script = "uid://bq4hgulf0pjpt"
+
+[node name="mmmc4" type="Node3D" parent="example_3/mmmi"]
+transform = Transform3D(1.10007, 0.382267, 0, -0.222179, 0.639377, -0.94769, -0.31107, 0.895183, 0.67688, 0.474057, 0.76772, 0.113749)
+script = ExtResource("2_034lr")
+metadata/_custom_type_script = "uid://bq4hgulf0pjpt"
+
+[node name="example_4" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 0)
+
+[node name="heading" type="Label3D" parent="example_4"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 0.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "TIPS"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_4"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "
+- Child transforms are synced automatically when editing in the editor.
+
+- For runtime syncing, just call the sync_from_children() function on the ManualMultiMeshInstance3D.
+
+- If in case a sync doesn't happen in the editor, press the \"Sync from Children\" button on the ManualMultiMeshInstance3D."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
