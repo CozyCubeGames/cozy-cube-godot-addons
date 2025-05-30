@@ -223,18 +223,35 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 0.611)
 pixel_size = 0.003
 modulate = Color(1, 0.763636, 0, 1)
-text = "TIPS"
+text = "IMPORTANT!"
 font_size = 40
 
 [node name="info" type="Label3D" parent="example_4"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
 pixel_size = 0.003
-text = "
-- Child transforms are synced automatically when editing in the editor.
+text = "This add-on is meant for EDITOR use only. It is meant to aid you in manual authoring of instances in a MultiMesh.
 
-- For runtime syncing, just call the sync_from_children() function on the ManualMultiMeshInstance3D.
+All ManualMultiMeshChild3D nodes will destroy themselves at runtime.
 
-- If in case a sync doesn't happen in the editor, press the \"Sync from Children\" button on the ManualMultiMeshInstance3D."
+Because runtime modification would require writing code anyway, using this add-on programmatically at runtime would yield no benefits, and would actually add overhead."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="example_5" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="heading" type="Label3D" parent="example_5"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.078, 0.611)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "TIPS"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_5"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "If in case a sync does not automatically happen, press the \"Sync from Children\" button on the ManualMultiMeshInstance3D."
 vertical_alignment = 0
 autowrap_mode = 3
 width = 640.0

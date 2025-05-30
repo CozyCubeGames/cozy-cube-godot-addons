@@ -3,20 +3,32 @@ class_name ManualMultiMeshInstance3D
 extends MultiMeshInstance3D
 
 
-@export_tool_button("Sync from Children") var sync_action := sync_from_children
+@export_tool_button("Sync from Children") var sync_action := _sync_from_children
+
+
+func _enter_tree() -> void:
+
+	if Engine.is_editor_hint() and EditorInterface.get_edited_scene_root() == owner:
+		child_order_changed.connect(_on_child_order_changed)
+
+
+func _exit_tree() -> void:
+
+	if child_order_changed.is_connected(_on_child_order_changed):
+		child_order_changed.disconnect(_on_child_order_changed)
 
 
 func _ready() -> void:
 
-	if is_instance_valid(multimesh):
-		if multimesh.transform_format != MultiMesh.TRANSFORM_3D:
-			var n := multimesh.instance_count
-			multimesh.instance_count = 0
-			multimesh.transform_format = MultiMesh.TRANSFORM_3D
-			multimesh.instance_count = n
-
 	if Engine.is_editor_hint():
-		child_order_changed.connect(sync_from_children)
+
+		if EditorInterface.get_edited_scene_root() == owner:
+			if is_instance_valid(multimesh):
+				if multimesh.transform_format != MultiMesh.TRANSFORM_3D:
+					var n := multimesh.instance_count
+					multimesh.instance_count = 0
+					multimesh.transform_format = MultiMesh.TRANSFORM_3D
+					multimesh.instance_count = n
 
 
 func _get_configuration_warnings() -> PackedStringArray:
@@ -27,8 +39,14 @@ func _get_configuration_warnings() -> PackedStringArray:
 	return []
 
 
-func sync_from_children() -> void:
+func _sync_from_children() -> void:
 
+	if not Engine.is_editor_hint():
+		return
+	if EditorInterface.get_edited_scene_root() != owner:
+		return
+	if not is_node_ready():
+		return
 	if not is_instance_valid(multimesh):
 		return
 	if not is_instance_valid(multimesh.mesh):
@@ -55,3 +73,9 @@ func sync_from_children() -> void:
 			multimesh.set_instance_custom_data(i, child.custom_data)
 		i += 1
 	multimesh.visible_instance_count = i
+
+
+func _on_child_order_changed() -> void:
+
+	return
+	_sync_from_children()
