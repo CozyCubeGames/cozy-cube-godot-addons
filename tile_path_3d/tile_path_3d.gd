@@ -197,7 +197,7 @@ func _ready() -> void:
 
 	if Engine.is_editor_hint():
 		curve_changed.connect(_on_curve_changed)
-		set_notify_transform(true)
+		set_notify_local_transform(true)
 
 
 func _validate_property(property: Dictionary) -> void:
@@ -223,7 +223,7 @@ func _validate_property(property: Dictionary) -> void:
 
 func _notification(what: int) -> void:
 
-	if what == NOTIFICATION_TRANSFORM_CHANGED:
+	if what == NOTIFICATION_LOCAL_TRANSFORM_CHANGED:
 		rebuild()
 
 
