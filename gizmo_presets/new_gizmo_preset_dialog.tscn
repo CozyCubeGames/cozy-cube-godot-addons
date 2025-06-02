@@ -23,11 +23,9 @@ layout_mode = 2
 layout_mode = 2
 text = "Preset Name"
 
-[node name="preset_name_field" type="TextEdit" parent="v_box_container/h_box_container"]
+[node name="preset_name_field" type="LineEdit" parent="v_box_container/h_box_container"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-scroll_fit_content_height = true
-caret_multiple = false
 
 [connection signal="text_changed" from="v_box_container/h_box_container/preset_name_field" to="." method="_on_preset_name_field_text_changed"]
