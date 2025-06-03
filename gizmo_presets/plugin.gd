@@ -139,7 +139,8 @@ func _save_preset(preset_name: String) -> void:
 	if presets is not Dictionary:
 		presets = {}
 
-	var preset = presets.get_or_add(preset_name, {})
+	var preset := {}
+	presets[preset_name] = preset
 
 	for i in _gizmos_menu.item_count:
 		if _gizmos_menu.get_item_multistate_max(i) != 3:
