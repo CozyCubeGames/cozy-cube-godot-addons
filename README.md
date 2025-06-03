@@ -26,6 +26,8 @@ These Godot addons were made for internal use by Cozy Cube Games for the upcomin
   - 3D lines and trails for Godot.
 - **Manual MultiMesh**
   - Adds a `ManualMultiMeshInstance3D` node which allows for manually specifying instance transforms/properties via child nodes. See example scene for details.
+- **More Viewport Options**
+  - Adds more options to the 3D editor viewport menu (the one accessed by clicking the button in the top left of each 3D viewport).
 - **Nine Patch Mesh**
   - Provides a `NinePatchMesh` mesh resource which can be sliced in a manner similar to the 2D `NinePatchRect`. `TwentySevenPatchMesh` adds another resizable dimension.
 - **Parallel Scene Views**
