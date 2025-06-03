@@ -79,18 +79,19 @@ class ViewportExtension extends Object:
 
 	func _align_to(tf: Transform3D) -> void:
 
+		var cam := vp.get_camera_3d()
+		cam.global_transform = tf
+		await RenderingServer.frame_post_draw
+
 		var temp_node := Node3D.new()
 		temp_node.transform = tf
+		temp_node.position += (temp_node.position - cam.global_position)
 		vp.add_child(temp_node)
 
 		var old_selected_nodes := EditorInterface.get_selection().get_selected_nodes()
 		EditorInterface.get_selection().clear()
 		EditorInterface.get_selection().add_node(temp_node)
 
-		var cam := vp.get_camera_3d()
-		cam.global_transform = tf
-		await RenderingServer.frame_post_draw
-		temp_node.position += (temp_node.position - cam.global_position)
 		menu.id_pressed.emit(focus_id)
 
 		EditorInterface.get_selection().clear()
