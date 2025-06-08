@@ -3,7 +3,7 @@ class_name DoodleTextureInspectorPlugin
 extends EditorInspectorPlugin
 
 
-const DOODLE_TEXTURE_PAINTER_SCN: PackedScene = preload("res://addons/doodle_texture/doodle_texture_painter.tscn")
+const DOODLE_TEXTURE_PAINTER_SCN: PackedScene = preload("uid://bf541rxq25q56")
 
 var _tex: DoodleTexture
 

@@ -6,7 +6,7 @@ extends PortableCompressedTexture2D
 @export var foreground_color: Color = Color.BLACK
 @export var background_color: Color = Color.WHITE
 @export_range(1.0, 50.0, 0.999) var brush_size: int = 8
-@export var size: Vector2i = Vector2(256, 256):
+@export var size: Vector2i = Vector2i(256, 256):
 	get: return size
 	set(value):
 		if size == value:
@@ -20,8 +20,14 @@ extends PortableCompressedTexture2D
 
 func _init() -> void:
 
-	if Engine.is_editor_hint():
+	if Engine.is_editor_hint() and not is_instance_valid(get_image()):
 		_rebuild()
+
+
+func _validate_property(property: Dictionary) -> void:
+
+	if property.name == "size_override":
+		property.usage = PROPERTY_USAGE_STORAGE
 
 
 func clear() -> void:
@@ -66,13 +72,14 @@ func _rebuild() -> void:
 
 	if is_instance_valid(image):
 		var old_size := image.get_size()
-		if old_size != size:
-			var old_image := image
-			image = Image.create_empty(size.x, size.y, true, Image.Format.FORMAT_RGBA8)
-			image.fill(background_color)
-			for x in mini(size.x, old_size.x):
-				for y in mini(size.y, old_size.y):
-					image.set_pixel(x, y, old_image.get_pixel(x, y))
+		if old_size == size:
+			return
+		var old_image := image
+		image = Image.create_empty(size.x, size.y, true, Image.Format.FORMAT_RGBA8)
+		image.fill(background_color)
+		for x in mini(size.x, old_size.x):
+			for y in mini(size.y, old_size.y):
+				image.set_pixel(x, y, old_image.get_pixel(x, y))
 	else:
 		image = Image.create_empty(size.x, size.y, true, Image.Format.FORMAT_RGBA8)
 		image.fill(background_color)

@@ -15,7 +15,7 @@ These Godot addons were made for internal use by Cozy Cube Games for the upcomin
 - **Control Proxies**
   - Provides a `ControlProxy3D` node for acting as a 3D visual/input proxy for a 2D `Control`.
 - **Doodle Texture**
-  - Provides a `DoodleTexture` resource type that you can easily doodle on in the inspector. Good for placeholder textures. Only works when you inspect the `DoodleTexture`. If the texture is a nested child resource, right-click on the property and click Edit to inspect the texture itself.
+  - Provides a `DoodleTexture` resource that you can doodle on in the inspector. Good for placeholder textures. Only works when you inspect the `DoodleTexture`. If the texture is a nested child resource, right-click on the property and click Edit to inspect the texture itself. Use left mouse button to draw, right mouse button to erase.
 - **Editor Relays**
   - Provides an `EditorRelay` node that facilitates communications between the editor and the running game. Check out the example scene.
 - **Gizmo Presets**
