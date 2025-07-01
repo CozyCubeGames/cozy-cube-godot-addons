@@ -1,0 +1,636 @@
+[gd_scene load_steps=28 format=4 uid="uid://djdcunfh14oed"]
+
+[ext_resource type="Script" uid="uid://cc5dvvgshd4vl" path="res://addons/seven_segment_display/seven_segment_digit_mesh.gd" id="1_4cn0w"]
+[ext_resource type="Script" uid="uid://bx0rnfjvk0gkd" path="res://addons/seven_segment_display/seven_segment_display.gd" id="2_8ca20"]
+[ext_resource type="Material" uid="uid://bphjkhgsv5fc7" path="res://addons/seven_segment_display/seven_segment_digit_default.material" id="2_blcaw"]
+[ext_resource type="Shader" uid="uid://djbouus7imo7d" path="res://addons/seven_segment_display/seven_segment_digit.gdshader" id="4_fce3b"]
+
+[sub_resource type="Environment" id="Environment_nl0ma"]
+background_mode = 1
+background_color = Color(0.0863636, 0.0863636, 0.0863636, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.2, 0.2, 0.2, 1)
+glow_enabled = true
+glow_blend_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iblk6"]
+albedo_color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_f5biq"]
+material = SubResource("StandardMaterial3D_iblk6")
+size = Vector2(2, 1)
+orientation = 1
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_4cn0w"]
+_surfaces = [{
+"aabb": AABB(-0.15, -0.25, 0, 0.3, 0.5, 1e-05),
+"attribute_data": PackedByteArray("bxKDOgAAAABvEoM6AAAAAG8SgzoAAAAAbxKDOgAAAABvEoM6AAAAAG8SgzoAAAAAxSCAPwAAAADFIIA/AAAAAMUggD8AAAAAxSCAPwAAAADFIIA/AAAAAMUggD8AAAAAYhAAQAAAAABiEABAAAAAAGIQAEAAAAAAYhAAQAAAAABiEABAAAAAAGIQAEAAAAAAYhBAQAAAAABiEEBAAAAAAGIQQEAAAAAAYhBAQAAAAABiEEBAAAAAAGIQQEAAAAAAMQiAQAAAAAAxCIBAAAAAADEIgEAAAAAAMQiAQAAAAAAxCIBAAAAAADEIgEAAAAAAMQigQAAAAAAxCKBAAAAAADEIoEAAAAAAMQigQAAAAAAxCKBAAAAAADEIoEAAAAAAMQjAQAAAAAAxCMBAAAAAADEIwEAAAAAAMQjAQAAAAAAxCMBAAAAAADEIwEAAAAAA"),
+"format": 34359742487,
+"index_count": 84,
+"index_data": PackedByteArray("AAACAAEAAQACAAMAAwACAAQAAwAEAAUABgAIAAcABwAIAAkACQAIAAoACQAKAAsADAAOAA0ADQAOAA8ADwAOABAADwAQABEAEgAUABMAEwAUABUAFQAUABYAFQAWABcAGAAaABkAGQAaABsAGwAaABwAGwAcAB0AHgAgAB8AHwAgACEAIQAgACIAIQAiACMAJAAmACUAJQAmACcAJwAmACgAJwAoACkA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 42,
+"vertex_data": PackedByteArray("WPABvjMzcz4AAAAA4xO3vczMTD4AAAAAFkfqvQAAgD4AAAAA4xO3PczMTD4AAAAAFkfqPQAAgD4AAAAAWPABPjMzcz4AAAAAzcwMPr5WaD4AAAAAzczMPVfwQT4AAAAAmpkZPvGJWz4AAAAAzczMPTrYET0AAAAAmpkZPjrYET0AAAAAAAAAPlDHLTwAAAAAAAAAPlDHLbwAAAAAzczMPTrYEb0AAAAAmpkZPjrYEb0AAAAAzczMPVfwQb4AAAAAmpkZPvGJW74AAAAAzcwMPr5WaL4AAAAAWPABvjMzc74AAAAAFkfqvQAAgL4AAAAA4xO3vczMTL4AAAAAFkfqPQAAgL4AAAAA4xO3PczMTL4AAAAAWPABPjMzc74AAAAAAAAAvlDHLbwAAAAAmpkZvjrYEb0AAAAAzczMvTrYEb0AAAAAmpkZvvGJW74AAAAAzczMvVfwQb4AAAAAzcwMvr5WaL4AAAAAzcwMvr5WaD4AAAAAmpkZvvGJWz4AAAAAzczMvVfwQT4AAAAAmpkZvjrYET0AAAAAzczMvTrYET0AAAAAAAAAvlDHLTwAAAAAFkfqvQAAAAAAAAAA4xO3vc3MzLwAAAAA4xO3vc3MzDwAAAAA4xO3Pc3MzLwAAAAA4xO3Pc3MzDwAAAAAFkfqPQAAAAAAAAAA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA")
+}]
+custom_aabb = AABB(-0.15, -0.25, 0, 0.3, 0.5, 0)
+script = ExtResource("1_4cn0w")
+size = Vector2(0.3, 0.5)
+segment_thickness = 0.05
+segment_gap = 0.015
+corner_fill = 0.5
+side_fill = 0.0
+slant = 0.0
+metadata/_custom_type_script = "uid://cc5dvvgshd4vl"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4cn0w"]
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8ca20"]
+_surfaces = [{
+"aabb": AABB(-0.14366, -0.3025, 0, 0.28732, 0.605, 1e-05),
+"attribute_data": PackedByteArray("bxKDOgAAAABvEoM6AAAAAG8SgzoAAAAAbxKDOgAAAABvEoM6AAAAAG8SgzoAAAAAxSCAPwAAAADFIIA/AAAAAMUggD8AAAAAxSCAPwAAAADFIIA/AAAAAMUggD8AAAAAYhAAQAAAAABiEABAAAAAAGIQAEAAAAAAYhAAQAAAAABiEABAAAAAAGIQAEAAAAAAYhBAQAAAAABiEEBAAAAAAGIQQEAAAAAAYhBAQAAAAABiEEBAAAAAAGIQQEAAAAAAMQiAQAAAAAAxCIBAAAAAADEIgEAAAAAAMQiAQAAAAAAxCIBAAAAAADEIgEAAAAAAMQigQAAAAAAxCKBAAAAAADEIoEAAAAAAMQigQAAAAAAxCKBAAAAAADEIoEAAAAAAMQjAQAAAAAAxCMBAAAAAADEIwEAAAAAAMQjAQAAAAAAxCMBAAAAAADEIwEAAAAAA"),
+"format": 34359742487,
+"index_count": 84,
+"index_data": PackedByteArray("AAACAAEAAQACAAMAAwACAAQAAwAEAAUABgAIAAcABwAIAAkACQAIAAoACQAKAAsADAAOAA0ADQAOAA8ADwAOABAADwAQABEAEgAUABMAEwAUABUAFQAUABYAFQAWABcAGAAaABkAGQAaABsAGwAaABwAGwAcAB0AHgAgAB8AHwAgACEAIQAgACIAIQAiACMAJAAmACUAJQAmACcAJwAmACgAJwAoACkA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 42,
+"vertex_data": PackedByteArray("JskEvSGwkj4AAAAACCmavPp+ij4AAAAAZ61lvEjhmj4AAAAAO7zMPfp+ij4AAAAA0JDWPUjhmj4AAAAAIWvyPSGwkj4AAAAA9HACPudBjT4AAAAAAjPfPcAQhT4AAAAAHV4QPsAQhT4AAAAAloiXPRf22TwAAAAAzhHZPRf22TwAAAAA52KzPVDHLTwAAAAAod6sPVDHLbwAAAAAui+HPRf22bwAAAAA8rjIPRf22bwAAAAAOhX+PMAQhb4AAAAAhg6BPcAQhb4AAAAAQL82PedBjb4AAAAAIWvyvSGwkr4AAAAA0JDWvUjhmr4AAAAAO7zMvfp+ir4AAAAAZ61lPEjhmr4AAAAACCmaPPp+ir4AAAAAJskEPSGwkr4AAAAA52KzvVDHLbwAAAAAzhHZvRf22bwAAAAAloiXvRf22bwAAAAAHV4QvsAQhb4AAAAAAjPfvcAQhb4AAAAA9HACvudBjb4AAAAAQL82vedBjT4AAAAAhg6BvcAQhT4AAAAAOhX+vMAQhT4AAAAA8rjIvRf22TwAAAAAui+HvRf22TwAAAAAod6svVDHLTwAAAAA2meavQAAAAAAAAAAEht9vW8Sg7wAAAAA6HFpvW8SgzwAAAAA6HFpPW8Sg7wAAAAAEht9PW8SgzwAAAAA2meaPQAAAAAAAAAA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA")
+}]
+custom_aabb = AABB(-0.147375, -0.3025, 0, 0.29475, 0.605, 0)
+script = ExtResource("1_4cn0w")
+size = Vector2(0.204, 0.605)
+segment_thickness = 0.032
+segment_gap = 0.015
+corner_fill = 0.0
+side_fill = 0.0
+slant = 0.15
+metadata/_custom_type_script = "uid://cc5dvvgshd4vl"
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_blcaw"]
+_surfaces = [{
+"aabb": AABB(-0.1375, -0.21, 0, 0.275, 0.42, 1e-05),
+"attribute_data": PackedByteArray("bxKDOgAAAABvEoM6AAAAAG8SgzoAAAAAbxKDOgAAAABvEoM6AAAAAG8SgzoAAAAAxSCAPwAAAADFIIA/AAAAAMUggD8AAAAAxSCAPwAAAADFIIA/AAAAAMUggD8AAAAAYhAAQAAAAABiEABAAAAAAGIQAEAAAAAAYhAAQAAAAABiEABAAAAAAGIQAEAAAAAAYhBAQAAAAABiEEBAAAAAAGIQQEAAAAAAYhBAQAAAAABiEEBAAAAAAGIQQEAAAAAAMQiAQAAAAAAxCIBAAAAAADEIgEAAAAAAMQiAQAAAAAAxCIBAAAAAADEIgEAAAAAAMQigQAAAAAAxCKBAAAAAADEIoEAAAAAAMQigQAAAAAAxCKBAAAAAADEIoEAAAAAAMQjAQAAAAAAxCMBAAAAAADEIwEAAAAAAMQjAQAAAAAAxCMBAAAAAADEIwEAAAAAA"),
+"format": 34359742487,
+"index_count": 84,
+"index_data": PackedByteArray("AAACAAEAAQACAAMAAwACAAQAAwAEAAUABgAIAAcABwAIAAkACQAIAAoACQAKAAsADAAOAA0ADQAOAA8ADwAOABAADwAQABEAEgAUABMAEwAUABUAFQAUABYAFQAWABcAGAAaABkAGQAaABsAGwAaABwAGwAcAB0AHgAgAB8AHwAgACEAIQAgACIAIQAiACMAJAAmACUAJQAmACcAJwAmACgAJwAoACkA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 42,
+"vertex_data": PackedByteArray("GUZ5vZmZGT4AAAAAgeJguupRuD0AAAAAgeJguj0KVz4AAAAAgeJgOupRuD0AAAAAgeJgOj0KVz4AAAAAGUZ5PZmZGT4AAAAAmpmZPVIeCz4AAAAAk8J1PF1bmz0AAAAAcT0KPl1bmz0AAAAAk8J1PNXXlz0AAAAAcT0KPmy0ZzwAAAAAmpmZPWq0ZzwAAAAAmpmZPWq0Z7wAAAAAk8J1PNXXl70AAAAAcT0KPmy0Z7wAAAAAk8J1PF1bm70AAAAAcT0KPl1bm70AAAAAmpmZPVIeC74AAAAAGUZ5vZmZGb4AAAAAgeJguj0KV74AAAAAgeJguupRuL0AAAAAgeJgOj0KV74AAAAAgeJgOupRuL0AAAAAGUZ5PZmZGb4AAAAAmpmZvWq0Z7wAAAAAcT0Kvmy0Z7wAAAAAk8J1vNXXl70AAAAAcT0Kvl1bm70AAAAAk8J1vF1bm70AAAAAmpmZvVIeC74AAAAAmpmZvVIeCz4AAAAAcT0Kvl1bmz0AAAAAk8J1vF1bmz0AAAAAcT0Kvmy0ZzwAAAAAk8J1vNXXlz0AAAAAmpmZvWq0ZzwAAAAAGUZ5vQAAAAAAAAAAgeJguo/Cdb0AAAAAgeJguo/CdT0AAAAAgeJgOo/Cdb0AAAAAgeJgOo/CdT0AAAAAGUZ5PQAAAAAAAAAA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA")
+}]
+custom_aabb = AABB(-0.135, -0.21, 0, 0.27, 0.42, 0)
+script = ExtResource("1_4cn0w")
+size = Vector2(0.27, 0.42)
+segment_thickness = 0.12
+segment_gap = 0.02
+corner_fill = 0.0
+side_fill = 1.0
+slant = 0.0
+metadata/_custom_type_script = "uid://cc5dvvgshd4vl"
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fce3b"]
+_surfaces = [{
+"aabb": AABB(-0.15, -0.1495, 0, 0.3, 0.299, 1e-05),
+"attribute_data": PackedByteArray("bxKDOgAAAABvEoM6AAAAAG8SgzoAAAAAbxKDOgAAAABvEoM6AAAAAG8SgzoAAAAAxSCAPwAAAADFIIA/AAAAAMUggD8AAAAAxSCAPwAAAADFIIA/AAAAAMUggD8AAAAAYhAAQAAAAABiEABAAAAAAGIQAEAAAAAAYhAAQAAAAABiEABAAAAAAGIQAEAAAAAAYhBAQAAAAABiEEBAAAAAAGIQQEAAAAAAYhBAQAAAAABiEEBAAAAAAGIQQEAAAAAAMQiAQAAAAAAxCIBAAAAAADEIgEAAAAAAMQiAQAAAAAAxCIBAAAAAADEIgEAAAAAAMQigQAAAAAAxCKBAAAAAADEIoEAAAAAAMQigQAAAAAAxCKBAAAAAADEIoEAAAAAAMQjAQAAAAAAxCMBAAAAAADEIwEAAAAAAMQjAQAAAAAAxCMBAAAAAADEIwEAAAAAA"),
+"format": 34359742487,
+"index_count": 84,
+"index_data": PackedByteArray("AAACAAEAAQACAAMAAwACAAQAAwAEAAUABgAIAAcABwAIAAkACQAIAAoACQAKAAsADAAOAA0ADQAOAA8ADwAOABAADwAQABEAEgAUABMAEwAUABUAFQAUABYAFQAWABcAGAAaABkAGQAaABsAGwAaABwAGwAcAB0AHgAgAB8AHwAgACEAIQAgACIAIQAiACMAJAAmACUAJQAmACcAJwAmACgAJwAoACkA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 42,
+"vertex_data": PackedByteArray("mpkZvocWGT4AAAAAfBSuvVYOrT0AAAAAmpkZvocWGT4AAAAAfBSuPVYOrT0AAAAAmpkZPocWGT4AAAAAmpkZPocWGT4AAAAAmpkZPocWGT4AAAAAfBSuPVYOrT0AAAAAmpkZPocWGT4AAAAAfBSuPbgeBT0AAAAAmpkZPgAAAAAAAAAA2KPwPQAAAAAAAAAA2KPwPQAAAAAAAAAAfBSuPbgeBb0AAAAAmpkZPgAAAAAAAAAAfBSuPVYOrb0AAAAAmpkZPocWGb4AAAAAmpkZPocWGb4AAAAAmpkZvocWGb4AAAAAmpkZvocWGb4AAAAAfBSuvVYOrb0AAAAAmpkZPocWGb4AAAAAfBSuPVYOrb0AAAAAmpkZPocWGb4AAAAA2KPwvQAAAAAAAAAAmpkZvgAAAAAAAAAAfBSuvbgeBb0AAAAAmpkZvocWGb4AAAAAfBSuvVYOrb0AAAAAmpkZvocWGb4AAAAAmpkZvocWGT4AAAAAmpkZvocWGT4AAAAAfBSuvVYOrT0AAAAAmpkZvgAAAAAAAAAAfBSuvbgeBT0AAAAA2KPwvQAAAAAAAAAA2KPwvQAAAAAAAAAAfBSuvbgeBb0AAAAAfBSuvbgeBT0AAAAAfBSuPbgeBb0AAAAAfBSuPbgeBT0AAAAA2KPwPQAAAAAAAAAA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA")
+}]
+custom_aabb = AABB(-0.15, -0.1495, 0, 0.3, 0.299, 0)
+script = ExtResource("1_4cn0w")
+size = Vector2(0.3, 0.299)
+segment_thickness = 0.065
+segment_gap = 0.0
+corner_fill = 1.0
+side_fill = 1.0
+slant = 0.0
+metadata/_custom_type_script = "uid://cc5dvvgshd4vl"
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_pwifq"]
+_surfaces = [{
+"aabb": AABB(-0.15045, -0.2005, 0, 0.3009, 0.401, 1e-05),
+"attribute_data": PackedByteArray("bxKDOgAAAABvEoM6AAAAAG8SgzoAAAAAbxKDOgAAAABvEoM6AAAAAG8SgzoAAAAAxSCAPwAAAADFIIA/AAAAAMUggD8AAAAAxSCAPwAAAADFIIA/AAAAAMUggD8AAAAAYhAAQAAAAABiEABAAAAAAGIQAEAAAAAAYhAAQAAAAABiEABAAAAAAGIQAEAAAAAAYhBAQAAAAABiEEBAAAAAAGIQQEAAAAAAYhBAQAAAAABiEEBAAAAAAGIQQEAAAAAAMQiAQAAAAAAxCIBAAAAAADEIgEAAAAAAMQiAQAAAAAAxCIBAAAAAADEIgEAAAAAAMQigQAAAAAAxCKBAAAAAADEIoEAAAAAAMQigQAAAAAAxCKBAAAAAADEIoEAAAAAAMQjAQAAAAAAxCMBAAAAAADEIwEAAAAAAMQjAQAAAAAAxCMBAAAAAADEIwEAAAAAA"),
+"format": 34359742487,
+"index_count": 84,
+"index_data": PackedByteArray("AAACAAEAAQACAAMAAwACAAQAAwAEAAUABgAIAAcABwAIAAkACQAIAAoACQAKAAsADAAOAA0ADQAOAA8ADwAOABAADwAQABEAEgAUABMAEwAUABUAFQAUABYAFQAWABcAGAAaABkAGQAaABsAGwAaABwAGwAcAB0AHgAgAB8AHwAgACEAIQAgACIAIQAiACMAJAAmACUAJQAmACcAJwAmACgAJwAoACkA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 42,
+"vertex_data": PackedByteArray("6wbgvXa+Pz4AAAAAR/GAvT0KFz4AAAAAK3PJvd9PTT4AAAAAg4xbPD0KFz4AAAAAvev9PN9PTT4AAAAAolk+PXa+Pz4AAAAAQkqrPRcpHz4AAAAAAh5PPbzp7D0AAAAAJPzKPa+XET4AAAAAiHhtPTCTkj0AAAAAqWXsPR2bOD0AAAAA6dHVPXxVAj0AAAAAT7frPXxVAr0AAAAADvynPTCTkr0AAAAAmLQFPh2bOL0AAAAAUSm3Pbzp7L0AAAAAW2kWPq+XEb4AAAAAex8LPhcpH74AAAAAolk+vXa+P74AAAAAvev9vN9PTb4AAAAAg4xbvD0KF74AAAAAK3PJPd9PTb4AAAAAR/GAPT0KF74AAAAA6wbgPXa+P74AAAAA6dHVvXxVAr0AAAAAqWXsvR2bOL0AAAAAiHhtvTCTkr0AAAAAJPzKva+XEb4AAAAAAh5Pvbzp7L0AAAAAQkqrvRcpH74AAAAAex8LvhcpHz4AAAAAW2kWvq+XET4AAAAAUSm3vbzp7D0AAAAAmLQFvh2bOD0AAAAADvynvTCTkj0AAAAAT7frvXxVAj0AAAAA3pmfvQAAAAAAAAAANmxAvYcW2bwAAAAAvORkvYcW2TwAAAAAvORkPYcW2bwAAAAANmxAPYcW2TwAAAAA3pmfPQAAAAAAAAAA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA")
+}]
+custom_aabb = AABB(-0.156684, -0.2005, 0, 0.313368, 0.401, 0)
+script = ExtResource("1_4cn0w")
+size = Vector2(0.246, 0.401)
+segment_thickness = 0.053
+segment_gap = 0.045
+corner_fill = 0.5
+side_fill = 0.5
+slant = -0.168
+metadata/_custom_type_script = "uid://cc5dvvgshd4vl"
+
+[sub_resource type="BoxMesh" id="BoxMesh_blcaw"]
+size = Vector3(1.33, 0.5, 0.061)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fce3b"]
+albedo_color = Color(0.1, 0.1, 0.1, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0sd4j"]
+_surfaces = [{
+"aabb": AABB(-0.132809, -0.181, 0, 0.265618, 0.362, 1e-05),
+"attribute_data": PackedByteArray("bxKDOgAAAABvEoM6AAAAAG8SgzoAAAAAbxKDOgAAAABvEoM6AAAAAG8SgzoAAAAAxSCAPwAAAADFIIA/AAAAAMUggD8AAAAAxSCAPwAAAADFIIA/AAAAAMUggD8AAAAAYhAAQAAAAABiEABAAAAAAGIQAEAAAAAAYhAAQAAAAABiEABAAAAAAGIQAEAAAAAAYhBAQAAAAABiEEBAAAAAAGIQQEAAAAAAYhBAQAAAAABiEEBAAAAAAGIQQEAAAAAAMQiAQAAAAAAxCIBAAAAAADEIgEAAAAAAMQiAQAAAAAAxCIBAAAAAADEIgEAAAAAAMQigQAAAAAAxCKBAAAAAADEIoEAAAAAAMQigQAAAAAAxCKBAAAAAADEIoEAAAAAAMQjAQAAAAAAxCMBAAAAAADEIwEAAAAAAMQjAQAAAAAAxCMBAAAAAADEIwEAAAAAA"),
+"format": 34359742487,
+"index_count": 84,
+"index_data": PackedByteArray("AAACAAEAAQACAAMAAwACAAQAAwAEAAUABgAIAAcABwAIAAkACQAIAAoACQAKAAsADAAOAA0ADQAOAA8ADwAOABAADwAQABEAEgAUABMAEwAUABUAFQAUABYAFQAWABcAGAAaABkAGQAaABsAGwAaABwAGwAcAB0AHgAgAB8AHwAgACEAIQAgACIAIQAiACMAJAAmACUAJQAmACcAJwAmACgAJwAoACkA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 42,
+"vertex_data": PackedByteArray("Er6FvR+FKz4AAAAAx+wIvbgeBT4AAAAA2ppQvexROD4AAAAAn1WUPbgeBT4AAAAA++TWPexROD4AAAAAiqfsPR+FKz4AAAAAuvb4PXxHJD4AAAAAzqSgPSrC+z0AAAAApFwHPq96Fz4AAAAAfpKIPSeQNj0AAAAA0ErnPYJToDwAAAAALNrJPWq05zsAAAAA/oHFPWq057sAAAAAJGBaPSeQNr0AAAAAjETbPYJToLwAAAAAgzsqPSrC+70AAAAAE9azPa96F74AAAAAcGWWPXxHJL4AAAAAiqfsvR+FK74AAAAA++TWvexROL4AAAAAn1WUvbgeBb4AAAAA2ppQPexROL4AAAAAx+wIPbgeBb4AAAAAEr6FPR+FK74AAAAALNrJvWq057sAAAAA0ErnvYJToLwAAAAAfpKIvSeQNr0AAAAApFwHvq96F74AAAAAzqSgvSrC+70AAAAAuvb4vXxHJL4AAAAAcGWWvXxHJD4AAAAAE9azva96Fz4AAAAAgzsqvSrC+z0AAAAAjETbvYJToDwAAAAAJGBavSeQNj0AAAAA/oHFvWq05zsAAAAAzjK5vQAAAAAAAAAAr62Nvc3MzLwAAAAADaN8vc3MzDwAAAAADaN8Pc3MzLwAAAAAr62NPc3MzDwAAAAAzjK5PQAAAAAAAAAA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA")
+}]
+custom_aabb = AABB(-0.137, -0.18, 0, 0.274, 0.36, 0)
+script = ExtResource("1_4cn0w")
+size = Vector2(0.22, 0.36)
+segment_thickness = 0.05
+segment_gap = 0.01
+corner_fill = 0.5
+side_fill = 0.5
+slant = 0.15
+metadata/_custom_type_script = "uid://cc5dvvgshd4vl"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pwifq"]
+render_priority = 0
+shader = ExtResource("4_fce3b")
+shader_parameter/off_color = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/on_color = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/glow_color = Color(1, 0.15, 0.15, 1)
+shader_parameter/glow_strength = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_fce3b"]
+size = Vector3(1.561, 0.5, 0.061)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pwifq"]
+albedo_color = Color(0.559091, 0.559091, 0.559091, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0sd4j"]
+render_priority = 0
+shader = ExtResource("4_fce3b")
+shader_parameter/off_color = Color(0.527273, 0.527273, 0.527273, 1)
+shader_parameter/on_color = Color(0.140909, 0.140909, 0.140909, 1)
+shader_parameter/glow_color = Color(0, 0, 0, 1)
+shader_parameter/glow_strength = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fce3b"]
+render_priority = 0
+shader = ExtResource("4_fce3b")
+shader_parameter/off_color = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/on_color = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/glow_color = Color(0.05, 0.533636, 1, 1)
+shader_parameter/glow_strength = 5.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_tc66u"]
+_surfaces = [{
+"aabb": AABB(-0.132809, -0.181, 0, 0.265618, 0.362, 1e-05),
+"attribute_data": PackedByteArray("bxKDOgAAAABvEoM6AAAAAG8SgzoAAAAAbxKDOgAAAABvEoM6AAAAAG8SgzoAAAAAxSCAPwAAAADFIIA/AAAAAMUggD8AAAAAxSCAPwAAAADFIIA/AAAAAMUggD8AAAAAYhAAQAAAAABiEABAAAAAAGIQAEAAAAAAYhAAQAAAAABiEABAAAAAAGIQAEAAAAAAYhBAQAAAAABiEEBAAAAAAGIQQEAAAAAAYhBAQAAAAABiEEBAAAAAAGIQQEAAAAAAMQiAQAAAAAAxCIBAAAAAADEIgEAAAAAAMQiAQAAAAAAxCIBAAAAAADEIgEAAAAAAMQigQAAAAAAxCKBAAAAAADEIoEAAAAAAMQigQAAAAAAxCKBAAAAAADEIoEAAAAAAMQjAQAAAAAAxCMBAAAAAADEIwEAAAAAAMQjAQAAAAAAxCMBAAAAAADEIwEAAAAAA"),
+"format": 34359742487,
+"index_count": 84,
+"index_data": PackedByteArray("AAACAAEAAQACAAMAAwACAAQAAwAEAAUABgAIAAcABwAIAAkACQAIAAoACQAKAAsADAAOAA0ADQAOAA8ADwAOABAADwAQABEAEgAUABMAEwAUABUAFQAUABYAFQAWABcAGAAaABkAGQAaABsAGwAaABwAGwAcAB0AHgAgAB8AHwAgACEAIQAgACIAIQAiACMAJAAmACUAJQAmACcAJwAmACgAJwAoACkA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 42,
+"vertex_data": PackedByteArray("Er6FvR+FKz4AAAAAx+wIvbgeBT4AAAAA2ppQvexROD4AAAAAn1WUPbgeBT4AAAAA++TWPexROD4AAAAAiqfsPR+FKz4AAAAAuvb4PXxHJD4AAAAAzqSgPSrC+z0AAAAApFwHPq96Fz4AAAAAfpKIPSeQNj0AAAAA0ErnPYJToDwAAAAALNrJPWq05zsAAAAA/oHFPWq057sAAAAAJGBaPSeQNr0AAAAAjETbPYJToLwAAAAAgzsqPSrC+70AAAAAE9azPa96F74AAAAAcGWWPXxHJL4AAAAAiqfsvR+FK74AAAAA++TWvexROL4AAAAAn1WUvbgeBb4AAAAA2ppQPexROL4AAAAAx+wIPbgeBb4AAAAAEr6FPR+FK74AAAAALNrJvWq057sAAAAA0ErnvYJToLwAAAAAfpKIvSeQNr0AAAAApFwHvq96F74AAAAAzqSgvSrC+70AAAAAuvb4vXxHJL4AAAAAcGWWvXxHJD4AAAAAE9azva96Fz4AAAAAgzsqvSrC+z0AAAAAjETbvYJToDwAAAAAJGBavSeQNj0AAAAA/oHFvWq05zsAAAAAzjK5vQAAAAAAAAAAr62Nvc3MzLwAAAAADaN8vc3MzDwAAAAADaN8Pc3MzLwAAAAAr62NPc3MzDwAAAAAzjK5PQAAAAAAAAAA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA")
+}]
+custom_aabb = AABB(-0.137, -0.18, 0, 0.274, 0.36, 0)
+script = ExtResource("1_4cn0w")
+size = Vector2(0.22, 0.36)
+segment_thickness = 0.05
+segment_gap = 0.01
+corner_fill = 0.5
+side_fill = 0.5
+slant = 0.15
+metadata/_custom_type_script = "uid://cc5dvvgshd4vl"
+
+[sub_resource type="GDScript" id="GDScript_fce3b"]
+script/source = "@tool
+extends Node3D
+
+
+const SPINNY_BIT_FLAGS: PackedByteArray = [
+	0b1100000,
+	0b0110000,
+	0b0011000,
+	0b0001100,
+	0b0000110,
+	0b1000010
+]
+
+@onready var spinny_display: SevenSegmentDisplay = $spinny_display
+@onready var hours_display: SevenSegmentDisplay = $hours_display
+@onready var minutes_display: SevenSegmentDisplay = $minutes_display
+@onready var seconds_display: SevenSegmentDisplay = $seconds_display
+
+
+func _notification(what: int) -> void:
+
+	if what == NOTIFICATION_EDITOR_PRE_SAVE:
+		spinny_display.content_bit_flags[0] = 0
+		hours_display.content_integer = 0
+		minutes_display.content_integer = 0
+		seconds_display.content_integer = 0
+
+
+func _process(delta: float) -> void:
+
+	var spinny_bf := SPINNY_BIT_FLAGS[floori(Time.get_ticks_msec() / 100.0) % SPINNY_BIT_FLAGS.size()]
+	if spinny_bf != spinny_display.content_bit_flags[0]:
+		spinny_display.content_bit_flags = [spinny_bf]
+
+	var t := Time.get_datetime_dict_from_system()
+	hours_display.content_integer = t[\"hour\"]
+	minutes_display.content_integer = t[\"minute\"]
+	seconds_display.content_integer = t[\"second\"]
+"
+
+[sub_resource type="BoxMesh" id="BoxMesh_0sd4j"]
+size = Vector3(0.65, 0.65, 0.061)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tc66u"]
+render_priority = 0
+shader = ExtResource("4_fce3b")
+shader_parameter/off_color = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/on_color = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/glow_color = Color(0.601115, 0.104545, 1, 1)
+shader_parameter/glow_strength = 3.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8386d"]
+_surfaces = [{
+"aabb": AABB(-0.132809, -0.181, 0, 0.265618, 0.362, 1e-05),
+"attribute_data": PackedByteArray("bxKDOgAAAABvEoM6AAAAAG8SgzoAAAAAbxKDOgAAAABvEoM6AAAAAG8SgzoAAAAAxSCAPwAAAADFIIA/AAAAAMUggD8AAAAAxSCAPwAAAADFIIA/AAAAAMUggD8AAAAAYhAAQAAAAABiEABAAAAAAGIQAEAAAAAAYhAAQAAAAABiEABAAAAAAGIQAEAAAAAAYhBAQAAAAABiEEBAAAAAAGIQQEAAAAAAYhBAQAAAAABiEEBAAAAAAGIQQEAAAAAAMQiAQAAAAAAxCIBAAAAAADEIgEAAAAAAMQiAQAAAAAAxCIBAAAAAADEIgEAAAAAAMQigQAAAAAAxCKBAAAAAADEIoEAAAAAAMQigQAAAAAAxCKBAAAAAADEIoEAAAAAAMQjAQAAAAAAxCMBAAAAAADEIwEAAAAAAMQjAQAAAAAAxCMBAAAAAADEIwEAAAAAA"),
+"format": 34359742487,
+"index_count": 84,
+"index_data": PackedByteArray("AAACAAEAAQACAAMAAwACAAQAAwAEAAUABgAIAAcABwAIAAkACQAIAAoACQAKAAsADAAOAA0ADQAOAA8ADwAOABAADwAQABEAEgAUABMAEwAUABUAFQAUABYAFQAWABcAGAAaABkAGQAaABsAGwAaABwAGwAcAB0AHgAgAB8AHwAgACEAIQAgACIAIQAiACMAJAAmACUAJQAmACcAJwAmACgAJwAoACkA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 42,
+"vertex_data": PackedByteArray("vadJvmDlUD4AAAAAHY0avsDKIT4AAAAAHY0avgAAgD4AAAAAHY0aPsDKIT4AAAAAHY0aPgAAgD4AAAAAvadJPmDlUD4AAAAAYOVQPr2nST4AAAAAwMohPh2NGj4AAAAAAACAPh2NGj4AAAAAwMohPgxhWT0AAAAAAACAPmi05zsAAAAAYOVQPmq05zsAAAAAYOVQPmq057sAAAAAwMohPgxhWb0AAAAAAACAPmi057sAAAAAwMohPh2NGr4AAAAAAACAPh2NGr4AAAAAYOVQPr2nSb4AAAAAvadJvmDlUL4AAAAAHY0avgAAgL4AAAAAHY0avsDKIb4AAAAAHY0aPgAAgL4AAAAAHY0aPsDKIb4AAAAAvadJPmDlUL4AAAAAYOVQvmq057sAAAAAAACAvmi057sAAAAAwMohvgxhWb0AAAAAAACAvh2NGr4AAAAAwMohvh2NGr4AAAAAYOVQvr2nSb4AAAAAYOVQvr2nST4AAAAAAACAvh2NGj4AAAAAwMohvh2NGj4AAAAAAACAvmi05zsAAAAAwMohvgxhWT0AAAAAYOVQvmq05zsAAAAAvadJvgAAAAAAAAAAHY0avn9qPL0AAAAAHY0avn9qPD0AAAAAHY0aPn9qPL0AAAAAHY0aPn9qPD0AAAAAvadJPgAAAAAAAAAA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA")
+}]
+custom_aabb = AABB(-0.25, -0.25, 0, 0.5, 0.5, 0)
+script = ExtResource("1_4cn0w")
+size = Vector2(0.5, 0.5)
+segment_thickness = 0.092
+segment_gap = 0.01
+corner_fill = 0.0
+side_fill = 1.0
+slant = 0.0
+metadata/_custom_type_script = "uid://cc5dvvgshd4vl"
+
+[sub_resource type="BoxMesh" id="BoxMesh_pwifq"]
+size = Vector3(2.257, 0.5, 0.061)
+
+[node name="seven_segment_display_examples" type="Node3D"]
+
+[node name="world_env" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nl0ma")
+
+[node name="main_light" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.925871, -0.32722, 0.18892, 0, 0.5, 0.866025, -0.377841, -0.801827, 0.462935, 0, 10, 0)
+directional_shadow_mode = 0
+
+[node name="example_1" type="Node3D" parent="."]
+
+[node name="heading" type="Label3D" parent="example_1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.0775828, 0.61109)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "DIGIT MESH BASICS"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "SevenSegmentDigitMesh is the building block of 7-segment displays.
+They are intended for use with SevenSegmentDisplay nodes, but you can also create them independently."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_1"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="digit" type="MeshInstance3D" parent="example_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_4cn0w")
+surface_material_override/0 = SubResource("StandardMaterial3D_4cn0w")
+
+[node name="example_2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
+
+[node name="heading" type="Label3D" parent="example_2"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.0775828, 0.61109)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "DIGIT STYLING"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_2"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "SevenSegmentDigitMesh exposes many different properties to help you style your digit, e.g. thickness, gap, slant, etc."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_2"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="digit_1" type="MeshInstance3D" parent="example_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52526, 0.5, 0)
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_8ca20")
+surface_material_override/0 = SubResource("StandardMaterial3D_4cn0w")
+
+[node name="digit_2" type="MeshInstance3D" parent="example_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.204981, 0.5, 0)
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_blcaw")
+surface_material_override/0 = SubResource("StandardMaterial3D_4cn0w")
+
+[node name="digit_3" type="MeshInstance3D" parent="example_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.158257, 0.5, 0)
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_fce3b")
+surface_material_override/0 = SubResource("StandardMaterial3D_4cn0w")
+
+[node name="digit_4" type="MeshInstance3D" parent="example_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.520782, 0.5, 0)
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_pwifq")
+surface_material_override/0 = SubResource("StandardMaterial3D_4cn0w")
+
+[node name="example_3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="heading" type="Label3D" parent="example_3"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.0775828, 0.61109)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "DISPLAY BASICS"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_3"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "Create a SevenSegmentDisplay node, and give it a SevenSegmentDigitMesh to display a sequence of 7-segment digits.
+You can tweak digit count and spacing.
+The display is  rendered with a single draw call because it uses MultiMesh."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_3"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="backing" type="MeshInstance3D" parent="example_3"]
+transform = Transform3D(1, 0.15, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.0321814)
+rotation_edit_mode = 2
+mesh = SubResource("BoxMesh_blcaw")
+surface_material_override/0 = SubResource("StandardMaterial3D_fce3b")
+
+[node name="seven_segment_display" type="MultiMeshInstance3D" parent="example_3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("2_blcaw")
+cast_shadow = 0
+script = ExtResource("2_8ca20")
+digit_mesh = SubResource("ArrayMesh_0sd4j")
+digit_count = 4
+content_integer = 1337
+metadata/_custom_type_script = "uid://bx0rnfjvk0gkd"
+
+[node name="example_4" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 0)
+
+[node name="heading" type="Label3D" parent="example_4"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.0775828, 0.61109)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "CONTENT MODE"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_4"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "By default, SevenSegmentDisplay has content mode INTEGER, which lets you specify an integer to display.
+The STRING mode provides basic support for alphanumeric characters and a couple of symbols.
+The BIT_FLAGS mode allows you to specify a precise 7-bit segment bit flag for each digit."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_4"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="backing_1" type="MeshInstance3D" parent="example_4"]
+transform = Transform3D(1, 0.15, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, -0.0321814)
+rotation_edit_mode = 2
+mesh = SubResource("BoxMesh_blcaw")
+surface_material_override/0 = SubResource("StandardMaterial3D_fce3b")
+
+[node name="seven_segment_display_1" type="MultiMeshInstance3D" parent="example_4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
+material_override = ExtResource("2_blcaw")
+cast_shadow = 0
+script = ExtResource("2_8ca20")
+digit_mesh = SubResource("ArrayMesh_0sd4j")
+digit_count = 4
+content_mode = 2
+content_string = "A_EJ"
+metadata/_custom_type_script = "uid://bx0rnfjvk0gkd"
+
+[node name="backing_2" type="MeshInstance3D" parent="example_4"]
+transform = Transform3D(1, 0.15, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.0321814)
+rotation_edit_mode = 2
+mesh = SubResource("BoxMesh_blcaw")
+surface_material_override/0 = SubResource("StandardMaterial3D_fce3b")
+
+[node name="seven_segment_display_2" type="MultiMeshInstance3D" parent="example_4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("2_blcaw")
+cast_shadow = 0
+script = ExtResource("2_8ca20")
+digit_mesh = SubResource("ArrayMesh_0sd4j")
+digit_count = 4
+content_mode = 3
+content_bit_flags = PackedByteArray("QmAQSQ==")
+metadata/_custom_type_script = "uid://bx0rnfjvk0gkd"
+
+[node name="example_5" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="heading" type="Label3D" parent="example_5"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.0775828, 0.61109)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "MATERIALS"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_5"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "This addon provides a digit shader, and a basic material that uses it. However, you can create your own ShaderMaterial that uses the shader.
+Using the various shader properties, you can achieve different kinds of displays, like calculators, or super glowy lights."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_5"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="backing_1" type="MeshInstance3D" parent="example_5"]
+transform = Transform3D(1, 0.15, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.0321814)
+rotation_edit_mode = 2
+mesh = SubResource("BoxMesh_blcaw")
+surface_material_override/0 = SubResource("StandardMaterial3D_fce3b")
+
+[node name="seven_segment_display_1" type="MultiMeshInstance3D" parent="example_5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+material_override = SubResource("ShaderMaterial_pwifq")
+cast_shadow = 0
+script = ExtResource("2_8ca20")
+digit_mesh = SubResource("ArrayMesh_0sd4j")
+digit_count = 4
+content_integer = -47
+content_string = "-475"
+content_bit_flags = PackedByteArray("QH9A")
+metadata/_custom_type_script = "uid://bx0rnfjvk0gkd"
+
+[node name="backing_2" type="MeshInstance3D" parent="example_5"]
+transform = Transform3D(1, 0.15, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, -0.0321814)
+rotation_edit_mode = 2
+mesh = SubResource("BoxMesh_fce3b")
+surface_material_override/0 = SubResource("StandardMaterial3D_pwifq")
+
+[node name="seven_segment_display_2" type="MultiMeshInstance3D" parent="example_5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
+material_override = SubResource("ShaderMaterial_0sd4j")
+cast_shadow = 0
+script = ExtResource("2_8ca20")
+digit_mesh = SubResource("ArrayMesh_0sd4j")
+digit_count = 5
+content_mode = 2
+content_integer = -1
+content_string = "BOOBS"
+metadata/_custom_type_script = "uid://bx0rnfjvk0gkd"
+
+[node name="backing_3" type="MeshInstance3D" parent="example_5"]
+transform = Transform3D(1, 0.15, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.0321814)
+rotation_edit_mode = 2
+mesh = SubResource("BoxMesh_blcaw")
+surface_material_override/0 = SubResource("StandardMaterial3D_fce3b")
+
+[node name="seven_segment_display_3" type="MultiMeshInstance3D" parent="example_5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("ShaderMaterial_fce3b")
+cast_shadow = 0
+script = ExtResource("2_8ca20")
+digit_mesh = SubResource("ArrayMesh_tc66u")
+digit_count = 4
+content_mode = 2
+content_integer = -1
+content_string = "BLUE"
+metadata/_custom_type_script = "uid://bx0rnfjvk0gkd"
+
+[node name="example_6" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 0)
+script = SubResource("GDScript_fce3b")
+
+[node name="heading" type="Label3D" parent="example_6"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.0775828, 0.61109)
+pixel_size = 0.003
+modulate = Color(1, 0.763636, 0, 1)
+text = "ADVANCED"
+font_size = 40
+
+[node name="info" type="Label3D" parent="example_6"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.138092, 0.671599)
+pixel_size = 0.003
+text = "Play around with the properties. Get creative! You can use bit flags to create animated displays, or combine multiple displays to create things like clocks."
+vertical_alignment = 0
+autowrap_mode = 3
+width = 640.0
+
+[node name="ground" type="MeshInstance3D" parent="example_6"]
+mesh = SubResource("QuadMesh_f5biq")
+
+[node name="backing_1" type="MeshInstance3D" parent="example_6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11876, -0.0321814)
+mesh = SubResource("BoxMesh_0sd4j")
+surface_material_override/0 = SubResource("StandardMaterial3D_fce3b")
+
+[node name="spinny_display" type="MultiMeshInstance3D" parent="example_6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11876, 0)
+material_override = SubResource("ShaderMaterial_tc66u")
+cast_shadow = 0
+script = ExtResource("2_8ca20")
+digit_mesh = SubResource("ArrayMesh_8386d")
+content_mode = 3
+content_bit_flags = PackedByteArray("AA==")
+metadata/_custom_type_script = "uid://bx0rnfjvk0gkd"
+
+[node name="backing_2" type="MeshInstance3D" parent="example_6"]
+transform = Transform3D(1, 0.15, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.0321814)
+rotation_edit_mode = 2
+mesh = SubResource("BoxMesh_pwifq")
+surface_material_override/0 = SubResource("StandardMaterial3D_fce3b")
+
+[node name="hours_display" type="MultiMeshInstance3D" parent="example_6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.738698, 0.5, 0)
+material_override = ExtResource("2_blcaw")
+cast_shadow = 0
+script = ExtResource("2_8ca20")
+digit_mesh = SubResource("ArrayMesh_0sd4j")
+digit_count = 2
+content_integer_padding = true
+metadata/_custom_type_script = "uid://bx0rnfjvk0gkd"
+
+[node name="colon_1" type="Label3D" parent="example_6"]
+transform = Transform3D(1, 0.15, 0, 0, 1, 0, 0, 0, 1, -0.360777, 0.540939, 0)
+rotation_edit_mode = 2
+pixel_size = 0.001
+modulate = Color(0.188235, 1, 0.207843, 1)
+text = ":"
+font_size = 335
+outline_size = 0
+
+[node name="minutes_display" type="MultiMeshInstance3D" parent="example_6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00558472, 0.5, 0)
+material_override = ExtResource("2_blcaw")
+cast_shadow = 0
+script = ExtResource("2_8ca20")
+digit_mesh = SubResource("ArrayMesh_0sd4j")
+digit_count = 2
+content_integer_padding = true
+metadata/_custom_type_script = "uid://bx0rnfjvk0gkd"
+
+[node name="colon_2" type="Label3D" parent="example_6"]
+transform = Transform3D(1, 0.15, 0, 0, 1, 0, 0, 0, 1, 0.374549, 0.540939, 0)
+rotation_edit_mode = 2
+pixel_size = 0.001
+modulate = Color(0.188235, 1, 0.207843, 1)
+text = ":"
+font_size = 335
+outline_size = 0
+
+[node name="seconds_display" type="MultiMeshInstance3D" parent="example_6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.749609, 0.5, 0)
+material_override = ExtResource("2_blcaw")
+cast_shadow = 0
+script = ExtResource("2_8ca20")
+digit_mesh = SubResource("ArrayMesh_0sd4j")
+digit_count = 2
+content_integer_padding = true
+metadata/_custom_type_script = "uid://bx0rnfjvk0gkd"

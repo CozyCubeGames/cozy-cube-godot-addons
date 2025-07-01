@@ -10,6 +10,8 @@ These Godot addons were made for internal use by Cozy Cube Games for the upcomin
 
 ## Addon List
 
+- **7-Segment Display**
+  - Adds a `SevenSegmentDisplay` node and `SevenSegmentDigitMesh` for rendering a sequence of 7-segment characters (3D). See example scene for details.
 - **Area Lights**
   - Provides an `AreaLight3D` class to simulate a quad surface that emits baked lighting. For use with `LightmapGI`. Works by creating a grid of `SpotLight3D`. Provides higher quality results than using an equivalent emissive surface. Check out the examples scene.
 - **Control Proxies**
