@@ -211,20 +211,21 @@ func _refresh_digits() -> void:
 			origin.y = -digit_mesh.size.y / 2
 
 	var bfs: PackedByteArray
-	if content_mode == ContentMode.BIT_FLAGS:
-		bfs = content_bit_flags
-	else:
-		bfs.resize(digit_count)
-		var s: String
-		if content_mode == ContentMode.STRING:
-			s = content_string
-		else:
-			if content_integer_padding:
-				s = ("%0" + str(digit_count) + "d") % content_integer
+	match content_mode:
+		ContentMode.BIT_FLAGS:
+			bfs = content_bit_flags
+		ContentMode.STRING, ContentMode.INTEGER:
+			bfs.resize(digit_count)
+			var s: String
+			if content_mode == ContentMode.STRING:
+				s = content_string
 			else:
-				s = str(content_integer)
-		for i in mini(s.length(), digit_count):
-			bfs[bfs.size() - 1 - i] = CHAR_BIT_FLAGS.get(s[s.length() - 1 - i], 0)
+				if content_integer_padding:
+					s = ("%0" + str(digit_count) + "d") % content_integer
+				else:
+					s = str(content_integer)
+			for i in mini(s.length(), digit_count):
+				bfs[bfs.size() - 1 - i] = CHAR_BIT_FLAGS.get(s[s.length() - 1 - i], 0)
 
 	for i in digit_count:
 		var p := Vector3(
