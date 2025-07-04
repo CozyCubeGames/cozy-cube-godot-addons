@@ -41,8 +41,6 @@ func _notification(what: int) -> void:
 
 func _notify_parent() -> void:
 
-	return
-
 	if not Engine.is_editor_hint():
 		return
 	if EditorInterface.get_edited_scene_root() != owner:
