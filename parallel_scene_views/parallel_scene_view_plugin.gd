@@ -3,7 +3,7 @@ class_name ParallelSceneViewPlugin
 extends EditorPlugin
 
 
-const BUTTON_SCN = preload("res://addons/parallel_scene_views/parallel_scene_view_button.tscn")
+const BUTTON_SCN = preload("uid://o4wce2273cft")
 
 var _button: ParallelSceneViewButton
 var _active_previews: Variant = null
