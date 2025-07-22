@@ -38,6 +38,8 @@ These Godot addons were made for internal use by Cozy Cube Games for the upcomin
   - Allows previewing the 2D viewport directly inside the 3D viewport in the editor.
 - **Procedural Texture Baker**
   - Allows baking any `Texture2D` in-place into a `PortableCompressedTexture2D`. Access via the context menu for any `Texture2D`.
+- **Synced Collision Shape 3D**
+  - Adds a `SyncedCollisionShape3D` node which automatically syncs a collision shape to a source `MeshInstance3D`. Intended mainly for authoring purposes in editor. Can be invoked at runtime programmatically.
 - **Tile Path 3D**
   - A system for creating paths by placing tiles along a spline. See examples scene for info.
 - **Transform Clusters**
