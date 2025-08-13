@@ -1,3 +1,9 @@
+# NOTICE
+Due to recent changes at GitHub and my personal stance on Microsoft and generative AI, I am pulling all my personal and professional work from GitHub. As such, this repository is now archived, and I will be deleting it permanently from GitHub on September 1, 2025.
+I've migrated the repository over to Codeberg: https://codeberg.org/MajorMcDoom/cozy-cube-godot-addons
+-------------------------------
+
+
 # Cozy Cube Godot Addons
 These Godot addons were made for internal use by Cozy Cube Games for the upcoming VR game, 🐧Penguin Festival🐧. They are provided for public use as-is, free of charge. If you find these addons useful, please consider supporting us by wishlisting or sharing our game 🙏: https://bit.ly/penguinfeststeam
 
